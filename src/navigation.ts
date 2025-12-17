@@ -101,20 +101,12 @@ export const headerData = {
           href: getPermalink('/homes/real-estate'),
         },
         {
-          text: 'Sales Call Planning',
-          href: getPermalink('/sales-call-planning'),
-        },
-        {
-          text: 'Sales Call Planning (Objections)',
+          text: 'Sales Objections',
           href: getPermalink('/sales-call-planning-objections'),
         },
         {
           text: 'Sales Call Script',
           href: getPermalink('/sales-call-script'),
-        },
-        {
-          text: 'Objection Handling',
-          href: getPermalink('/objection-handling'),
         },
         {
           text: 'Testimonials Hub',
