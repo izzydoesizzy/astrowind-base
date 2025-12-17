@@ -1,0 +1,834 @@
+---
+// @ts-ignore - Astro components are resolved by the Astro compiler
+import Layout from '~/layouts/PageLayout.astro';
+// @ts-ignore - Astro components are resolved by the Astro compiler
+import HeroText from '~/components/widgets/HeroText.astro';
+
+const metadata = {
+  title: 'Sales Call Script - Discovery to Close',
+};
+
+// Sales Call Flow Phases
+// @ts-ignore - TypeScript inference works correctly at runtime
+const callPhases = [
+  {
+    phase: 'Pre-Call Preparation',
+    icon: 'tabler:clipboard-check',
+    color: 'blue',
+    duration: '5-10 min',
+    objectives: [
+      'Review their application/intake form',
+      'Identify 2-3 key questions to ask',
+      'Set your intention for the call'
+    ],
+    checklist: [
+      'Read their intake form or application',
+      'Note their stated goals and challenges',
+      'Prepare 2-3 personalized questions',
+      'Set up your space (quiet, good lighting)',
+      'Have your calendar ready for next steps'
+    ],
+    mindset: 'Your role is to help them get clarity, not to sell. Come from a place of service and curiosity.'
+  },
+  {
+    phase: 'Opening & Rapport Building',
+    icon: 'tabler:handshake',
+    color: 'green',
+    duration: '3-5 min',
+    objectives: [
+      'Create a warm, welcoming environment',
+      'Set expectations for the call',
+      'Build trust and connection'
+    ],
+    openingScript: '"Hi [Name], it\'s so great to meet you! Thanks for taking the time to talk today. I\'ve been looking forward to our conversation.\n\nJust so we\'re on the same page, I\'ve set aside about [X] minutes for us today. My goal is to really understand where you are, where you want to go, and see if there\'s a way I can help you get there.\n\nHow does that sound? And is there anything specific you\'re hoping we cover today?"',
+    keyPoints: [
+      'Use their name naturally',
+      'Set clear time expectations',
+      'Ask what they want to cover (shows you care)',
+      'Be warm but professional'
+    ],
+    transition: 'Once they\'ve shared their hopes for the call, transition: "Perfect. Let\'s dive in. I\'d love to start by understanding where you are right now..."'
+  },
+  {
+    phase: 'Discovery & Needs Assessment',
+    icon: 'tabler:search',
+    color: 'purple',
+    duration: '15-20 min',
+    objectives: [
+      'Understand their current situation deeply',
+      'Identify their desired outcome',
+      'Uncover what\'s been in the way',
+      'Assess their commitment level'
+    ],
+    questions: [
+      {
+        question: '"Can you tell me about where you are right now with [their stated goal]?"',
+        listenFor: 'Current reality, pain points, what\'s not working',
+        followUp: '"What\'s that been like for you?" or "How long has that been going on?"'
+      },
+      {
+        question: '"If we were talking six months from now and everything had changed, what would be different? What would success look like?"',
+        listenFor: 'Desired outcome, vision, what they really want',
+        followUp: '"What would that make possible for you?" or "Why is that important to you?"'
+      },
+      {
+        question: '"What have you tried so far to get there?"',
+        listenFor: 'Past attempts, what hasn\'t worked, patterns',
+        followUp: '"What was missing from those approaches?" or "What did you learn from that?"'
+      },
+      {
+        question: '"What\'s been in the way? What\'s kept you from getting there already?"',
+        listenFor: 'Real obstacles, limiting beliefs, constraints',
+        followUp: '"What would need to change for that not to be in the way anymore?"'
+      },
+      {
+        question: '"If you could solve this without any constraints, what would you do?"',
+        listenFor: 'True desires, priorities, what they really want',
+        followUp: '"What\'s stopping you from doing that?"'
+      }
+    ],
+    keyPrinciples: [
+      'Ask open-ended questions (what, how, why)',
+      'Listen more than you talk (80/20 rule)',
+      'Take notes on key phrases they use',
+      'Dig deeper with "Tell me more" or "What do you mean by that?"',
+      'Notice emotions—they reveal what matters most'
+    ],
+    transition: 'Once you understand their situation, transition: "I really appreciate you sharing that with me. Based on what I\'m hearing, it sounds like..." (reflect back what you heard, then:) "Is that accurate? And if we could solve that, what would that mean for you?"'
+  },
+  {
+    phase: 'Presenting the Solution',
+    icon: 'tabler:presentation',
+    color: 'orange',
+    duration: '10-15 min',
+    objectives: [
+      'Connect your solution to their specific needs',
+      'Show how you\'ll help them get their desired outcome',
+      'Address their specific obstacles'
+    ],
+    framework: 'Use the "Bridge" framework:',
+    bridgeSteps: [
+      {
+        step: 'Reflect',
+        script: '"Based on everything you\'ve shared, it sounds like you\'re dealing with [their challenge] and you want [their desired outcome], but [their obstacle] has been in the way. Is that right?"'
+      },
+      {
+        step: 'Connect',
+        script: '"Here\'s how I help people in similar situations..." (Share a relevant case study or example)'
+      },
+      {
+        step: 'Present',
+        script: '"The way I work with clients is [your approach]. We start by [first step], then [next step], and the result is [outcome]. Does that sound like it could work for your situation?"'
+      },
+      {
+        step: 'Check',
+        script: '"What questions does that bring up for you?" or "How does that land for you?"'
+      }
+    ],
+    keyPrinciples: [
+      'Only present what\'s relevant to their situation',
+      'Use their language and phrases from discovery',
+      'Show, don\'t just tell (use examples)',
+      'Check in frequently—don\'t monologue',
+      'Focus on outcomes, not features'
+    ],
+    transition: 'After presenting, transition: "I\'d love to hear your thoughts. What resonates? What questions do you have?"'
+  },
+  {
+    phase: 'Handling Objections',
+    icon: 'tabler:message-question',
+    color: 'red',
+    duration: '5-10 min',
+    objectives: [
+      'Acknowledge their concern',
+      'Get to the root of the objection',
+      'Address it directly and check if resolved'
+    ],
+    framework: 'Use the "Feel, Felt, Found" framework:',
+    objectionHandling: [
+      {
+        objection: 'Investment/Price',
+        script: '"I totally understand that concern. Most of my clients said the same thing initially. When you say \'expensive,\' what are you comparing it to?\n\nI ask because [Client Name] had the same reaction, but after [specific result], they said it paid for itself in [timeframe].\n\nWhat would need to be true for this investment to feel worth it to you?"'
+      },
+      {
+        objection: 'Timing/Readiness',
+        script: '"That makes sense. Can I ask—what would \'ready\' look like for you?\n\nI ask because most of my clients said the same thing, and they realized that waiting often made things harder, not easier. What\'s the cost of staying where you are for another [timeframe]?"'
+      },
+      {
+        objection: 'Fit/Doubt',
+        script: '"I appreciate you sharing that. Can you help me understand what specifically feels like it might not work?\n\nI ask because I\'ve worked with clients in similar situations. For example, [Client Name] was [similar situation] and here\'s what we achieved: [result]. Does that sound like it could work for you?"'
+      }
+    ],
+    keyPrinciples: [
+      'Objections are buying signals—they\'re engaged',
+      'Acknowledge first, then explore',
+      'Get specific about the concern',
+      'Use case studies and examples',
+      'Always check: "Does that address your concern?"'
+    ],
+    transition: 'After handling objections, transition: "Does that help? What other questions do you have?"'
+  },
+  {
+    phase: 'Closing & Next Steps',
+    icon: 'tabler:check',
+    color: 'emerald',
+    duration: '5-10 min',
+    objectives: [
+      'Create a clear next step',
+      'Set expectations',
+      'Maintain momentum'
+    ],
+    closingScenarios: [
+      {
+        scenario: 'They\'re ready to move forward',
+        script: '"That\'s wonderful! I\'m excited to work with you. Here\'s what happens next:\n\n[Outline next steps clearly]\n\nDoes that work for you? And do you have any questions before we move forward?"'
+      },
+      {
+        scenario: 'They need to think about it',
+        script: '"Absolutely—I want you to feel confident in this decision. What specifically would you like to think about?\n\nI ask because sometimes when people say \'think about it,\' there\'s a specific concern. If we can address that now, would that help?\n\nAlso, what happens if you wait? What\'s the cost of staying where you are?"'
+      },
+      {
+        scenario: 'They need to check with someone',
+        script: '"That makes sense. Can you help me understand what [person] would need to know to feel supportive?\n\nI can help you prepare for that conversation, or I\'m happy to join a call with both of you. What would be most helpful?"'
+      }
+    ],
+    nextSteps: [
+      'Send proposal or agreement within 24 hours',
+      'Schedule first session if they\'re ready',
+      'Set a follow-up date if they need time',
+      'Send relevant resources or case studies',
+      'Add them to your nurture sequence'
+    ],
+    keyPrinciples: [
+      'Assume the close—act like it\'s happening',
+      'Create urgency around inaction, not pressure',
+      'Make next steps clear and simple',
+      'Follow up within 24 hours',
+      'Stay in touch even if they don\'t say yes immediately'
+    ]
+  }
+];
+---
+
+<Layout metadata={metadata}>
+  <!-- HeroText Widget ******************* -->
+
+  <HeroText
+    tagline="Sales call framework"
+    title="Discovery Call Script: From Hello to Close"
+    subtitle="A step-by-step guide to conducting discovery calls that convert. Each phase includes scripts, questions, and strategies you can use immediately."
+  />
+
+  <!-- Quick Navigation -->
+  <section class="py-8 bg-slate-50 dark:bg-slate-900 border-b border-slate-200 dark:border-slate-700 sticky top-0 z-10">
+    <div class="max-w-5xl mx-auto px-4 md:px-8">
+      <nav class="flex flex-wrap justify-center gap-3 md:gap-4">
+        {/* @ts-ignore */}
+        {callPhases.map((phase, index) => (
+          <a 
+            href={`#phase-${index + 1}`} 
+            class="text-xs md:text-sm font-medium px-3 py-1.5 rounded-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:border-primary hover:text-primary transition-colors"
+          >
+            {index + 1}. {phase.phase.split(' ')[0]}
+          </a>
+        ))}
+      </nav>
+    </div>
+  </section>
+
+  <!-- Phase 1: Pre-Call Preparation -->
+  <section id="phase-1" class="py-16 md:py-24 scroll-mt-20">
+    <div class="max-w-5xl mx-auto px-4 md:px-8">
+      <div class="mb-12">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+            </svg>
+          </div>
+          <div>
+            <span class="text-sm font-semibold text-blue-600 dark:text-blue-400 uppercase tracking-wider">Phase 1</span>
+            <h2 class="text-3xl md:text-4xl font-bold mt-1">{callPhases[0].phase}</h2>
+          </div>
+        </div>
+        <div class="flex items-center gap-4 text-sm text-muted mt-4">
+          <span class="flex items-center gap-1">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            {callPhases[0].duration}
+          </span>
+        </div>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-6 mb-8">
+        <div class="bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700 p-6">
+          <h3 class="text-lg font-semibold mb-4 flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-green-500"></span>
+            Objectives
+          </h3>
+          <ul class="space-y-2">
+            {callPhases[0].objectives.map((obj) => (
+              <li class="flex items-start gap-2 text-muted">
+                <svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                <span>{obj}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div class="bg-gradient-to-br from-blue-50 to-blue-100/50 dark:from-blue-900/20 dark:to-blue-800/10 rounded-lg border border-blue-200 dark:border-blue-800 p-6">
+          <h3 class="text-lg font-semibold mb-4 flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-blue-500"></span>
+            Mindset
+          </h3>
+          <p class="text-slate-700 dark:text-slate-300 italic leading-relaxed">
+            "{callPhases[0].mindset}"
+          </p>
+        </div>
+      </div>
+
+      <div class="bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700 p-6">
+        <div class="flex items-center justify-between mb-4">
+          <h3 class="text-lg font-semibold">Pre-Call Checklist</h3>
+          <button 
+            type="button"
+            class="text-sm text-primary hover:underline"
+            onclick="resetChecklist('phase-1-checklist')"
+          >
+            Reset
+          </button>
+        </div>
+        <div class="grid sm:grid-cols-2 gap-3">
+          {callPhases[0].checklist.map((item, index) => (
+            <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-50 dark:bg-slate-900/50 cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-900 transition-colors checklist-item">
+              <input 
+                type="checkbox" 
+                class="mt-1 w-5 h-5 rounded border-slate-300 text-primary focus:ring-primary cursor-pointer"
+                data-checklist="phase-1-checklist"
+                data-item={index}
+              />
+              <span class="text-muted flex-1">{item}</span>
+            </label>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Phase 2: Opening & Rapport -->
+  <section id="phase-2" class="py-16 md:py-24 bg-slate-50 dark:bg-slate-900 scroll-mt-20">
+    <div class="max-w-5xl mx-auto px-4 md:px-8">
+      <div class="mb-12">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="flex items-center justify-center w-12 h-12 rounded-full bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h10m-7 4h7" />
+            </svg>
+          </div>
+          <div>
+            <span class="text-sm font-semibold text-green-600 dark:text-green-400 uppercase tracking-wider">Phase 2</span>
+            <h2 class="text-3xl md:text-4xl font-bold mt-1">{callPhases[1].phase}</h2>
+          </div>
+        </div>
+        <div class="flex items-center gap-4 text-sm text-muted mt-4">
+          <span class="flex items-center gap-1">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            {callPhases[1].duration}
+          </span>
+        </div>
+      </div>
+
+      <div class="space-y-6">
+        <div class="bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 rounded-lg border-l-4 border-green-500 p-6">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="text-xs font-semibold text-green-700 dark:text-green-400 uppercase tracking-wider px-2 py-1 rounded bg-green-100 dark:bg-green-900/50">Opening Script</span>
+          </div>
+          <p class="text-slate-800 dark:text-slate-200 whitespace-pre-line leading-relaxed font-medium">
+            {callPhases[1].openingScript}
+          </p>
+        </div>
+
+        <div class="bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700 p-6">
+          <h3 class="text-lg font-semibold mb-4">Key Points to Remember</h3>
+          <div class="grid sm:grid-cols-2 gap-3">
+            {callPhases[1].keyPoints.map((point, index) => (
+              <label class="flex items-start gap-2 cursor-pointer checklist-item">
+                <input 
+                  type="checkbox" 
+                  class="mt-1 w-5 h-5 rounded border-slate-300 text-primary focus:ring-primary cursor-pointer"
+                  data-checklist="phase-2-keypoints"
+                  data-item={index}
+                />
+                <span class="text-muted flex-1">{point}</span>
+              </label>
+            ))}
+          </div>
+        </div>
+
+        <div class="bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-800 p-6">
+          <h3 class="text-lg font-semibold mb-2 flex items-center gap-2">
+            <span class="text-blue-600 dark:text-blue-400">Transition to Discovery</span>
+          </h3>
+          <p class="text-slate-700 dark:text-slate-300 italic">
+            {callPhases[1].transition}
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Phase 3: Discovery & Needs Assessment -->
+  <section id="phase-3" class="py-16 md:py-24 scroll-mt-20">
+    <div class="max-w-5xl mx-auto px-4 md:px-8">
+      <div class="mb-12">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+          </div>
+          <div>
+            <span class="text-sm font-semibold text-purple-600 dark:text-purple-400 uppercase tracking-wider">Phase 3</span>
+            <h2 class="text-3xl md:text-4xl font-bold mt-1">{callPhases[2].phase}</h2>
+          </div>
+        </div>
+        <div class="flex items-center gap-4 text-sm text-muted mt-4">
+          <span class="flex items-center gap-1">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            {callPhases[2].duration}
+          </span>
+          <span class="px-2 py-1 rounded-full bg-purple-100 dark:bg-purple-900/50 text-purple-700 dark:text-purple-300 text-xs font-medium">
+            Most Important Phase
+          </span>
+        </div>
+      </div>
+
+      <div class="space-y-6">
+        {callPhases[2].questions.map((q, index) => (
+          <div class="bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700 p-6">
+            <div class="flex items-start gap-4">
+              <div class="flex-shrink-0">
+                <div class="flex items-center justify-center w-10 h-10 rounded-full bg-purple-100 dark:bg-purple-900/50 text-purple-600 dark:text-purple-400 font-bold">
+                  {index + 1}
+                </div>
+              </div>
+              <div class="flex-1 space-y-3">
+                <div>
+                  <h3 class="font-semibold text-lg mb-2">Question {index + 1}</h3>
+                  <div class="bg-gradient-to-r from-purple-50 to-purple-100/50 dark:from-purple-900/20 dark:to-purple-800/10 rounded-lg p-4 border-l-4 border-purple-500">
+                    <p class="text-slate-800 dark:text-slate-200 font-medium whitespace-pre-line">
+                      {q.question}
+                    </p>
+                  </div>
+                </div>
+                <div class="grid md:grid-cols-2 gap-4">
+                  <div>
+                    <span class="text-xs font-semibold text-purple-600 dark:text-purple-400 uppercase tracking-wider mb-1 block">Listen For</span>
+                    <p class="text-sm text-muted">{q.listenFor}</p>
+                  </div>
+                  <div>
+                    <span class="text-xs font-semibold text-purple-600 dark:text-purple-400 uppercase tracking-wider mb-1 block">Follow-Up</span>
+                    <p class="text-sm text-muted italic">{q.followUp}</p>
+                  </div>
+                </div>
+                <label class="flex items-center gap-2 pt-2 border-t border-slate-200 dark:border-slate-700 cursor-pointer">
+                  <input 
+                    type="checkbox" 
+                    class="w-5 h-5 rounded border-slate-300 text-primary focus:ring-primary cursor-pointer"
+                    data-checklist="phase-3-questions"
+                    data-item={index}
+                  />
+                  <span class="text-sm text-muted">I asked this question</span>
+                </label>
+              </div>
+            </div>
+          </div>
+        ))}
+
+        <div class="bg-gradient-to-br from-purple-50 to-indigo-50 dark:from-purple-900/20 dark:to-indigo-900/20 rounded-lg border border-purple-200 dark:border-purple-800 p-6">
+          <h3 class="text-lg font-semibold mb-4 flex items-center gap-2">
+            <svg class="w-5 h-5 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+            </svg>
+            Key Principles
+          </h3>
+          <div class="grid sm:grid-cols-2 gap-3">
+            {callPhases[2].keyPrinciples.map((principle, index) => (
+              <label class="flex items-start gap-2 cursor-pointer checklist-item">
+                <input 
+                  type="checkbox" 
+                  class="mt-0.5 w-5 h-5 rounded border-slate-300 text-primary focus:ring-primary cursor-pointer"
+                  data-checklist="phase-3-principles"
+                  data-item={index}
+                />
+                <span class="text-sm text-slate-700 dark:text-slate-300 flex-1">{principle}</span>
+              </label>
+            ))}
+          </div>
+        </div>
+
+        <div class="bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-800 p-6">
+          <h3 class="text-lg font-semibold mb-2 flex items-center gap-2">
+            <span class="text-blue-600 dark:text-blue-400">Transition to Solution</span>
+          </h3>
+          <p class="text-slate-700 dark:text-slate-300 italic">
+            {callPhases[2].transition}
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Phase 4: Presenting the Solution -->
+  <section id="phase-4" class="py-16 md:py-24 bg-slate-50 dark:bg-slate-900 scroll-mt-20">
+    <div class="max-w-5xl mx-auto px-4 md:px-8">
+      <div class="mb-12">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="flex items-center justify-center w-12 h-12 rounded-full bg-orange-100 dark:bg-orange-900/30 text-orange-600 dark:text-orange-400">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z" />
+            </svg>
+          </div>
+          <div>
+            <span class="text-sm font-semibold text-orange-600 dark:text-orange-400 uppercase tracking-wider">Phase 4</span>
+            <h2 class="text-3xl md:text-4xl font-bold mt-1">{callPhases[3].phase}</h2>
+          </div>
+        </div>
+        <div class="flex items-center gap-4 text-sm text-muted mt-4">
+          <span class="flex items-center gap-1">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            {callPhases[3].duration}
+          </span>
+        </div>
+      </div>
+
+      <div class="space-y-6">
+        <div class="bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700 p-6">
+          <h3 class="text-lg font-semibold mb-4 flex items-center gap-2">
+            <span class="text-orange-600 dark:text-orange-400">The Bridge Framework</span>
+          </h3>
+          <div class="space-y-4">
+            {callPhases[3].bridgeSteps.map((step, index) => (
+              <div class="flex gap-4">
+                <div class="flex-shrink-0">
+                  <div class="flex items-center justify-center w-10 h-10 rounded-full bg-orange-100 dark:bg-orange-900/50 text-orange-600 dark:text-orange-400 font-bold">
+                    {index + 1}
+                  </div>
+                </div>
+                <div class="flex-1">
+                  <div class="flex items-center justify-between mb-2">
+                    <h4 class="font-semibold">{step.step}</h4>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input 
+                        type="checkbox" 
+                        class="w-4 h-4 rounded border-slate-300 text-primary focus:ring-primary cursor-pointer"
+                        data-checklist="phase-4-bridge"
+                        data-item={index}
+                      />
+                      <span class="text-xs text-muted">Done</span>
+                    </label>
+                  </div>
+                  <div class="bg-gradient-to-r from-orange-50 to-amber-50 dark:from-orange-900/20 dark:to-amber-900/20 rounded-lg p-4 border-l-4 border-orange-500">
+                    <p class="text-slate-800 dark:text-slate-200 whitespace-pre-line text-sm">
+                      {step.script}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div class="bg-gradient-to-br from-orange-50 to-amber-50 dark:from-orange-900/20 dark:to-amber-900/20 rounded-lg border border-orange-200 dark:border-orange-800 p-6">
+          <h3 class="text-lg font-semibold mb-4">Key Principles</h3>
+          <div class="grid sm:grid-cols-2 gap-3">
+            {callPhases[3].keyPrinciples.map((principle, index) => (
+              <label class="flex items-start gap-2 cursor-pointer checklist-item">
+                <input 
+                  type="checkbox" 
+                  class="mt-0.5 w-5 h-5 rounded border-slate-300 text-primary focus:ring-primary cursor-pointer"
+                  data-checklist="phase-4-principles"
+                  data-item={index}
+                />
+                <span class="text-sm text-slate-700 dark:text-slate-300 flex-1">{principle}</span>
+              </label>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Phase 5: Handling Objections -->
+  <section id="phase-5" class="py-16 md:py-24 scroll-mt-20">
+    <div class="max-w-5xl mx-auto px-4 md:px-8">
+      <div class="mb-12">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="flex items-center justify-center w-12 h-12 rounded-full bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <div>
+            <span class="text-sm font-semibold text-red-600 dark:text-red-400 uppercase tracking-wider">Phase 5</span>
+            <h2 class="text-3xl md:text-4xl font-bold mt-1">{callPhases[4].phase}</h2>
+          </div>
+        </div>
+        <div class="flex items-center gap-4 text-sm text-muted mt-4">
+          <span class="flex items-center gap-1">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            {callPhases[4].duration}
+          </span>
+          <span class="px-2 py-1 rounded-full bg-red-100 dark:bg-red-900/50 text-red-700 dark:text-red-300 text-xs font-medium">
+            Objections = Buying Signals
+          </span>
+        </div>
+      </div>
+
+      <div class="space-y-6">
+        <div class="bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700 p-6">
+          <h3 class="text-lg font-semibold mb-4">Common Objections & Responses</h3>
+          <div class="space-y-4">
+            {callPhases[4].objectionHandling.map((obj, index) => (
+              <div class="border-l-4 border-red-500 pl-4">
+                <div class="flex items-center justify-between mb-2">
+                  <h4 class="font-semibold text-red-700 dark:text-red-400">{obj.objection}</h4>
+                  <label class="flex items-center gap-2 cursor-pointer">
+                    <input 
+                      type="checkbox" 
+                      class="w-4 h-4 rounded border-slate-300 text-primary focus:ring-primary cursor-pointer"
+                      data-checklist="phase-5-objections"
+                      data-item={index}
+                    />
+                    <span class="text-xs text-muted">Handled</span>
+                  </label>
+                </div>
+                <div class="bg-gradient-to-r from-red-50 to-pink-50 dark:from-red-900/20 dark:to-pink-900/20 rounded-lg p-4">
+                  <p class="text-slate-800 dark:text-slate-200 whitespace-pre-line text-sm">
+                    {obj.script}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div class="bg-gradient-to-br from-red-50 to-pink-50 dark:from-red-900/20 dark:to-pink-900/20 rounded-lg border border-red-200 dark:border-red-800 p-6">
+          <h3 class="text-lg font-semibold mb-4">Key Principles</h3>
+          <div class="grid sm:grid-cols-2 gap-3">
+            {callPhases[4].keyPrinciples.map((principle, index) => (
+              <label class="flex items-start gap-2 cursor-pointer checklist-item">
+                <input 
+                  type="checkbox" 
+                  class="mt-0.5 w-5 h-5 rounded border-slate-300 text-primary focus:ring-primary cursor-pointer"
+                  data-checklist="phase-5-principles"
+                  data-item={index}
+                />
+                <span class="text-sm text-slate-700 dark:text-slate-300 flex-1">{principle}</span>
+              </label>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Phase 6: Closing & Next Steps -->
+  <section id="phase-6" class="py-16 md:py-24 bg-slate-50 dark:bg-slate-900 scroll-mt-20">
+    <div class="max-w-5xl mx-auto px-4 md:px-8">
+      <div class="mb-12">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            </svg>
+          </div>
+          <div>
+            <span class="text-sm font-semibold text-emerald-600 dark:text-emerald-400 uppercase tracking-wider">Phase 6</span>
+            <h2 class="text-3xl md:text-4xl font-bold mt-1">{callPhases[5].phase}</h2>
+          </div>
+        </div>
+        <div class="flex items-center gap-4 text-sm text-muted mt-4">
+          <span class="flex items-center gap-1">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            {callPhases[5].duration}
+          </span>
+        </div>
+      </div>
+
+      <div class="space-y-6">
+        <div class="bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700 p-6">
+          <h3 class="text-lg font-semibold mb-4">Closing Scenarios</h3>
+          <div class="space-y-4">
+            {callPhases[5].closingScenarios.map((scenario, index) => (
+              <div class="border-l-4 border-emerald-500 pl-4">
+                <div class="flex items-center justify-between mb-2">
+                  <h4 class="font-semibold text-emerald-700 dark:text-emerald-400">{scenario.scenario}</h4>
+                  <label class="flex items-center gap-2 cursor-pointer">
+                    <input 
+                      type="checkbox" 
+                      class="w-4 h-4 rounded border-slate-300 text-primary focus:ring-primary cursor-pointer"
+                      data-checklist="phase-6-scenarios"
+                      data-item={index}
+                    />
+                    <span class="text-xs text-muted">Used</span>
+                  </label>
+                </div>
+                <div class="bg-gradient-to-r from-emerald-50 to-green-50 dark:from-emerald-900/20 dark:to-green-900/20 rounded-lg p-4">
+                  <p class="text-slate-800 dark:text-slate-200 whitespace-pre-line text-sm">
+                    {scenario.script}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div class="bg-gradient-to-br from-emerald-50 to-green-50 dark:from-emerald-900/20 dark:to-green-900/20 rounded-lg border border-emerald-200 dark:border-emerald-800 p-6">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="text-lg font-semibold">Next Steps Checklist</h3>
+            <button 
+              type="button"
+              class="text-sm text-primary hover:underline"
+              onclick="resetChecklist('phase-6-nextsteps')"
+            >
+              Reset
+            </button>
+          </div>
+          <div class="grid sm:grid-cols-2 gap-3">
+            {callPhases[5].nextSteps.map((step, index) => (
+              <label class="flex items-start gap-2 cursor-pointer checklist-item">
+                <input 
+                  type="checkbox" 
+                  class="mt-0.5 w-6 h-6 rounded border-slate-300 text-primary focus:ring-primary cursor-pointer"
+                  data-checklist="phase-6-nextsteps"
+                  data-item={index}
+                />
+                <span class="text-sm text-slate-700 dark:text-slate-300 flex-1">{step}</span>
+              </label>
+            ))}
+          </div>
+        </div>
+
+        <div class="bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700 p-6">
+          <h3 class="text-lg font-semibold mb-4">Key Principles</h3>
+          <div class="grid sm:grid-cols-2 gap-3">
+            {callPhases[5].keyPrinciples.map((principle, index) => (
+              <label class="flex items-start gap-2 cursor-pointer checklist-item">
+                <input 
+                  type="checkbox" 
+                  class="mt-0.5 w-5 h-5 rounded border-slate-300 text-primary focus:ring-primary cursor-pointer"
+                  data-checklist="phase-6-principles"
+                  data-item={index}
+                />
+                <span class="text-sm text-slate-700 dark:text-slate-300 flex-1">{principle}</span>
+              </label>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script is:inline>
+    // Interactive Checklist Functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      // Load saved checklist state from localStorage
+      function loadChecklistState() {
+        const saved = localStorage.getItem('sales-call-checklist');
+        if (saved) {
+          try {
+            const state = JSON.parse(saved);
+            Object.keys(state).forEach(checklistId => {
+              state[checklistId].forEach((checked, index) => {
+                if (checked) {
+                  const checkbox = document.querySelector(
+                    `input[data-checklist="${checklistId}"][data-item="${index}"]`
+                  );
+                  if (checkbox) {
+                    checkbox.checked = true;
+                    updateChecklistItem(checkbox);
+                  }
+                }
+              });
+            });
+          } catch (e) {
+            console.error('Error loading checklist state:', e);
+          }
+        }
+      }
+
+      // Save checklist state to localStorage
+      function saveChecklistState() {
+        const state = {};
+        document.querySelectorAll('input[data-checklist]').forEach(checkbox => {
+          const checklistId = checkbox.getAttribute('data-checklist');
+          const itemIndex = checkbox.getAttribute('data-item') || '0';
+          
+          if (!state[checklistId]) {
+            state[checklistId] = [];
+          }
+          
+          const index = parseInt(itemIndex);
+          state[checklistId][index] = checkbox.checked;
+        });
+        
+        localStorage.setItem('sales-call-checklist', JSON.stringify(state));
+      }
+
+      // Update visual state of checklist item
+      function updateChecklistItem(checkbox) {
+        const label = checkbox.closest('label');
+        if (label) {
+          if (checkbox.checked) {
+            label.classList.add('opacity-60');
+            const text = label.querySelector('span');
+            if (text) {
+              text.classList.add('line-through');
+            }
+          } else {
+            label.classList.remove('opacity-60');
+            const text = label.querySelector('span');
+            if (text) {
+              text.classList.remove('line-through');
+            }
+          }
+        }
+      }
+
+      // Handle checkbox changes
+      document.querySelectorAll('input[data-checklist]').forEach(checkbox => {
+        checkbox.addEventListener('change', function() {
+          updateChecklistItem(this);
+          saveChecklistState();
+        });
+      });
+
+      // Reset checklist function (called from button onclick)
+      window.resetChecklist = function(checklistId) {
+        document.querySelectorAll(`input[data-checklist="${checklistId}"]`).forEach(checkbox => {
+          checkbox.checked = false;
+          updateChecklistItem(checkbox);
+        });
+        saveChecklistState();
+      };
+
+      // Initialize on page load
+      loadChecklistState();
+    });
+  </script>
+</Layout>
+

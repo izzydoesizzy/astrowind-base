@@ -109,6 +109,10 @@ export const headerData = {
           href: getPermalink('/sales-call-planning-objections'),
         },
         {
+          text: 'Sales Call Script',
+          href: getPermalink('/sales-call-script'),
+        },
+        {
           text: 'Objection Handling',
           href: getPermalink('/objection-handling'),
         },
