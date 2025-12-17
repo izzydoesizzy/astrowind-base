@@ -1,0 +1,270 @@
+---
+// @ts-ignore - Astro components are resolved by the Astro compiler
+import Layout from '~/layouts/PageLayout.astro';
+
+// @ts-ignore - Astro components are resolved by the Astro compiler
+import Header from '~/components/widgets/Header.astro';
+// @ts-ignore - Astro components are resolved by the Astro compiler
+import Hero from '~/components/widgets/Hero.astro';
+// @ts-ignore - Astro components are resolved by the Astro compiler
+import Features from '~/components/widgets/Features.astro';
+// @ts-ignore - Astro components are resolved by the Astro compiler
+import Content from '~/components/widgets/Content.astro';
+// @ts-ignore - Astro components are resolved by the Astro compiler
+import Steps from '~/components/widgets/Steps.astro';
+// @ts-ignore - Astro components are resolved by the Astro compiler
+import Testimonials from '~/components/widgets/Testimonials.astro';
+// @ts-ignore - Astro components are resolved by the Astro compiler
+import FAQs from '~/components/widgets/FAQs.astro';
+// @ts-ignore - Astro components are resolved by the Astro compiler
+import CallToAction from '~/components/widgets/CallToAction.astro';
+// @ts-ignore - Astro components are resolved by the Astro compiler
+import Stats from '~/components/widgets/Stats.astro';
+
+// @ts-ignore - Provided by AstroWind navigation utilities
+import { headerData } from '~/navigation';
+
+const metadata = {
+  title: 'Coach Landing Page',
+};
+---
+
+<Layout metadata={metadata}>
+  <Header
+    slot="header"
+    {...headerData}
+    actions={[
+      {
+        variant: 'secondary',
+        text: 'Free session',
+        href: '#free-session',
+      },
+      {
+        variant: 'primary',
+        text: 'Book a call',
+        href: '#contact',
+      },
+    ]}
+    isSticky
+    showToggleTheme
+  />
+
+  <!-- Hero Widget ******************* -->
+
+  <Hero
+    tagline="Coaching Web Demo"
+    actions={[
+      {
+        variant: 'primary',
+        text: 'Apply for a free clarity call',
+        href: '#free-session',
+      },
+      { text: 'View coaching programs', href: '#programs' },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
+      alt: 'Coach talking with client in a session.',
+    }}
+  >
+    <div slot="title">
+      A modern website starter for <span class="text-accent dark:text-white">Coaches & Consultants</span>
+    </div>
+
+    <div slot="subtitle">
+      Turn your expertise into a predictable pipeline of dream clients with a story-driven homepage designed for coaches,
+      strategists, and service providers.
+    </div>
+  </Hero>
+
+  <!-- Stats Widget ****************** -->
+
+  <Stats
+    title="Social proof that builds instant trust"
+    stats={[
+      { title: 'Client sessions delivered', amount: '3.5K+' },
+      { title: 'Average client rating', amount: '4.9/5' },
+      { title: 'Countries coached', amount: '19' },
+      { title: 'Programs launched', amount: '24' },
+    ]}
+  />
+
+  <!-- Features Widget *************** -->
+
+  <Features
+    id="programs"
+    title="Signature coaching programs"
+    subtitle="Highlight your core offer, group program, and premium 1:1 engagement in a single, clear section."
+    columns={3}
+    items={[
+      {
+        title: 'Clarity Intensive',
+        description:
+          'A focused, 90-minute deep dive to untangle your biggest decision, map options, and leave with a confident next step.',
+        icon: 'tabler:target',
+      },
+      {
+        title: 'Momentum Group Program',
+        description:
+          'A 12-week small group container for accountability, frameworks, and live coaching that turns goals into habits.',
+        icon: 'tabler:users',
+      },
+      {
+        title: 'Private 1:1 Partnership',
+        description:
+          'A high-touch, bespoke coaching partnership for founders and leaders who want strategic thinking and honest feedback.',
+        icon: 'tabler:diamond',
+      },
+    ]}
+  />
+
+  <!-- Content Widget **************** -->
+
+  <Content
+    id="free-session"
+    isReversed
+    tagline="Start with clarity"
+    title="Offer a free or low-risk first step that feels valuable on its own."
+    subtitle="Use this section to position your free discovery call, audit, or mini-session as a no-pressure way to experience your coaching."
+    items={[
+      {
+        title: 'No obligation',
+        description:
+          'Make it clear this is a space for exploration, not a high-pressure sales pitch. People relax when expectations are explicit.',
+      },
+      {
+        title: 'Concrete takeaway',
+        description:
+          'Promise one specific outcome—like a roadmap, a decision, or a diagnosis—so the call feels worthwhile even if they never buy.',
+      },
+      {
+        title: 'Simple next step',
+        description:
+          'End the call with a clear recommendation: either a program that fits or a resource to keep momentum going.',
+      },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
+      alt: 'Video call coaching session.',
+    }}
+  >
+    <div slot="bg" class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+  </Content>
+
+  <!-- Steps Widget ****************** -->
+
+  <Steps
+    title="A simple path from first call to transformation"
+    items={[
+      {
+        title: '1. Schedule a clarity call',
+        description:
+          'Choose a time that works for you and answer a few quick questions so we can make the most of our time together.',
+        icon: 'tabler:calendar-check',
+      },
+      {
+        title: '2. Map your goals & roadblocks',
+        description:
+          'We’ll clarify where you are, where you want to go, and what’s been in the way so far.',
+        icon: 'tabler:route',
+      },
+      {
+        title: '3. Choose the right container',
+        description:
+          'If it’s a fit, we’ll match you with the program that best fits your goals, timeline, and level of support.',
+        icon: 'tabler:layers-difference',
+      },
+      {
+        title: '4. Implement with support',
+        description:
+          'Show up to calls, follow through on actions, and use our tools between sessions to keep momentum going.',
+        icon: 'tabler:rocket',
+      },
+    ]}
+  />
+
+  <!-- Testimonials Widget *********** -->
+
+  <Testimonials
+    title="What coaching clients are saying"
+    subtitle="Use testimonials to help visitors see themselves in the stories of people you have already helped."
+    testimonials={[
+      {
+        testimonial:
+          'Within three months I went from feeling stuck and second-guessing every move to launching a new offer that sold out its first cohort.',
+        name: 'Jordan Lee',
+        job: 'Creative entrepreneur',
+        image: {
+          src: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=987&q=80',
+          alt: 'Portrait of Jordan Lee.',
+        },
+      },
+      {
+        testimonial:
+          'Having a space to think out loud with someone who understands both business and mindset has been game changing.',
+        name: 'Alex Rivera',
+        job: 'SaaS founder',
+        image: {
+          src: 'https://images.unsplash.com/photo-1544723795-3fb6469f5b39?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=987&q=80',
+          alt: 'Portrait of Alex Rivera.',
+        },
+      },
+      {
+        testimonial:
+          'I finally have a weekly rhythm that supports my goals instead of constantly reacting to whatever feels urgent.',
+        name: 'Monica Hughes',
+        job: 'Marketing director',
+        image: {
+          src: 'https://images.unsplash.com/photo-1525130413817-d45c1d127c42?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=987&q=80',
+          alt: 'Portrait of Monica Hughes.',
+        },
+      },
+    ]}
+  />
+
+  <!-- FAQs Widget (Accordion style) ******************* -->
+
+  <FAQs
+    title="Coaching FAQs"
+    subtitle="Pre-answer the most common sales call questions and objections with an accordion visitors can skim in seconds."
+    tagline="FAQs"
+    items={[
+      {
+        title: 'Who is this coaching for?',
+        description:
+          'This template is ideal for service-based professionals, creators, and founders who want a clear, conversion-focused homepage that explains what they do and how they help.',
+      },
+      {
+        title: 'What happens on the first call?',
+        description:
+          'We’ll talk about where you are, what you want, and what you’ve already tried. You’ll leave with clarity and a recommended next step—whether or not we end up working together.',
+      },
+      {
+        title: 'Do you offer group or 1:1 only?',
+        description:
+          'The layout is flexible enough to showcase group programs, private coaching, VIP days, or a mix of all three.',
+      },
+      {
+        title: 'How soon can I start?',
+        description:
+          'Use this space to describe your intake cadence (rolling, cohorts, or waitlist) so prospects know exactly what to expect after they apply.',
+      },
+    ]}
+  />
+
+  <!-- CallToAction Widget *********** -->
+
+  <CallToAction
+    id="contact"
+    title="Ready to design your coaching homepage?"
+    subtitle="Use this demo as a starting point, then plug in your own story, programs, and testimonials."
+    actions={[
+      {
+        variant: 'primary',
+        text: 'Book a clarity call',
+        href: '#free-session',
+      },
+    ]}
+  />
+</Layout>
+
+

@@ -1,0 +1,431 @@
+---
+import Layout from '~/layouts/LandingLayout.astro';
+
+import Announcement from '~/components/widgets/Announcement.astro';
+import Hero2 from '~/components/widgets/Hero2.astro';
+import Features from '~/components/widgets/Features.astro';
+import Features2 from '~/components/widgets/Features2.astro';
+import Features3 from '~/components/widgets/Features3.astro';
+import Steps from '~/components/widgets/Steps.astro';
+import Steps2 from '~/components/widgets/Steps2.astro';
+import Content from '~/components/widgets/Content.astro';
+import Pricing from '~/components/widgets/Pricing.astro';
+import Testimonials from '~/components/widgets/Testimonials.astro';
+import FAQs from '~/components/widgets/FAQs.astro';
+import Stats from '~/components/widgets/Stats.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+import Contact from '~/components/widgets/Contact.astro';
+
+const metadata = {
+  title: "Value Ladder Long-form Sales Page",
+};
+---
+
+<Layout metadata={metadata}>
+  <Fragment slot="announcement">
+    <Announcement
+      title="New: Value Ladder sales page"
+      href="#ladder"
+      action={{
+        text: 'View the ladder',
+        icon: 'tabler:stairs-up',
+      }}
+    >
+      See how a single long-form page can walk visitors up a Russell Brunson–style value ladder.
+    </Announcement>
+  </Fragment>
+
+  <!-- Hero2 Widget ******************* -->
+
+  <Hero2
+    tagline="Value Ladder Sales Demo"
+    title="Turn one-time clicks into lifelong customers with a value ladder offer stack."
+    subtitle="Blend Russell Brunson’s value ladder model with AstroWind’s components to move visitors from free value to premium programs on a single, story-first page."
+    actions={[
+      {
+        variant: 'primary',
+        text: 'Start at the top of the ladder',
+        href: '#ladder',
+        icon: 'tabler:square-rounded-arrow-right',
+      },
+      { text: 'Skip to pricing', href: '#pricing' },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
+      alt: 'Team mapping a value ladder and customer journey on a whiteboard.',
+    }}
+  />
+
+  <!-- Stats Widget ****************** -->
+
+  <Stats
+    title="Proof that ascending customers is more profitable than chasing new ones"
+    subtitle="A well-structured value ladder increases average order value and lifetime customer value."
+    stats={[
+      { title: 'New customers', amount: '12K+' },
+      { title: 'Avg. conversion lift', amount: '38%' },
+      { title: 'Countries served', amount: '42' },
+      { title: 'Return on ad spend', amount: '4.7x' },
+    ]}
+  />
+
+  <!-- Features Widget **************** -->
+
+  <Features
+    id="pain"
+    tagline="Start with their pain, not your products"
+    title="Your visitors don’t want a funnel. They want a clear next step."
+    subtitle="Open your long-form page by describing what it feels like to move through your world without a value ladder."
+    columns={3}
+    items={[
+      {
+        title: 'Only one main offer',
+        description:
+          'Most traffic hits a single “core” offer. If visitors aren’t ready, they bounce—there’s no lower step where they can start the relationship.',
+        icon: 'tabler:stairs-down',
+      },
+      {
+        title: 'No natural next step',
+        description:
+          'Existing customers have nowhere to ascend. There’s no premium or continuity offer to grow accounts that already trust you.',
+        icon: 'tabler:route',
+      },
+      {
+        title: 'Random upgrades',
+        description:
+          'Upsells and cross-sells are bolted on after checkout instead of being part of a strategic, story-driven ladder.',
+        icon: 'tabler:puzzle',
+      },
+    ]}
+  />
+
+  <!-- Content Widget **************** -->
+
+  <Content
+    id="solution"
+    isReversed
+    tagline="Introduce the value ladder"
+    title="One page, four rungs: free, entry, core, and premium."
+    subtitle="Use AstroWind’s widgets to visually stack your offers so every visitor knows exactly where to start and what comes next."
+    items={[
+      {
+        title: 'Free & low-friction entry',
+        description:
+          'Lead with a free resource or trial so cold traffic can say “yes” without talking to sales or pulling out a credit card.',
+      },
+      {
+        title: 'Low-ticket “quick win” offer',
+        description:
+          'Introduce an affordable, high-perceived-value product that delivers a fast transformation and turns leads into buyers.',
+      },
+      {
+        title: 'Core and premium ascension',
+        description:
+          'Present your flagship program and high-touch offers as the natural next step for people who want deeper, faster results.',
+      },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1553877522-43269d4ea984?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
+      alt: 'Dashboard showing analytics and conversion improvements.',
+    }}
+  >
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+    </Fragment>
+  </Content>
+
+  <!-- Steps Widget ****************** -->
+
+  <Steps
+    id="ladder"
+    title="Your Russell Brunson–style value ladder on one page"
+    subtitle="Each rung increases value, price, and proximity—without ever feeling like a hard sell."
+    items={[
+      {
+        title: '1. Free value: lead magnet or trial',
+        description:
+          'Offer a free checklist, training, or trial that solves one specific problem and builds trust without pressure.',
+        icon: 'tabler:gift',
+      },
+      {
+        title: '2. Entry offer: low-ticket, high value',
+        description:
+          'Invite new leads into an affordable workshop, mini-course, or starter plan that delivers a fast, tangible win.',
+        icon: 'tabler:ticket',
+      },
+      {
+        title: '3. Core offer: your main transformation',
+        description:
+          'Present your flagship product or program as the obvious next step for people who loved the quick win and want the full result.',
+        icon: 'tabler:trophy',
+      },
+      {
+        title: '4. Premium & continuity',
+        description:
+          'Ascend your best customers into high-touch consulting, masterminds, or ongoing memberships that deepen results over time.',
+        icon: 'tabler:crown',
+      },
+    ]}
+  />
+
+  <!-- Features2 Widget *************** -->
+
+  <Features2
+    id="benefits"
+    tagline="Think lifetime value, not one-time sales"
+    title="What a value ladder–driven page unlocks for your business"
+    subtitle="Instead of asking, “Did this campaign convert?” you’ll ask, “How far did this visitor climb?”"
+    items={[
+      {
+        title: 'More customers saying “yes” somewhere',
+        description:
+          'Not everyone is ready for your highest offer today—but almost everyone is ready for a free or low-ticket step.',
+        icon: 'tabler:hand-click',
+      },
+      {
+        title: 'Predictable ascension paths',
+        description:
+          'Design clear upgrade paths so buyers always know what the “next best step” is after they get results.',
+        icon: 'tabler:stairs-up',
+      },
+      {
+        title: 'Higher lifetime value',
+        description:
+          'Grow revenue per customer by stacking continuity and premium offers on top of your core product, not instead of it.',
+        icon: 'tabler:chart-bar',
+      },
+      {
+        title: 'Cleaner funnel analytics',
+        description:
+          'Measure not just conversions, but how far different traffic sources typically move up your ladder.',
+        icon: 'tabler:chart-dots',
+      },
+    ]}
+  />
+
+  <!-- Testimonials Widget *********** -->
+
+  <Testimonials
+    id="proof"
+    title="Stories from teams that swapped short pages for long-form"
+    subtitle="Show—not just tell—what happens when prospects finally understand the full value of your offer."
+    testimonials={[
+      {
+        testimonial:
+          'We rebuilt our main funnel as a long-form page using these widgets and saw a 41% lift in paid traffic conversions within two weeks.',
+        name: 'Amelia Patel',
+        job: 'Head of Growth, Beacon CRM',
+        image: {
+          src: 'https://images.unsplash.com/photo-1525134479668-1bee5c7c6845?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=987&q=80',
+          alt: 'Portrait of Amelia Patel.',
+        },
+      },
+      {
+        testimonial:
+          'The modular components let us launch three narrative variations in a single sprint. Our sales team now points every prospect to this page.',
+        name: 'Jonas Miller',
+        job: 'VP Revenue, Northline',
+        image: {
+          src: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=987&q=80',
+          alt: 'Portrait of Jonas Miller.',
+        },
+      },
+      {
+        testimonial:
+          'We used to maintain separate pages for features, pricing, and testimonials. Consolidating them into one long-form narrative dramatically simplified our analytics and messaging.',
+        name: 'Grace Chen',
+        job: 'Founder, Launchwell',
+        image: {
+          src: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=987&q=80',
+          alt: 'Portrait of Grace Chen.',
+        },
+      },
+    ]}
+  />
+
+  <!-- Content Widget **************** -->
+
+  <Content
+    id="inside"
+    isAfterContent
+    tagline="What’s included"
+    title="Everything you need to build a value ladder–driven long-form page"
+    items={[
+      {
+        title: 'Top-of-funnel hero & announcement',
+        description:
+          'Use `Announcement` and `Hero2` to frame your ladder, call out the free step, and make your primary CTA impossible to miss.',
+      },
+      {
+        title: 'Mid-page education & positioning',
+        description:
+          'Use `Features`, `Features2`, `Features3`, `Content`, `Steps`, and `Stats` to explain why your ladder exists and who it serves best.',
+      },
+      {
+        title: 'Proof & risk reversal',
+        description:
+          'Stack `Testimonials` and `FAQs` to answer objections and show real people climbing your ladder successfully.',
+      },
+      {
+        title: 'Offer stack & ascension CTAs',
+        description:
+          'Use `Pricing`, `Contact`, `Steps2`, and `CallToAction` to map each rung to a clear action your visitors can take today.',
+      },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
+      alt: 'Team planning content structure on sticky notes.',
+    }}
+  />
+
+  <!-- Pricing Widget ******************* -->
+
+  <Pricing
+    id="pricing"
+    title="Map each rung of your value ladder to a clear offer"
+    subtitle="These tiers are examples—rename and reprice them to match your own lead magnet, entry offer, core offer, and premium offer."
+    prices={[
+      {
+        title: 'Free / Lead Magnet',
+        subtitle: 'Perfect for cold traffic that needs a quick win before making a purchase.',
+        price: '0',
+        period: '/ month',
+        callToAction: {
+          text: 'Get the free resource',
+          href: '#contact',
+        },
+        features: [
+          'Instant access to a checklist, training, or trial',
+          'Designed to deliver one specific, fast result',
+          'Collects emails so you can follow up with nurturing',
+        ],
+      },
+      {
+        title: 'Entry Offer',
+        subtitle: 'Low-ticket, high-value “tripwire” that turns leads into first-time buyers.',
+        price: 29,
+        period: ' one-time',
+        hasRibbon: true,
+        ribbonTitle: 'Popular first step',
+        callToAction: {
+          text: 'Join the entry offer',
+          href: '#contact',
+        },
+        features: [
+          'One focused transformation delivered in days, not months',
+          'Simple fulfillment that’s easy to scale',
+          'Perfect bridge into your core offer',
+        ],
+      },
+      {
+        title: 'Core & Premium',
+        subtitle: 'Your flagship program plus high-touch ascension offers.',
+        price: 99,
+        period: '/ month or program',
+        callToAction: {
+          text: 'Apply for the core program',
+          href: '#contact',
+        },
+        features: [
+          'Flagship program that delivers your main promise',
+          'Premium upsells (done-for-you, masterminds, or memberships)',
+          'Built-in upgrade paths so best clients never hit a ceiling',
+        ],
+      },
+    ]}
+  />
+
+  <!-- FAQs Widget ******************* -->
+
+  <FAQs
+    id="faqs"
+    title="Questions about using a value ladder on one page"
+    subtitle="If you’re wondering whether a value ladder will fit your audience or offer, you’re not alone."
+    tagline="FAQs"
+    items={[
+      {
+        title: 'Do I need all four rungs from day one?',
+        description:
+          'No. Start with a free step and a core offer, then add an entry and premium offer once you understand what your audience values most.',
+      },
+      {
+        title: 'What if my product is already low-ticket?',
+        description:
+          'Great. That becomes your entry offer. Use this layout to design a free step above it and a more comprehensive solution below it.',
+      },
+      {
+        title: 'Will a ladder confuse my visitors?',
+        description:
+          'Confusion comes from unclear copy, not from choice. As long as each rung has a clear “who it is for” and “what you get,” visitors will self-select into the right step.',
+      },
+      {
+        title: 'Can I point ads to this page directly?',
+        description:
+          'Yes. Most campaigns send cold traffic to the free or entry rung. Warm audiences (email list, referrals, retargeting) can be sent to the core or premium sections.',
+      },
+    ]}
+  />
+
+  <!-- Steps2 Widget ****************** -->
+
+  <Steps2
+    id="contact"
+    title="Ready to design your own value ladder?"
+    subtitle="Here’s how to turn this demo into a working funnel in the next 24 hours."
+    callToAction={{
+      text: 'Schedule a strategy call',
+      href: '#contact-form',
+    }}
+    items={[
+      {
+        title: 'Map what you already sell',
+        description: 'Write down your existing offers and price points—from free content to premium services.',
+        icon: 'tabler:map',
+      },
+      {
+        title: 'Assign each offer to a rung',
+        description: 'Label each offer as free, entry, core, or premium so there is exactly one next step at every level.',
+        icon: 'tabler:checklist',
+      },
+      {
+        title: 'Wire each rung to a section',
+        description: 'Use the existing AstroWind widgets to give every rung its own hero, proof, and CTA.',
+        icon: 'tabler:pencil',
+      },
+      {
+        title: 'Launch, measure, and refine',
+        description: 'Ship your page, track which rung most visitors choose, and optimize from there.',
+        icon: 'tabler:refresh-dot',
+      },
+    ]}
+  />
+
+  <!-- Contact Widget ***************** -->
+
+  <Contact
+    id="contact-form"
+    title="Tell us about your offer"
+    subtitle="Share a bit about your product, audience, and goals, and we’ll help you shape a long-form page that sells."
+  />
+
+  <!-- CallToAction Widget *********** -->
+
+  <CallToAction
+    title="Turn this value ladder demo into your next high-converting funnel"
+    subtitle="You already have the components. Now give each offer a clear rung on the ladder."
+    actions={[
+      {
+        variant: 'primary',
+        text: 'Start building today',
+        href: '#pricing',
+        icon: 'tabler:rocket',
+      },
+      {
+        text: 'Talk to sales',
+        href: '#contact',
+      },
+    ]}
+  />
+</Layout>
+
+

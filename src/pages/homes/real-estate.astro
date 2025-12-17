@@ -1,0 +1,267 @@
+---
+// @ts-ignore - Astro components are resolved by the Astro compiler
+import Layout from '~/layouts/PageLayout.astro';
+
+// @ts-ignore - Astro components are resolved by the Astro compiler
+import Header from '~/components/widgets/Header.astro';
+// @ts-ignore - Astro components are resolved by the Astro compiler
+import Hero2 from '~/components/widgets/Hero2.astro';
+// @ts-ignore - Astro components are resolved by the Astro compiler
+import Stats from '~/components/widgets/Stats.astro';
+// @ts-ignore - Astro components are resolved by the Astro compiler
+import Features2 from '~/components/widgets/Features2.astro';
+// @ts-ignore - Astro components are resolved by the Astro compiler
+import Content from '~/components/widgets/Content.astro';
+// @ts-ignore - Astro components are resolved by the Astro compiler
+import Testimonials from '~/components/widgets/Testimonials.astro';
+// @ts-ignore - Astro components are resolved by the Astro compiler
+import CallToAction from '~/components/widgets/CallToAction.astro';
+// @ts-ignore - Astro components are resolved by the Astro compiler
+import FAQs from '~/components/widgets/FAQs.astro';
+
+// @ts-ignore - Provided by AstroWind navigation utilities
+import { headerData } from '~/navigation';
+
+const metadata = {
+  title: 'Real Estate Landing Page',
+};
+---
+
+<Layout metadata={metadata}>
+  <Header
+    slot="header"
+    {...headerData}
+    actions={[
+      {
+        variant: 'secondary',
+        text: 'Schedule a tour',
+        href: '#contact',
+      },
+      {
+        variant: 'primary',
+        text: 'List your property',
+        href: '#list',
+      },
+    ]}
+    isSticky
+    showToggleTheme
+  />
+
+  <!-- Hero2 Widget ******************* -->
+
+  <Hero2
+    tagline="Real Estate Web Demo"
+    actions={[
+      {
+        variant: 'primary',
+        text: 'Browse featured listings',
+        href: '#listings',
+      },
+      { text: 'Meet your agent', href: '#about-agent' },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1502005097973-6a7082348e28?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
+      alt: 'Modern home exterior at sunset.',
+    }}
+  >
+    <div slot="title">
+      Showcase listings & build trust with a <span class="text-accent dark:text-white">Real Estate</span> homepage
+    </div>
+
+    <div slot="subtitle">
+      Use this layout to highlight your marquee properties, prove your track record, and make it easy for buyers and
+      sellers to take the next step.
+    </div>
+  </Hero2>
+
+  <!-- Stats Widget ****************** -->
+
+  <Stats
+    title="Results that move buyers & sellers to action"
+    stats={[
+      { title: 'Homes sold', amount: '420+' },
+      { title: 'Average days on market', amount: '14' },
+      { title: 'Total volume closed', amount: '$185M' },
+      { title: '5-star reviews', amount: '310' },
+    ]}
+  />
+
+  <!-- Features2 Widget ************** -->
+
+  <Features2
+    id="listings"
+    title="Featured listings"
+    subtitle="Use cards, images, and copy to highlight a small number of high-intent properties."
+    columns={3}
+    items={[
+      {
+        title: 'Downtown loft with skyline views',
+        description:
+          '2 bed · 2 bath · 1,450 sq ft — Floor-to-ceiling windows, private terrace, and secure parking just steps from cafes and transit.',
+        icon: 'tabler:building',
+      },
+      {
+        title: 'Family home near top-rated schools',
+        description:
+          '4 bed · 3 bath · 2,300 sq ft — Quiet cul-de-sac, renovated kitchen, and a large backyard made for weekends.',
+        icon: 'tabler:home-heart',
+      },
+      {
+        title: 'Turn-key investment duplex',
+        description:
+          '6 bed · 4 bath · 3,100 sq ft — Fully leased, updated mechanicals, and professional management in place.',
+        icon: 'tabler:building-community',
+      },
+    ]}
+  />
+
+  <!-- Content Widget **************** -->
+
+  <Content
+    id="about-agent"
+    isReversed
+    tagline="Position your brand"
+    title="Lead with a trusted advisor, not just another listing feed."
+    subtitle="This section helps visitors understand who you are, how you work, and what sets your approach apart in a crowded market."
+    items={[
+      {
+        title: 'Local market expertise',
+        description:
+          'Share the neighborhoods you specialize in so both buyers and sellers know you understand the nuances of their area.',
+      },
+      {
+        title: 'Clear process',
+        description:
+          'Outline the steps from consult, to listing, to closing so first-time buyers and seasoned investors know what to expect.',
+      },
+      {
+        title: 'Aligned incentives',
+        description:
+          'Use this space to explain how you advocate for your clients and the principles that guide every negotiation.',
+      },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
+      alt: 'Real estate agent meeting with a couple at a property.',
+    }}
+  >
+    <div slot="bg" class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+  </Content>
+
+  <!-- Content Widget **************** -->
+
+  <Content
+    id="list"
+    isAfterContent
+    tagline="For sellers"
+    title="Make your property the obvious choice"
+    items={[
+      {
+        title: 'Strategic pricing',
+        description:
+          'Position your property competitively using recent comps, buyer demand data, and seasonality.',
+      },
+      {
+        title: 'High-impact presentation',
+        description:
+          'Professional photography, staging recommendations, and compelling copy that highlights what matters most to buyers.',
+      },
+      {
+        title: 'Modern marketing engine',
+        description:
+          'Syndicated listings, email campaigns, and targeted ads that get the right eyes on your home fast.',
+      },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
+      alt: 'Living room prepared for an open house.',
+    }}
+  />
+
+  <!-- Testimonials Widget *********** -->
+
+  <Testimonials
+    title="Stories from buyers & sellers"
+    subtitle="Let future clients hear from people who have already trusted you with their biggest transactions."
+    testimonials={[
+      {
+        testimonial:
+          'We sold above asking in eight days. The marketing, photos, and pricing strategy were dialed in from day one.',
+        name: 'Taylor & Sam',
+        job: 'Home sellers',
+        image: {
+          src: 'https://images.unsplash.com/photo-1513151233558-d860c5398176?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=987&q=80',
+          alt: 'Happy couple in new home.',
+        },
+      },
+      {
+        testimonial:
+          'As first-time buyers we had a lot of questions. Every step was explained clearly, and we never felt rushed or pressured.',
+        name: 'Jordan',
+        job: 'First-time buyer',
+        image: {
+          src: 'https://images.unsplash.com/photo-1525130413817-d45c1d127c42?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=987&q=80',
+          alt: 'New homeowner with keys.',
+        },
+      },
+      {
+        testimonial:
+          'We now send every investor we work with to this page. It showcases our current deals and track record in one place.',
+        name: 'Morgan',
+        job: 'Real estate investor',
+        image: {
+          src: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=987&q=80',
+          alt: 'Investor reviewing property portfolio.',
+        },
+      },
+    ]}
+  />
+
+  <!-- FAQs Widget (Accordion style) ******************* -->
+
+  <FAQs
+    id="faq"
+    title="Buying & selling FAQs"
+    subtitle="Answer the most common questions buyers and sellers bring to discovery calls and open houses."
+    tagline="FAQs"
+    items={[
+      {
+        title: 'How much is my home worth?',
+        description:
+          'Use this space to explain how you approach valuations, from comparative sales to recent upgrades and local demand.',
+      },
+      {
+        title: 'Do I need to be pre-approved before touring homes?',
+        description:
+          'Set expectations around financing, pre-approvals, and timelines so buyers know how to prepare before they fall in love with a property.',
+      },
+      {
+        title: 'What does your listing process look like?',
+        description:
+          'Outline photos, staging, showings, and marketing so sellers can picture exactly what working together will feel like.',
+      },
+      {
+        title: 'Do you work with investors?',
+        description:
+          'If you support investors, use this answer to explain your deal flow, underwriting approach, and how you evaluate opportunities.',
+      },
+    ]}
+  />
+
+  <!-- CallToAction Widget *********** -->
+
+  <CallToAction
+    id="contact"
+    title="Ready to talk about your next move?"
+    subtitle="Invite visitors to schedule a consultation, request a valuation, or join your buyers list."
+    actions={[
+      {
+        variant: 'primary',
+        text: 'Schedule a consult',
+        href: '#',
+      },
+    ]}
+  />
+</Layout>
+
+

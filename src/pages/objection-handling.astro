@@ -1,0 +1,119 @@
+---
+// @ts-ignore - Astro components are resolved by the Astro compiler
+import Layout from '~/layouts/PageLayout.astro';
+
+// @ts-ignore - Astro components are resolved by the Astro compiler
+import HeroText from '~/components/widgets/HeroText.astro';
+// @ts-ignore - Astro components are resolved by the Astro compiler
+import FAQs from '~/components/widgets/FAQs.astro';
+// @ts-ignore - Astro components are resolved by the Astro compiler
+import Content from '~/components/widgets/Content.astro';
+
+const metadata = {
+  title: 'Objection Handling Library',
+};
+---
+
+<Layout metadata={metadata}>
+  <!-- HeroText Widget ******************* -->
+
+  <HeroText
+    tagline="Sales enablement"
+    title="Objection Handling Library"
+    subtitle="Turn common objections into confident, calm conversations with prepared responses your whole team can use."
+  />
+
+  <!-- Content Widget **************** -->
+
+  <Content
+    title="How to use this page"
+    subtitle="Each accordion focuses on a single objection pattern. Read the intent, then adapt the wording to your own voice."
+    items={[
+      {
+        title: 'Acknowledge',
+        description:
+          'First, show you understand the concern. Objections are often a sign of interest, not rejection.',
+      },
+      {
+        title: 'Clarify',
+        description:
+          'Ask a follow-up question to uncover what they truly mean so you respond to the real issue, not the surface one.',
+      },
+      {
+        title: 'Respond & check in',
+        description:
+          'Share context, examples, or options, then ask if your answer helped: “Does that address your concern?”',
+      },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1523952578875-4b821f7e2713?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
+      alt: 'Two people in a thoughtful sales conversation.',
+    }}
+  />
+
+  <!-- FAQs Widget (Accordion style) ******************* -->
+
+  <FAQs
+    id="price"
+    title="Price & budget objections"
+    subtitle="Use these patterns when prospects say the offer feels too expensive or not budgeted."
+    tagline="Pricing"
+    items={[
+      {
+        title: '“This is more expensive than we expected.”',
+        description:
+          'Acknowledge: “That makes sense—most of our best customers said the same thing at first.” Clarify: “When you say expensive, are you comparing us to another solution, or to doing nothing and keeping the status quo?” Respond: Connect price back to outcomes and costs of inaction.',
+      },
+      {
+        title: '“We don’t have budget for this right now.”',
+        description:
+          'Clarify timing and priorities: “Totally fair. When you look at your current priorities this quarter, where does solving this problem sit?” From there you can explore phased starts, pilots, or align on a better time to revisit.',
+      },
+      {
+        title: '“Can you just send me a discount?”',
+        description:
+          'Protect your positioning: “We can sometimes adjust structure, but the investment is tied to the outcomes we commit to. Can we walk through what success would look like so we can see together what makes sense?”',
+      },
+    ]}
+  />
+
+  <FAQs
+    id="timing"
+    title="Timing & urgency objections"
+    subtitle="When prospects agree with the problem but want to wait."
+    tagline="Timing"
+    items={[
+      {
+        title: '“Let’s talk again in six months.”',
+        description:
+          'Explore the cost of waiting: “We can absolutely do that. Before we park it, can we quickly look at what changes—good or bad—if we revisit this in six months instead of now?”',
+      },
+      {
+        title: '“We’re in the middle of another project.”',
+        description:
+          'Acknowledge their capacity: “That makes sense—nobody wants to overload the team.” Then explore fit: “If this did move forward, what would we need to do to make sure it feels supportive, not overwhelming?”',
+      },
+    ]}
+  />
+
+  <FAQs
+    id="fit"
+    title="Fit & product objections"
+    subtitle="When prospects aren’t sure your solution is right for them."
+    tagline="Fit"
+    items={[
+      {
+        title: '“I’m not sure this will work in our situation.”',
+        description:
+          'Ask for specificity: “I appreciate you sharing that. Which part feels like the biggest mismatch with your situation?” This lets you address a concrete concern instead of a vague feeling.',
+      },
+      {
+        title: '“We tried something similar and it didn’t work.”',
+        description:
+          'Differentiate without attacking: “Thank you for sharing that—that context really helps. Where do you see this being similar, and where does it feel different so far?” Then highlight key differences in approach, support, or implementation.',
+      },
+    ]}
+  />
+</Layout>
+
+
