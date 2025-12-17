@@ -6,142 +6,381 @@ import Layout from '~/layouts/PageLayout.astro';
 import HeroText from '~/components/widgets/HeroText.astro';
 // @ts-ignore - Astro components are resolved by the Astro compiler
 import Testimonials from '~/components/widgets/Testimonials.astro';
-// @ts-ignore - Astro components are resolved by the Astro compiler
-import Content from '~/components/widgets/Content.astro';
-// @ts-ignore - Astro components are resolved by the Astro compiler
-import Stats from '~/components/widgets/Stats.astro';
 
 const metadata = {
-  title: 'Testimonials & Social Proof',
+  title: 'Testimonials Wall - Style Showcase',
 };
+
+// Shared testimonial data
+// @ts-ignore - TypeScript inference works correctly at runtime
+const allTestimonials = [
+  {
+    testimonial:
+      'Onboarding dropped from 21 days to 6, and our activation rate jumped by 28%. The templates made it easy to redesign our entire product tour.',
+    name: 'Riya Patel',
+    job: 'VP Product, Flowstack',
+    image: {
+      src: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=987&q=80',
+      alt: 'Portrait of Riya Patel.',
+    },
+  },
+  {
+    testimonial:
+      'We ship new campaign pages in hours instead of weeks. That speed has been a quiet superpower for our growth team.',
+    name: 'Chris Young',
+    job: 'Head of Growth, Nimbus',
+    image: {
+      src: 'https://images.unsplash.com/photo-1525130413817-d45c1d127c42?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=987&q=80',
+      alt: 'Portrait of Chris Young.',
+    },
+  },
+  {
+    testimonial:
+      'The new long-form sales page became the single source of truth for our offer. Sales calls got shorter and close rates went up.',
+    name: 'Daniela Rossi',
+    job: 'Revenue Operations, Beacon',
+    image: {
+      src: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=987&q=80',
+      alt: 'Portrait of Daniela Rossi.',
+    },
+  },
+  {
+    testimonial:
+      'Our new coaching homepage gives prospects everything they need to say yes before we ever talk. Calls feel more like enrollment than persuasion.',
+    name: 'Morgan Blake',
+    job: 'Business coach',
+    image: {
+      src: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=987&q=80',
+      alt: 'Portrait of Morgan Blake.',
+    },
+  },
+  {
+    testimonial:
+      'We finally have one place to send leads that shows our authority, explains our process, and surfaces the right next step.',
+    name: 'Jamie Chen',
+    job: 'Agency founder',
+    image: {
+      src: 'https://images.unsplash.com/photo-1544723795-3fb6469f5b39?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=987&q=80',
+      alt: 'Portrait of Jamie Chen.',
+    },
+  },
+  {
+    testimonial:
+      'The long-form layout helped us tell the full story behind our flagship program. Applications now come in from people who are already bought in.',
+    name: 'Nicole Alvarez',
+    job: 'Leadership consultant',
+    image: {
+      src: 'https://images.unsplash.com/photo-1525130413817-d45c1d127c42?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=987&q=80',
+      alt: 'Portrait of Nicole Alvarez.',
+    },
+  },
+  {
+    testimonial:
+      'Within three months I went from feeling stuck and second-guessing every move to launching a new offer that sold out its first cohort.',
+    name: 'Jordan Lee',
+    job: 'Creative entrepreneur',
+    image: {
+      src: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=987&q=80',
+      alt: 'Portrait of Jordan Lee.',
+    },
+  },
+  {
+    testimonial:
+      'Having a space to think out loud with someone who understands both business and mindset has been game changing.',
+    name: 'Alex Rivera',
+    job: 'SaaS founder',
+    image: {
+      src: 'https://images.unsplash.com/photo-1544723795-3fb6469f5b39?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=987&q=80',
+      alt: 'Portrait of Alex Rivera.',
+    },
+  },
+  {
+    testimonial:
+      'I finally have a weekly rhythm that supports my goals instead of constantly reacting to whatever feels urgent.',
+    name: 'Monica Hughes',
+    job: 'Marketing director',
+    image: {
+      src: 'https://images.unsplash.com/photo-1525130413817-d45c1d127c42?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=987&q=80',
+      alt: 'Portrait of Monica Hughes.',
+    },
+  },
+];
 ---
 
 <Layout metadata={metadata}>
   <!-- HeroText Widget ******************* -->
 
   <HeroText
-    tagline="Social proof"
-    title="Testimonials & Case Study Hub"
-    subtitle="Use this page as a central library of stories that sales, marketing, and success teams can share with prospects."
+    tagline="Testimonial Wall Styles"
+    title="Choose Your Favorite Testimonial Layout"
+    subtitle="Browse different testimonial wall styles below. Each showcases the same testimonials in a unique layout so you can pick the one that best fits your brand."
   />
 
-  <!-- Stats Widget ****************** -->
+  <!-- Style 1: Standard Grid (3 columns) -->
+  <section id="style-1" class="py-16 md:py-24">
+    <div class="max-w-6xl mx-auto px-4 md:px-8">
+      <div class="text-center mb-12">
+        <span class="text-sm font-semibold text-primary uppercase tracking-wider">Style 1</span>
+        <h2 class="text-3xl md:text-4xl font-bold mt-2 mb-4">Standard Grid Layout</h2>
+        <p class="text-lg text-muted max-w-2xl mx-auto">
+          Classic 3-column grid with equal-height cards. Perfect for balanced, professional presentations.
+        </p>
+      </div>
+      <Testimonials testimonials={allTestimonials} />
+    </div>
+  </section>
 
-  <Stats
-    title="At-a-glance impact metrics"
-    stats={[
-      { title: 'Customers served', amount: '12K+' },
-      { title: 'Average ROI reported', amount: '3.7x' },
-      { title: 'Industries supported', amount: '18' },
-      { title: 'NPS (Net Promoter Score)', amount: '72' },
-    ]}
-  />
+  <!-- Style 2: 2-Column Grid -->
+  <section id="style-2" class="py-16 md:py-24 bg-slate-50 dark:bg-slate-900">
+    <div class="max-w-6xl mx-auto px-4 md:px-8">
+      <div class="text-center mb-12">
+        <span class="text-sm font-semibold text-primary uppercase tracking-wider">Style 2</span>
+        <h2 class="text-3xl md:text-4xl font-bold mt-2 mb-4">Two-Column Layout</h2>
+        <p class="text-lg text-muted max-w-2xl mx-auto">
+          Spacious 2-column grid that gives each testimonial more room to breathe. Ideal for longer quotes.
+        </p>
+      </div>
+      <div class="grid sm:grid-cols-2 gap-6">
+        {/* @ts-ignore */}
+        {allTestimonials.map(({ testimonial, name, job, image }) => (
+          <div class="flex h-auto">
+            <div class="flex flex-col p-6 rounded-lg shadow-lg dark:shadow-none dark:border dark:border-slate-600 bg-white dark:bg-slate-800">
+              {testimonial && (
+                <blockquote class="flex-auto mb-6">
+                  <p class="text-lg text-muted">" {testimonial} "</p>
+                </blockquote>
+              )}
 
-  <!-- Testimonials Widget *********** -->
+              <hr class="border-slate-200 dark:border-slate-600 mb-4" />
 
-  <Testimonials
-    id="saas"
-    title="Software & SaaS teams"
-    subtitle="Stories that highlight faster onboarding, higher adoption, and stronger retention."
-    testimonials={[
-      {
-        testimonial:
-          'Onboarding dropped from 21 days to 6, and our activation rate jumped by 28%. The templates made it easy to redesign our entire product tour.',
-        name: 'Riya Patel',
-        job: 'VP Product, Flowstack',
-        image: {
-          src: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=987&q=80',
-          alt: 'Portrait of Riya Patel.',
-        },
-      },
-      {
-        testimonial:
-          'We ship new campaign pages in hours instead of weeks. That speed has been a quiet superpower for our growth team.',
-        name: 'Chris Young',
-        job: 'Head of Growth, Nimbus',
-        image: {
-          src: 'https://images.unsplash.com/photo-1525130413817-d45c1d127c42?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=987&q=80',
-          alt: 'Portrait of Chris Young.',
-        },
-      },
-      {
-        testimonial:
-          'The new long-form sales page became the single source of truth for our offer. Sales calls got shorter and close rates went up.',
-        name: 'Daniela Rossi',
-        job: 'Revenue Operations, Beacon',
-        image: {
-          src: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=987&q=80',
-          alt: 'Portrait of Daniela Rossi.',
-        },
-      },
-    ]}
-  />
+              <div class="flex items-center">
+                {image && (
+                  <div class="h-12 w-12 rounded-full border-2 border-slate-200 dark:border-slate-600 overflow-hidden">
+                    <img
+                      src={image.src}
+                      alt={image.alt}
+                      class="h-12 w-12 object-cover"
+                    />
+                  </div>
+                )}
 
-  <Testimonials
-    id="services"
-    title="Coaches, consultants, and agencies"
-    subtitle="Highlight transformations, not just deliverables."
-    testimonials={[
-      {
-        testimonial:
-          'Our new coaching homepage gives prospects everything they need to say yes before we ever talk. Calls feel more like enrollment than persuasion.',
-        name: 'Morgan Blake',
-        job: 'Business coach',
-        image: {
-          src: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=987&q=80',
-          alt: 'Portrait of Morgan Blake.',
-        },
-      },
-      {
-        testimonial:
-          'We finally have one place to send leads that shows our authority, explains our process, and surfaces the right next step.',
-        name: 'Jamie Chen',
-        job: 'Agency founder',
-        image: {
-          src: 'https://images.unsplash.com/photo-1544723795-3fb6469f5b39?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=987&q=80',
-          alt: 'Portrait of Jamie Chen.',
-        },
-      },
-      {
-        testimonial:
-          'The long-form layout helped us tell the full story behind our flagship program. Applications now come in from people who are already bought in.',
-        name: 'Nicole Alvarez',
-        job: 'Leadership consultant',
-        image: {
-          src: 'https://images.unsplash.com/photo-1525130413817-d45c1d127c42?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=987&q=80',
-          alt: 'Portrait of Nicole Alvarez.',
-        },
-      },
-    ]}
-  />
+                <div class="grow ml-4">
+                  {name && <p class="text-base font-semibold">{name}</p>}
+                  {job && <p class="text-sm text-muted">{job}</p>}
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
 
-  <!-- Content Widget **************** -->
+  <!-- Style 3: Featured + Grid -->
+  <section id="style-3" class="py-16 md:py-24">
+    <div class="max-w-6xl mx-auto px-4 md:px-8">
+      <div class="text-center mb-12">
+        <span class="text-sm font-semibold text-primary uppercase tracking-wider">Style 3</span>
+        <h2 class="text-3xl md:text-4xl font-bold mt-2 mb-4">Featured Testimonial + Grid</h2>
+        <p class="text-lg text-muted max-w-2xl mx-auto">
+          One large featured testimonial at the top, followed by a grid of smaller testimonials below.
+        </p>
+      </div>
+      
+      <!-- Featured Testimonial -->
+      <div class="mb-12">
+        <div class="bg-gradient-to-br from-primary/10 to-primary/5 dark:from-primary/20 dark:to-primary/10 rounded-xl p-8 md:p-12 border border-primary/20">
+          <div class="flex items-start gap-6">
+            {allTestimonials[0].image && (
+              <div class="h-20 w-20 rounded-full border-4 border-white dark:border-slate-800 overflow-hidden flex-shrink-0">
+                <img
+                  src={allTestimonials[0].image.src}
+                  alt={allTestimonials[0].image.alt}
+                  class="h-20 w-20 object-cover"
+                />
+              </div>
+            )}
+            <div class="flex-1">
+              <blockquote class="mb-6">
+                <p class="text-2xl md:text-3xl font-medium text-slate-900 dark:text-white leading-relaxed">
+                  " {allTestimonials[0].testimonial} "
+                </p>
+              </blockquote>
+              <div>
+                <p class="text-lg font-semibold text-slate-900 dark:text-white">{allTestimonials[0].name}</p>
+                <p class="text-base text-muted">{allTestimonials[0].job}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
-  <Content
-    title="How sales & marketing can use this page"
-    subtitle="Point to concrete stories instead of vague claims."
-    items={[
-      {
-        title: 'In outbound sequences',
-        description:
-          'Link directly to the most relevant section of this page for a prospect’s industry so they can see themselves in your customers.',
-      },
-      {
-        title: 'On discovery & demo calls',
-        description:
-          'Keep this hub open so you can quickly reference a case study when a prospect mentions a similar challenge.',
-      },
-      {
-        title: 'In proposals & decks',
-        description:
-          'Embed select testimonials and stats from this page into your proposals so every deal includes credible social proof.',
-      },
-    ]}
-    image={{
-      src: 'https://images.unsplash.com/photo-1545239351-1141bd82e8a6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
-      alt: 'Team reviewing testimonials and customer stories on a laptop.',
-    }}
-  />
+      <!-- Grid of remaining testimonials -->
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {/* @ts-ignore */}
+        {allTestimonials.slice(1).map(({ testimonial, name, job, image }) => (
+          <div class="flex h-auto">
+            <div class="flex flex-col p-6 rounded-lg shadow-lg dark:shadow-none dark:border dark:border-slate-600 bg-white dark:bg-slate-800">
+              {testimonial && (
+                <blockquote class="flex-auto mb-6">
+                  <p class="text-muted">" {testimonial} "</p>
+                </blockquote>
+              )}
+
+              <hr class="border-slate-200 dark:border-slate-600 mb-4" />
+
+              <div class="flex items-center">
+                {image && (
+                  <div class="h-10 w-10 rounded-full border border-slate-200 dark:border-slate-600 overflow-hidden">
+                    <img
+                      src={image.src}
+                      alt={image.alt}
+                      class="h-10 w-10 object-cover"
+                    />
+                  </div>
+                )}
+
+                <div class="grow ml-3">
+                  {name && <p class="text-base font-semibold">{name}</p>}
+                  {job && <p class="text-xs text-muted">{job}</p>}
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Style 4: Masonry/Staggered Layout -->
+  <section id="style-4" class="py-16 md:py-24 bg-slate-50 dark:bg-slate-900">
+    <div class="max-w-6xl mx-auto px-4 md:px-8">
+      <div class="text-center mb-12">
+        <span class="text-sm font-semibold text-primary uppercase tracking-wider">Style 4</span>
+        <h2 class="text-3xl md:text-4xl font-bold mt-2 mb-4">Masonry Layout</h2>
+        <p class="text-lg text-muted max-w-2xl mx-auto">
+          Staggered cards of varying heights create visual interest. Great for dynamic, modern presentations.
+        </p>
+      </div>
+      <div class="columns-1 md:columns-2 lg:columns-3 gap-6">
+        {/* @ts-ignore */}
+        {allTestimonials.map(({ testimonial, name, job, image }) => (
+          <div class="break-inside-avoid mb-6">
+            <div class="flex flex-col p-6 rounded-lg shadow-lg dark:shadow-none dark:border dark:border-slate-600 bg-white dark:bg-slate-800">
+              {testimonial && (
+                <blockquote class="flex-auto mb-6">
+                  <p class="text-muted">" {testimonial} "</p>
+                </blockquote>
+              )}
+
+              <hr class="border-slate-200 dark:border-slate-600 mb-4" />
+
+              <div class="flex items-center">
+                {image && (
+                  <div class="h-10 w-10 rounded-full border border-slate-200 dark:border-slate-600 overflow-hidden">
+                    <img
+                      src={image.src}
+                      alt={image.alt}
+                      class="h-10 w-10 object-cover"
+                    />
+                  </div>
+                )}
+
+                <div class="grow ml-3">
+                  {name && <p class="text-base font-semibold">{name}</p>}
+                  {job && <p class="text-xs text-muted">{job}</p>}
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Style 5: Minimal Cards -->
+  <section id="style-5" class="py-16 md:py-24">
+    <div class="max-w-6xl mx-auto px-4 md:px-8">
+      <div class="text-center mb-12">
+        <span class="text-sm font-semibold text-primary uppercase tracking-wider">Style 5</span>
+        <h2 class="text-3xl md:text-4xl font-bold mt-2 mb-4">Minimal Clean Cards</h2>
+        <p class="text-lg text-muted max-w-2xl mx-auto">
+          Clean, minimal design with subtle borders. Perfect for brands that prefer understated elegance.
+        </p>
+      </div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        {/* @ts-ignore */}
+        {allTestimonials.map(({ testimonial, name, job, image }) => (
+          <div class="flex h-auto">
+            <div class="flex flex-col p-8 rounded-lg border-2 border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:border-primary/50 dark:hover:border-primary/50 transition-colors">
+              {testimonial && (
+                <blockquote class="flex-auto mb-8">
+                  <p class="text-lg text-slate-700 dark:text-slate-300 leading-relaxed">" {testimonial} "</p>
+                </blockquote>
+              )}
+
+              <div class="flex items-center pt-6 border-t border-slate-200 dark:border-slate-700">
+                {image && (
+                  <div class="h-12 w-12 rounded-full overflow-hidden">
+                    <img
+                      src={image.src}
+                      alt={image.alt}
+                      class="h-12 w-12 object-cover"
+                    />
+                  </div>
+                )}
+
+                <div class="grow ml-4">
+                  {name && <p class="text-base font-semibold text-slate-900 dark:text-white">{name}</p>}
+                  {job && <p class="text-sm text-muted">{job}</p>}
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Style 6: Side-by-Side Alternating -->
+  <section id="style-6" class="py-16 md:py-24 bg-slate-50 dark:bg-slate-900">
+    <div class="max-w-6xl mx-auto px-4 md:px-8">
+      <div class="text-center mb-12">
+        <span class="text-sm font-semibold text-primary uppercase tracking-wider">Style 6</span>
+        <h2 class="text-3xl md:text-4xl font-bold mt-2 mb-4">Alternating Side-by-Side</h2>
+        <p class="text-lg text-muted max-w-2xl mx-auto">
+          Large testimonials displayed side-by-side with alternating layouts. Perfect for storytelling flow.
+        </p>
+      </div>
+      <div class="space-y-12">
+        {/* @ts-ignore */}
+        {allTestimonials.slice(0, 4).map((testimonial, index) => (
+          <div class={`flex flex-col md:flex-row gap-8 items-center ${index % 2 === 1 ? 'md:flex-row-reverse' : ''}`}>
+            {testimonial.image && (
+              <div class="flex-shrink-0">
+                <div class="h-32 w-32 rounded-full overflow-hidden border-4 border-white dark:border-slate-800 shadow-lg">
+                  <img
+                    src={testimonial.image.src}
+                    alt={testimonial.image.alt}
+                    class="h-32 w-32 object-cover"
+                  />
+                </div>
+              </div>
+            )}
+            <div class="flex-1 text-center md:text-left">
+              <blockquote class="mb-6">
+                <p class="text-xl md:text-2xl font-medium text-slate-900 dark:text-white leading-relaxed">
+                  " {testimonial.testimonial} "
+                </p>
+              </blockquote>
+              <div>
+                <p class="text-lg font-semibold text-slate-900 dark:text-white">{testimonial.name}</p>
+                <p class="text-base text-muted">{testimonial.job}</p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
 </Layout>
-
-
