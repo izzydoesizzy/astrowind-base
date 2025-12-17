@@ -195,6 +195,51 @@ const masonryTestimonials = [
     },
   },
 ];
+
+// Longer testimonials for the expandable section
+// @ts-ignore
+const longTestimonials = [
+  {
+    testimonial:
+      'I\'ve been working with this team for over a year now, and the transformation in my business has been nothing short of remarkable. When I first started, I was struggling to articulate my value proposition clearly. My sales calls felt like I was constantly explaining and defending my approach rather than enrolling clients who were already excited to work with me.\n\nAfter implementing the long-form sales page template, everything changed. Prospects now come to discovery calls having already read about my methodology, seen case studies from similar clients, and understood the investment. The calls have shifted from "tell me more" to "how do we get started?"\n\nMy close rate increased from 35% to 68%, and my average deal size grew by 40% because clients were better qualified and more committed before we even spoke. The testimonials section has been particularly powerful—seeing real results from people in similar situations has removed so much friction from the sales process.\n\nThe best part? I spend less time on sales calls and more time actually delivering results for my clients. The templates gave me a framework, but the real value was in learning how to structure my story in a way that resonates with my ideal clients.',
+    name: 'Sarah Mitchell',
+    job: 'Executive Leadership Coach',
+    image: {
+      src: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=987&q=80',
+      alt: 'Portrait of Sarah Mitchell.',
+    },
+  },
+  {
+    testimonial:
+      'As a consultant who works with B2B SaaS companies, I needed a way to showcase complex service offerings without overwhelming potential clients. The landing page templates provided exactly what I was looking for—a structure that could handle detailed explanations while maintaining visual appeal and readability.\n\nWe implemented the long-form sales page for our flagship consulting program, and the results exceeded our expectations. Application quality improved dramatically because prospects had a complete understanding of our process, methodology, and expected outcomes before applying. This meant we were spending time with truly qualified leads rather than educating people who weren\'t a good fit.\n\nOur sales cycle shortened by three weeks on average, and we saw a 55% increase in applications. But more importantly, the clients who came through this process were more engaged, more committed, and achieved better results because they understood what they were signing up for.\n\nThe testimonials and case studies sections have become our most powerful conversion tools. When prospects see detailed stories from companies similar to theirs, it creates an immediate connection and builds trust that would normally take multiple sales calls to establish.',
+    name: 'David Chen',
+    job: 'SaaS Growth Consultant',
+    image: {
+      src: 'https://images.unsplash.com/photo-1525130413817-d45c1d127c42?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=987&q=80',
+      alt: 'Portrait of David Chen.',
+    },
+  },
+  {
+    testimonial:
+      'Before discovering these templates, I was using a simple one-page website that didn\'t do justice to the depth of my coaching programs. I knew my clients were getting incredible results, but I struggled to communicate the full value and transformation potential in a way that resonated with prospects.\n\nThe coaching homepage template changed everything. It gave me a framework to tell the complete story—not just what I do, but why it matters, how it works, and what transformation is possible. The structure helped me organize years of client success stories, methodologies, and program details into a cohesive narrative.\n\nWithin the first month of launching the new page, I saw a 90% increase in applications for my group coaching program. But what really surprised me was the quality of those applications. People were applying with a clear understanding of the commitment required and the results they could expect.\n\nMy favorite feature is the testimonials section. I can showcase detailed case studies that show the full journey—not just the end result, but the challenges clients faced, the process we went through together, and the lasting impact. This has been invaluable for building trust with potential clients who are considering a significant investment in their growth.',
+    name: 'Maria Rodriguez',
+    job: 'Business Strategy Coach',
+    image: {
+      src: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=987&q=80',
+      alt: 'Portrait of Maria Rodriguez.',
+    },
+  },
+  {
+    testimonial:
+      'I run a boutique consulting firm that specializes in helping service-based businesses scale. For years, I struggled with how to present our comprehensive approach in a way that didn\'t feel overwhelming but also didn\'t oversimplify what we do.\n\nThe long-form sales page template solved this perfectly. It allowed us to create a detailed, multi-section page that guides prospects through our entire methodology while maintaining their attention. The key was the strategic use of sections, visual breaks, and progressive disclosure of information.\n\nWe\'ve seen incredible results: a 75% increase in qualified leads, a 50% improvement in close rates, and most importantly, clients who are better prepared and more committed when they start working with us. The detailed explanations mean fewer surprises and higher satisfaction rates.\n\nWhat I appreciate most is how the template structure forced us to think more strategically about our sales process. We had to clarify our messaging, organize our case studies, and think about the prospect\'s journey from first visit to application. This exercise alone was worth the investment, but the ongoing results have been transformative for our business.',
+    name: 'James Thompson',
+    job: 'Scaling Consultant',
+    image: {
+      src: 'https://images.unsplash.com/photo-1544723795-3fb6469f5b39?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=987&q=80',
+      alt: 'Portrait of James Thompson.',
+    },
+  },
+];
 ---
 
 <Layout metadata={metadata}>
@@ -233,6 +278,9 @@ const masonryTestimonials = [
         </a>
         <a href="#style-8" class="text-sm font-medium text-slate-700 dark:text-slate-300 hover:text-primary transition-colors">
           Style 8: Slider
+        </a>
+        <a href="#style-9" class="text-sm font-medium text-slate-700 dark:text-slate-300 hover:text-primary transition-colors">
+          Style 9: Long Form
         </a>
       </nav>
     </div>
@@ -386,36 +434,58 @@ const masonryTestimonials = [
       </div>
       <div class="columns-1 md:columns-2 lg:columns-3 gap-6">
         {/* @ts-ignore */}
-        {masonryTestimonials.map(({ testimonial, name, job, image }) => (
-          <div class="break-inside-avoid mb-6">
-            <div class="flex flex-col p-6 rounded-lg shadow-lg dark:shadow-none dark:border dark:border-slate-600 bg-white dark:bg-slate-800">
-              {testimonial && (
-                <blockquote class="flex-auto mb-6">
-                  <p class="text-muted">" {testimonial} "</p>
-                </blockquote>
-              )}
-
-              <hr class="border-slate-200 dark:border-slate-600 mb-4" />
-
-              <div class="flex items-center">
-                {image && (
-                  <div class="h-10 w-10 rounded-full border border-slate-200 dark:border-slate-600 overflow-hidden">
-                    <img
-                      src={image.src}
-                      alt={image.alt}
-                      class="h-10 w-10 object-cover"
-                    />
-                  </div>
+        {masonryTestimonials.map(({ testimonial, name, job, image }, index) => {
+          const isLong = testimonial.length > 200;
+          const truncatedText = isLong ? testimonial.substring(0, 200) + '...' : testimonial;
+          return (
+            <div class="break-inside-avoid mb-6">
+              <div class="flex flex-col p-6 rounded-lg shadow-lg dark:shadow-none dark:border dark:border-slate-600 bg-white dark:bg-slate-800 masonry-testimonial" data-masonry-index={index}>
+                {testimonial && (
+                  <blockquote class="flex-auto mb-6">
+                    <p class="masonry-text text-muted" data-full={testimonial}>" {truncatedText} "</p>
+                  </blockquote>
                 )}
 
-                <div class="grow ml-3">
-                  {name && <p class="text-base font-semibold">{name}</p>}
-                  {job && <p class="text-xs text-muted">{job}</p>}
+                {isLong && (
+                  <button
+                    type="button"
+                    class="masonry-expand-btn text-xs text-primary hover:text-primary/80 font-semibold mb-4 flex items-center gap-1 transition-colors"
+                    onclick={`toggleMasonryTestimonial(${index})`}
+                  >
+                    <span class="masonry-expand-text">Read More</span>
+                    <svg 
+                      class="masonry-expand-icon w-4 h-4 transition-transform" 
+                      fill="none" 
+                      stroke="currentColor" 
+                      viewBox="0 0 24 24"
+                    >
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </button>
+                )}
+
+                <hr class="border-slate-200 dark:border-slate-600 mb-4" />
+
+                <div class="flex items-center">
+                  {image && (
+                    <div class="h-10 w-10 rounded-full border border-slate-200 dark:border-slate-600 overflow-hidden">
+                      <img
+                        src={image.src}
+                        alt={image.alt}
+                        class="h-10 w-10 object-cover"
+                      />
+                    </div>
+                  )}
+
+                  <div class="grow ml-3">
+                    {name && <p class="text-base font-semibold">{name}</p>}
+                    {job && <p class="text-xs text-muted">{job}</p>}
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   </section>
@@ -674,5 +744,136 @@ const masonryTestimonials = [
       // Initialize
       updateSlider();
     })();
+  </script>
+
+  <!-- Style 9: Long Form Testimonials with Expand/Collapse -->
+  <section id="style-9" class="py-16 md:py-24 scroll-mt-20">
+    <div class="max-w-5xl mx-auto px-4 md:px-8">
+      <div class="text-center mb-12">
+        <span class="text-sm font-semibold text-primary uppercase tracking-wider">Style 9</span>
+        <h2 class="text-3xl md:text-4xl font-bold mt-2 mb-4">Long Form Testimonials</h2>
+        <p class="text-lg text-muted max-w-2xl mx-auto">
+          Full-width layout designed for detailed, story-driven testimonials. Click to expand and read the complete story.
+        </p>
+      </div>
+      
+      <div class="space-y-8">
+        {/* @ts-ignore */}
+        {longTestimonials.map((testimonial, index) => (
+          <div 
+            class="testimonial-card bg-white dark:bg-slate-800 rounded-lg shadow-lg dark:shadow-none dark:border dark:border-slate-600 overflow-hidden"
+            data-index={index}
+          >
+            <div class="p-6 md:p-8">
+              <div class="flex items-start gap-6 mb-6">
+                {testimonial.image && (
+                  <div class="flex-shrink-0">
+                    <div class="h-16 w-16 md:h-20 md:w-20 rounded-full overflow-hidden border-2 border-slate-200 dark:border-slate-600">
+                      <img
+                        src={testimonial.image.src}
+                        alt={testimonial.image.alt}
+                        class="h-16 w-16 md:h-20 md:w-20 object-cover"
+                      />
+                    </div>
+                  </div>
+                )}
+                <div class="flex-1 min-w-0">
+                  <h3 class="text-xl md:text-2xl font-semibold text-slate-900 dark:text-white mb-1">
+                    {testimonial.name}
+                  </h3>
+                  <p class="text-base text-muted mb-4">{testimonial.job}</p>
+                </div>
+              </div>
+
+              <div class="testimonial-content">
+                <blockquote>
+                  <p 
+                    class="testimonial-text text-lg md:text-xl text-slate-700 dark:text-slate-300 leading-relaxed whitespace-pre-line"
+                    data-full={testimonial.testimonial}
+                  >
+                    {testimonial.testimonial.length > 300 
+                      ? testimonial.testimonial.substring(0, 300) + '...' 
+                      : testimonial.testimonial}
+                  </p>
+                </blockquote>
+              </div>
+
+              {testimonial.testimonial.length > 300 && (
+                <button
+                  type="button"
+                  class="expand-btn mt-6 text-primary hover:text-primary/80 font-semibold flex items-center gap-2 transition-colors"
+                  data-index={index}
+                  onclick={`toggleTestimonial(${index})`}
+                >
+                  <span class="expand-text">Read More</span>
+                  <svg 
+                    class="expand-icon w-5 h-5 transition-transform" 
+                    fill="none" 
+                    stroke="currentColor" 
+                    viewBox="0 0 24 24"
+                  >
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                  </svg>
+                </button>
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <script is:inline>
+    // Expand/Collapse functionality for long form testimonials
+    function toggleTestimonial(index) {
+      const card = document.querySelector(`[data-index="${index}"]`);
+      const text = card.querySelector('.testimonial-text');
+      const btn = card.querySelector('.expand-btn');
+      const expandText = btn.querySelector('.expand-text');
+      const expandIcon = btn.querySelector('.expand-icon');
+      const fullText = text.getAttribute('data-full');
+      
+      if (text.textContent.includes('...')) {
+        // Expand
+        text.textContent = fullText;
+        expandText.textContent = 'Read Less';
+        expandIcon.style.transform = 'rotate(180deg)';
+        card.classList.add('expanded');
+      } else {
+        // Collapse
+        text.textContent = fullText.substring(0, 300) + '...';
+        expandText.textContent = 'Read More';
+        expandIcon.style.transform = 'rotate(0deg)';
+        card.classList.remove('expanded');
+      }
+    }
+
+    // Expand/Collapse functionality for masonry testimonials
+    function toggleMasonryTestimonial(index) {
+      const card = document.querySelector(`[data-masonry-index="${index}"]`);
+      const text = card.querySelector('.masonry-text');
+      const btn = card.querySelector('.masonry-expand-btn');
+      const expandText = btn.querySelector('.masonry-expand-text');
+      const expandIcon = btn.querySelector('.masonry-expand-icon');
+      const fullText = text.getAttribute('data-full');
+      
+      if (text.textContent.includes('...')) {
+        // Expand
+        text.textContent = '" ' + fullText + ' "';
+        expandText.textContent = 'Read Less';
+        expandIcon.style.transform = 'rotate(180deg)';
+        card.classList.add('expanded');
+      } else {
+        // Collapse
+        text.textContent = '" ' + fullText.substring(0, 200) + '... "';
+        expandText.textContent = 'Read More';
+        expandIcon.style.transform = 'rotate(0deg)';
+        card.classList.remove('expanded');
+      }
+    }
+
+    // Make functions available globally
+    window.toggleTestimonial = toggleTestimonial;
+    window.toggleMasonryTestimonial = toggleMasonryTestimonial;
   </script>
 </Layout>
