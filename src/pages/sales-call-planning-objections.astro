@@ -8,103 +8,124 @@ const metadata = {
   title: 'Sales Call Planning - Objection Handling',
 };
 
-// Price & Budget Objections
+// Investment & Value Objections (coaching/services focused)
 // @ts-ignore - TypeScript inference works correctly at runtime
-const priceObjections = [
+const investmentObjections = [
   {
-    objection: '"This is more expensive than we expected."',
-    strategy: 'Acknowledge the concern, then reframe the conversation around value and ROI. Connect the price to specific outcomes they want to achieve. Avoid getting defensive—this is often a buying signal.',
-    script: '"I totally understand that concern—most of our best customers said the same thing initially. When you say \'expensive,\' are you comparing us to another solution, or to the cost of keeping things as they are?\n\nLet me share something: [Customer Name] had the same reaction, but after seeing [specific outcome—e.g., 40% reduction in onboarding time], they realized the ROI was actually 3x their investment in the first year.\n\nWhat would need to be true for this investment to feel like a no-brainer for you?"'
+    objection: '"This is more expensive than I expected for coaching."',
+    strategy: 'Reframe from cost to investment in transformation. Connect the price to the specific outcomes and transformation they\'re seeking. Most coaching clients say this initially—it\'s often a buying signal.',
+    script: '"I totally understand—most of my clients said the same thing when we first talked. When you say \'expensive,\' are you comparing this to other coaches you\'ve looked at, or to what it costs to stay where you are right now?\n\nLet me share something: [Client Name] had the same reaction, but after [specific transformation—e.g., landing their dream role, doubling their revenue, finally launching their business], they said the investment paid for itself in the first three months.\n\nWhat would need to be true for this investment to feel like a no-brainer for you?"',
+    tags: ['Value Reframe', 'ROI']
   },
   {
-    objection: '"We don\'t have budget for this right now."',
-    strategy: 'Explore timing, priorities, and potential budget sources. Understand what "right now" means and what would need to change. Sometimes budget can be found or reallocated if the priority is high enough.',
-    script: '"That makes complete sense. Before we move on, can I ask—when you say \'right now,\' are we talking about this quarter, this year, or something else?\n\nAnd just to understand your priorities: if you could solve [the problem] without budget constraints, where would it rank on your list of priorities?\n\nSometimes we can structure things in phases or find budget from other areas. What would need to happen for this to become a priority?"'
+    objection: '"I don\'t have the budget for coaching right now."',
+    strategy: 'Explore what "right now" means and what\'s really driving the budget concern. Sometimes it\'s about priorities, not actual budget. Help them see the cost of staying stuck.',
+    script: '"That makes complete sense. Before we move on, can I ask—when you say \'right now,\' are we talking about this month, this quarter, or something else?\n\nAnd I\'m curious: if money wasn\'t a factor, where would getting [their desired outcome] rank on your list of priorities?\n\nSometimes we can structure payment plans or start with a smaller commitment. But I also want to ask—what\'s the cost of staying where you are? What happens if you wait another [timeframe]?"',
+    tags: ['Timing', 'Priority']
   },
   {
-    objection: '"Can you just send me a discount?"',
-    strategy: 'Protect your positioning while staying helpful. Focus on value rather than price. Explore what they really need—sometimes it\'s not about the price but about structure, terms, or proving ROI.',
-    script: '"I appreciate you asking. We can sometimes adjust structure or terms, but the investment is tied to the outcomes we commit to delivering.\n\nCan we walk through what success would look like for you so we can see together what makes sense? Sometimes there are ways to structure this that work better for your situation.\n\nWhat specific outcome would make this investment feel worth it to you?"'
+    objection: '"Can you give me a discount or payment plan?"',
+    strategy: 'Protect your value while staying helpful. Focus on outcomes rather than price. Sometimes payment plans are appropriate, but maintain the value of your offer.',
+    script: '"I appreciate you asking. I do offer payment plans for my [program name] because I want this to be accessible. But I also want to make sure we\'re aligned on the value here.\n\nCan we talk about what success would look like for you? What would need to happen for you to feel like this was worth every dollar?\n\nI ask because I\'ve found that when clients are fully invested—both financially and energetically—they get better results. What specific outcome would make this investment feel worth it?"',
+    tags: ['Payment Plan', 'Value']
   },
   {
-    objection: '"We need to think about it."',
-    strategy: 'Understand what they need to think about. This is often a stall tactic. Get specific about concerns, decision-makers, or information gaps. Create urgency around the cost of inaction.',
-    script: '"Absolutely—I want to make sure you have everything you need. What specifically would you like to think about? Is it the fit, the investment, the timing, or something else?\n\nI ask because sometimes when people say \'think about it,\' there\'s a specific concern we haven\'t addressed yet. If we can solve that concern now, would that help you move forward?\n\nAlso, what happens if you wait? What\'s the cost of not solving [the problem] in the next [timeframe]?"'
+    objection: '"I need to think about it."',
+    strategy: 'Get specific about what they need to think about. This is often a stall. Uncover the real concern—is it the fit, the investment, timing, or something else?',
+    script: '"Absolutely—I want you to feel confident in this decision. What specifically would you like to think about? Is it whether this is the right fit, the investment, the timing, or something else?\n\nI ask because sometimes when people say \'think about it,\' there\'s a specific concern we haven\'t addressed yet. If we can solve that concern right now, would that help you feel ready to move forward?\n\nAlso, what happens if you wait? What\'s the cost of staying where you are for another [timeframe]?"',
+    tags: ['Clarification', 'Urgency']
   }
 ];
 
-// Timing & Urgency Objections
+// Readiness & Timing Objections
 // @ts-ignore - TypeScript inference works correctly at runtime
-const timingObjections = [
+const readinessObjections = [
   {
-    objection: '"Let\'s talk again in six months."',
-    strategy: 'Explore the cost of waiting. Help them visualize what changes—good or bad—if they delay. Sometimes urgency can be created by showing the opportunity cost or competitive disadvantage.',
-    script: '"We can absolutely do that. Before we park it, can we quickly look at what changes—good or bad—if we revisit this in six months instead of now?\n\nFor example, [Customer Name] was in a similar situation. They waited six months, and by then [specific negative consequence—e.g., they\'d lost 3 key team members to competitors, or the problem had cost them $X].\n\nWhat would need to be different in six months for this to make sense then? And what\'s the cost if nothing changes?"'
+    objection: '"I\'m not sure I\'m ready for coaching yet."',
+    strategy: 'Help them see that readiness is often a feeling, not a fact. Most people feel "not ready" even when they are. Explore what "ready" means to them and address those concerns.',
+    script: '"I hear that, and I appreciate you being honest. Can you help me understand what \'ready\' would look like for you?\n\nIs it about having more clarity on your goals? Feeling more committed? Having more time? Or something else?\n\nI ask because most of my clients said the same thing when we first talked. [Client Name] felt \'not ready\' but decided to start anyway, and within [timeframe] they\'d [specific result].\n\nWhat\'s the one thing that, if we solved it today, would make you feel ready?"',
+    tags: ['Readiness', 'Mindset']
   },
   {
-    objection: '"We\'re in the middle of another project."',
-    strategy: 'Acknowledge their capacity constraints. Explore whether this could be complementary or if there\'s a way to make it feel supportive rather than overwhelming. Sometimes projects can run in parallel.',
-    script: '"That makes sense—nobody wants to overload the team. Can I ask what project you\'re working on?\n\nSometimes what we do actually supports other initiatives. For example, [Customer Name] was in the middle of [similar project] and found that our solution actually accelerated their timeline.\n\nIf this did move forward, what would we need to do to make sure it feels supportive, not overwhelming? Could we phase it in a way that works with your current project?"'
+    objection: '"I\'m too busy right now—let\'s talk in a few months."',
+    strategy: 'Explore the cost of waiting. Busy people often benefit most from coaching because it helps them prioritize and create systems. Show them that waiting often makes things worse, not better.',
+    script: '"I totally get that—you\'re juggling a lot. Before we park this, can we quickly look at what changes if we revisit this in a few months?\n\nFor example, [Client Name] was in a similar situation. They said they were too busy, but after three months, they realized they were even busier and the problems they wanted to solve had gotten bigger.\n\nWhat would need to be different in a few months for this to make sense then? And what\'s the cost if nothing changes in the meantime?"',
+    tags: ['Time', 'Priority']
   },
   {
-    objection: '"We\'re not ready to make a decision yet."',
-    strategy: 'Understand what "ready" means. Identify what information, approvals, or conditions they need. Help them see that they might be more ready than they think, or create a path to readiness.',
-    script: '"I appreciate you being honest about that. What would need to be true for you to feel ready to make a decision?\n\nIs it about having more information? Getting buy-in from other stakeholders? Understanding the ROI better? Or something else?\n\nSometimes people feel more ready than they think once we address a specific concern. What\'s the one thing that, if we solved it today, would make you feel ready?"'
+    objection: '"I need to get my life/business more organized first."',
+    strategy: 'Flip the script—coaching is exactly what helps people get organized. This is often a form of perfectionism or procrastination. Help them see that coaching is the tool, not something they need to prepare for.',
+    script: '"I appreciate you thinking ahead. Can I ask—what does \'more organized\' look like to you?\n\nI ask because getting organized is actually something we work on together. [Client Name] said the same thing, but they realized that trying to get organized on their own was part of what was keeping them stuck.\n\nWhat if getting organized was part of what we do together? What would that make possible for you?"',
+    tags: ['Perfectionism', 'Support']
   }
 ];
 
-// Fit & Product Objections
+// Fit & Approach Objections
 // @ts-ignore - TypeScript inference works correctly at runtime
 const fitObjections = [
   {
-    objection: '"I\'m not sure this will work in our situation."',
-    strategy: 'Get specific about their concerns. Ask for concrete examples of what might not work. Often this is a vague concern that can be addressed once you understand the real issue.',
-    script: '"I appreciate you sharing that—that\'s really helpful feedback. Can you help me understand which part feels like the biggest mismatch with your situation?\n\nIs it about [specific aspect—e.g., team size, industry, current tools, processes]?\n\nI ask because we\'ve worked with companies in similar situations. For example, [Customer Name] had [similar concern] and here\'s how we addressed it: [specific solution]. Does that sound like it could work for you?"'
+    objection: '"I\'m not sure your coaching style will work for me."',
+    strategy: 'Get specific about their concerns. Ask what they\'ve tried before and what didn\'t work. Then show how your approach is different and why it works for people like them.',
+    script: '"I appreciate you sharing that—that\'s really helpful. Can you help me understand what specifically feels like it might not work?\n\nIs it about [specific aspect—e.g., my approach, the structure, the communication style]?\n\nI ask because I\'ve worked with clients who had similar concerns. For example, [Client Name] was worried about [similar concern], but here\'s how we addressed it: [specific approach]. Does that sound like it could work for you?"',
+    tags: ['Style', 'Approach']
   },
   {
-    objection: '"We tried something similar and it didn\'t work."',
-    strategy: 'Differentiate without attacking their previous solution. Understand what specifically didn\'t work and highlight how your approach is different. Focus on implementation, support, or methodology differences.',
-    script: '"Thank you for sharing that—that context really helps. Can you tell me a bit about what you tried before and what specifically didn\'t work?\n\nWas it the product itself, the implementation, the support, or something else?\n\nI ask because while we might seem similar on the surface, we actually approach [key differentiator] very differently. For example, [Customer Name] had the same experience with [competitor/similar solution], but here\'s what made the difference with us: [specific differentiator].\n\nDoes that address the concern you had before?"'
+    objection: '"I tried coaching before and it didn\'t work."',
+    strategy: 'Understand what specifically didn\'t work. Differentiate your approach without badmouthing their previous coach. Focus on what makes your methodology different and why it works.',
+    script: '"Thank you for sharing that—that context really helps. Can you tell me a bit about what you tried before and what specifically didn\'t work?\n\nWas it the coach\'s style, the structure, the accountability, or something else?\n\nI ask because while coaching might seem similar on the surface, I actually approach [key differentiator] very differently. For example, [Client Name] had a similar experience, but here\'s what made the difference with my approach: [specific differentiator].\n\nDoes that address what didn\'t work before?"',
+    tags: ['Past Experience', 'Differentiation']
   },
   {
-    objection: '"This seems too complex for our team."',
-    strategy: 'Address complexity concerns by showing simplicity, training, and support. Emphasize ease of use and the support they\'ll receive. Sometimes complexity is a feature, not a bug—if positioned correctly.',
-    script: '"I hear that. Can you help me understand what feels complex? Is it the setup, the day-to-day use, or something else?\n\nThe good news is that while we\'re powerful, we\'re actually designed to be simple. Most of our customers say it\'s easier than what they were using before.\n\nFor example, [Customer Name] had the same concern, but after [specific training/support], their team was up and running in [timeframe]. We also provide [specific support—e.g., dedicated onboarding, training, ongoing support].\n\nWhat would make you feel confident that your team could use this successfully?"'
+    objection: '"I need something more personalized to my situation."',
+    strategy: 'Show how your coaching is personalized. Sometimes "customization" is code for "I don\'t think this will work for me"—address the underlying concern about fit.',
+    script: '"That\'s a great point. Can you help me understand what specific personalization you\'re thinking about?\n\nI ask because every coaching relationship I have is completely tailored to the client. For example, [Client Name] needed [similar customization] and here\'s how we structured it: [solution].\n\nSometimes when people say \'personalized,\' they\'re really concerned about [underlying need—e.g., whether I understand their industry, their unique challenges]. Is that what you\'re thinking about?\n\nWhat would need to be personalized for this to feel like the perfect fit?"',
+    tags: ['Customization', 'Fit']
   },
   {
-    objection: '"We need something more customizable."',
-    strategy: 'Understand what customization they need. Show flexibility where possible. Sometimes "customization" is code for "we don\'t think this will work"—address the underlying concern.',
-    script: '"That\'s a great point. Can you help me understand what specific customizations you\'re thinking about?\n\nI ask because we actually have [specific customization options]. For example, [Customer Name] needed [similar customization] and here\'s how we handled it: [solution].\n\nSometimes when people say \'customizable,\' they\'re really concerned about [underlying need]. Is that what you\'re thinking about, or something else?\n\nWhat would need to be customizable for this to work perfectly for you?"'
+    objection: '"How do I know this will work for someone like me?"',
+    strategy: 'Share specific examples of similar clients. Use case studies and testimonials from people in similar situations. Build confidence through proof, not promises.',
+    script: '"That\'s such an important question. Can you help me understand what \'someone like me\' means? Is it about [specific aspect—e.g., your industry, your situation, your goals]?\n\nI ask because I\'ve worked with several clients in similar situations. For example, [Client Name] was [similar situation] and here\'s what we achieved together: [specific results].\n\nWould it be helpful if I shared a few case studies of clients who were in a similar place? I can send those over so you can see how this worked for them."',
+    tags: ['Proof', 'Case Study']
   }
 ];
 
-// Authority & Decision-Making Objections
+// Commitment & Decision Objections
 // @ts-ignore - TypeScript inference works correctly at runtime
-const authorityObjections = [
+const commitmentObjections = [
   {
-    objection: '"I need to check with my boss/team/stakeholders."',
-    strategy: 'This is often legitimate, but get specific. Understand who needs to be involved, what they need to know, and how you can help prepare them. Offer to join the conversation or provide materials.',
-    script: '"Absolutely—I want to make sure everyone who needs to be involved is on board. Can you help me understand who else needs to be part of this decision?\n\nAnd what do you think their main concerns or questions will be? I ask because I can help you prepare for that conversation, or I\'m happy to join a call with them if that would be helpful.\n\nWhat information would be most helpful for them to see? I can put together a brief summary or proposal that addresses their likely concerns."'
+    objection: '"I need to check with my partner/spouse/family first."',
+    strategy: 'This is often legitimate, but get specific. Understand what they need their partner to know and help them prepare for that conversation. Offer to join a call if helpful.',
+    script: '"Absolutely—I want to make sure everyone who needs to be involved feels good about this. Can you help me understand what your [partner/spouse] would need to know to feel supportive of this?\n\nI ask because I can help you prepare for that conversation. Sometimes partners have concerns about [common concerns—e.g., time commitment, investment, results].\n\nWould it be helpful if I joined a call with both of you? Or I can put together a brief overview that addresses the questions they might have."',
+    tags: ['Family', 'Support']
   },
   {
-    objection: '"I\'m not the decision maker."',
-    strategy: 'Understand their role in the process. Even if they\'re not the final decision maker, they\'re often an influencer. Help them become a champion. Get introduced to the decision maker.',
-    script: '"I appreciate you being upfront about that. Can you help me understand your role in this process? Even if you\'re not the final decision maker, your input is really valuable.\n\nWhat would need to be true for you to feel confident recommending this to [decision maker]? I\'d love to help you become a champion for this.\n\nAlso, would it be helpful if I had a conversation with [decision maker] directly? Sometimes it helps to have everyone in the same room so we can address any concerns in real-time."'
+    objection: '"I\'m worried I won\'t follow through or do the work."',
+    strategy: 'Acknowledge this is a real concern. Show how your coaching structure supports accountability and follow-through. This is actually a sign they\'re serious about change.',
+    script: '"I really appreciate you being honest about that—that shows you\'re serious about this. Can I ask what makes you worried about that?\n\nI ask because accountability and follow-through are actually built into how I work. For example, [Client Name] had the same concern, but here\'s how we structured it: [specific accountability measures].\n\nWhat would need to be true for you to feel confident you\'d follow through? What kind of support or structure would help?"',
+    tags: ['Accountability', 'Commitment']
+  },
+  {
+    objection: '"What if this doesn\'t work for me?"',
+    strategy: 'Address the risk directly. Offer guarantees or risk-reversal if you have them. Show confidence while acknowledging their concern. Sometimes a guarantee removes the final barrier.',
+    script: '"That\'s a totally valid concern. Can I ask what \'doesn\'t work\' would look like for you?\n\nI ask because I\'m confident in my process, and here\'s why: [specific reason—e.g., track record, methodology, support].\n\nI also offer [guarantee/risk-reversal if applicable]. But more importantly, what would need to be true for you to feel confident this will work? What would success look like?"',
+    tags: ['Risk', 'Guarantee']
   }
 ];
 
-// Competitor Objections
+// Comparison & Alternatives Objections
 // @ts-ignore - TypeScript inference works correctly at runtime
-const competitorObjections = [
+const comparisonObjections = [
   {
-    objection: '"We\'re already talking to [Competitor Name]."',
-    strategy: 'Don\'t badmouth the competitor. Focus on differentiation and what makes you unique. Understand what they like about the competitor and address gaps. Position yourself as complementary or better.',
-    script: '"That makes sense—[Competitor Name] is a solid option. Can I ask what you like about what you\'ve seen from them so far?\n\nI ask because while we might seem similar, we actually approach [key differentiator] very differently. For example, [specific differentiator that matters to them].\n\n[Competitor Name] is great at [their strength], but where we really shine is [your unique strength that addresses their specific need].\n\nWhat\'s most important to you in making this decision? Is it [factor 1], [factor 2], or something else?"'
+    objection: '"I\'m looking at other coaches/consultants too."',
+    strategy: 'Don\'t badmouth competitors. Focus on what makes you unique and what matters most to them. Understand what they like about others and show how you\'re different or better.',
+    script: '"That makes sense—it\'s smart to explore your options. Can I ask what you\'re looking for in a coach? What matters most to you?\n\nI ask because while there are great coaches out there, we all have different strengths. For example, I really shine at [your unique strength that addresses their specific need].\n\nWhat\'s most important to you in making this decision? Is it [factor 1], [factor 2], or something else?"',
+    tags: ['Comparison', 'Differentiation']
   },
   {
-    objection: '"We\'re going to build this in-house."',
-    strategy: 'Understand the real cost of building in-house—time, resources, opportunity cost. Show examples of companies who tried and why they eventually bought. Position as faster time to value.',
-    script: '"I totally respect that—building in-house gives you full control. Can I ask what\'s driving that decision? Is it about customization, cost, or something else?\n\nI ask because we\'ve worked with several companies who started down that path. For example, [Customer Name] was building something similar, but after [timeframe], they realized it was taking [X times longer] and costing [Y times more] than expected.\n\nBy the time they came to us, they\'d spent [resources] and still weren\'t where they wanted to be. They ended up using our solution and were live in [timeframe] instead of [their timeline].\n\nWhat would need to be true for buying to make more sense than building?"'
+    objection: '"I think I can figure this out on my own with books/courses."',
+    strategy: 'Acknowledge their capability while showing the value of personalized support. Help them see the difference between information and transformation. Show the cost of going it alone.',
+    script: '"I totally respect that—you\'re clearly capable and resourceful. Can I ask what\'s driving that approach? Is it about cost, preference, or something else?\n\nI ask because I\'ve worked with several clients who tried that first. For example, [Client Name] spent [timeframe] and [resources] on courses and books, but here\'s what made the difference when we started working together: [specific value of personalized coaching].\n\nWhat would need to be true for working with a coach to make more sense than going it alone?"',
+    tags: ['DIY', 'Value']
   }
 ];
 ---
@@ -115,23 +136,46 @@ const competitorObjections = [
   <HeroText
     tagline="Sales enablement"
     title="Sales Call Planning - Objection Handling"
-    subtitle="Expand each objection to see the strategy and sample scripts your team can use on calls. Each accordion includes the objection, handling strategy, and word-for-word scripts you can adapt."
+    subtitle="Expand each objection to see the strategy and sample scripts your team can use on discovery calls. Each accordion includes the objection, handling strategy, and word-for-word scripts you can adapt to your voice."
   />
 
-  <!-- Price & Budget Objections -->
-  <section class="py-16 md:py-24">
+  <!-- Navigation Index -->
+  <section class="py-8 bg-slate-50 dark:bg-slate-900 border-b border-slate-200 dark:border-slate-700 sticky top-0 z-10">
+    <div class="max-w-4xl mx-auto px-4 md:px-8">
+      <nav class="flex flex-wrap justify-center gap-4 md:gap-6">
+        <a href="#investment" class="text-sm font-medium text-slate-700 dark:text-slate-300 hover:text-primary transition-colors">
+          Investment & Value
+        </a>
+        <a href="#readiness" class="text-sm font-medium text-slate-700 dark:text-slate-300 hover:text-primary transition-colors">
+          Readiness & Timing
+        </a>
+        <a href="#fit" class="text-sm font-medium text-slate-700 dark:text-slate-300 hover:text-primary transition-colors">
+          Fit & Approach
+        </a>
+        <a href="#commitment" class="text-sm font-medium text-slate-700 dark:text-slate-300 hover:text-primary transition-colors">
+          Commitment & Decision
+        </a>
+        <a href="#comparison" class="text-sm font-medium text-slate-700 dark:text-slate-300 hover:text-primary transition-colors">
+          Comparison & Alternatives
+        </a>
+      </nav>
+    </div>
+  </section>
+
+  <!-- Investment & Value Objections -->
+  <section id="investment" class="py-16 md:py-24 scroll-mt-20">
     <div class="max-w-4xl mx-auto px-4 md:px-8">
       <div class="text-center mb-12">
         <span class="text-sm font-semibold text-primary uppercase tracking-wider">Category 1</span>
-        <h2 class="text-3xl md:text-4xl font-bold mt-2 mb-4">Price & Budget Objections</h2>
+        <h2 class="text-3xl md:text-4xl font-bold mt-2 mb-4">Investment & Value Objections</h2>
         <p class="text-lg text-muted max-w-2xl mx-auto">
-          Handle concerns about cost, budget, and pricing with confidence.
+          Handle concerns about pricing, budget, and the value of coaching with confidence.
         </p>
       </div>
 
       <div class="space-y-4">
         {/* @ts-ignore */}
-        {priceObjections.map((item) => (
+        {investmentObjections.map((item) => (
           <details class="group bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-md transition-shadow">
             <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
               <h3 class="text-lg font-semibold text-slate-900 dark:text-white pr-4">
@@ -145,12 +189,23 @@ const competitorObjections = [
             </summary>
             <div class="px-6 pb-6 space-y-4 border-t border-slate-200 dark:border-slate-700 pt-4">
               <div>
-                <h4 class="text-sm font-semibold text-primary uppercase tracking-wider mb-2">Strategy</h4>
+                <div class="flex items-center gap-2 mb-2">
+                  <h4 class="text-sm font-semibold text-primary uppercase tracking-wider">Strategy</h4>
+                  {item.tags && (
+                    <div class="flex gap-2">
+                      {item.tags.map((tag) => (
+                        <span class="text-xs px-2 py-0.5 rounded-full bg-primary/10 text-primary font-medium">
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+                </div>
                 <p class="text-muted leading-relaxed">{item.strategy}</p>
               </div>
               <div>
                 <h4 class="text-sm font-semibold text-primary uppercase tracking-wider mb-2">Sample Script</h4>
-                <div class="bg-slate-50 dark:bg-slate-900 rounded-md p-4 border-l-4 border-primary">
+                <div class="bg-gradient-to-r from-primary/5 to-primary/10 dark:from-primary/10 dark:to-primary/20 rounded-md p-4 border-l-4 border-primary">
                   <p class="text-slate-700 dark:text-slate-300 whitespace-pre-line leading-relaxed">{item.script}</p>
                 </div>
               </div>
@@ -161,20 +216,20 @@ const competitorObjections = [
     </div>
   </section>
 
-  <!-- Timing & Urgency Objections -->
-  <section class="py-16 md:py-24 bg-slate-50 dark:bg-slate-900">
+  <!-- Readiness & Timing Objections -->
+  <section id="readiness" class="py-16 md:py-24 bg-slate-50 dark:bg-slate-900 scroll-mt-20">
     <div class="max-w-4xl mx-auto px-4 md:px-8">
       <div class="text-center mb-12">
         <span class="text-sm font-semibold text-primary uppercase tracking-wider">Category 2</span>
-        <h2 class="text-3xl md:text-4xl font-bold mt-2 mb-4">Timing & Urgency Objections</h2>
+        <h2 class="text-3xl md:text-4xl font-bold mt-2 mb-4">Readiness & Timing Objections</h2>
         <p class="text-lg text-muted max-w-2xl mx-auto">
-          Address concerns about timing, readiness, and when to move forward.
+          Address concerns about whether now is the right time and if they're ready for coaching.
         </p>
       </div>
 
       <div class="space-y-4">
         {/* @ts-ignore */}
-        {timingObjections.map((item) => (
+        {readinessObjections.map((item) => (
           <details class="group bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-md transition-shadow">
             <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
               <h3 class="text-lg font-semibold text-slate-900 dark:text-white pr-4">
@@ -188,12 +243,23 @@ const competitorObjections = [
             </summary>
             <div class="px-6 pb-6 space-y-4 border-t border-slate-200 dark:border-slate-700 pt-4">
               <div>
-                <h4 class="text-sm font-semibold text-primary uppercase tracking-wider mb-2">Strategy</h4>
+                <div class="flex items-center gap-2 mb-2">
+                  <h4 class="text-sm font-semibold text-primary uppercase tracking-wider">Strategy</h4>
+                  {item.tags && (
+                    <div class="flex gap-2">
+                      {item.tags.map((tag) => (
+                        <span class="text-xs px-2 py-0.5 rounded-full bg-primary/10 text-primary font-medium">
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+                </div>
                 <p class="text-muted leading-relaxed">{item.strategy}</p>
               </div>
               <div>
                 <h4 class="text-sm font-semibold text-primary uppercase tracking-wider mb-2">Sample Script</h4>
-                <div class="bg-slate-50 dark:bg-slate-900 rounded-md p-4 border-l-4 border-primary">
+                <div class="bg-gradient-to-r from-primary/5 to-primary/10 dark:from-primary/10 dark:to-primary/20 rounded-md p-4 border-l-4 border-primary">
                   <p class="text-slate-700 dark:text-slate-300 whitespace-pre-line leading-relaxed">{item.script}</p>
                 </div>
               </div>
@@ -204,14 +270,14 @@ const competitorObjections = [
     </div>
   </section>
 
-  <!-- Fit & Product Objections -->
-  <section class="py-16 md:py-24">
+  <!-- Fit & Approach Objections -->
+  <section id="fit" class="py-16 md:py-24 scroll-mt-20">
     <div class="max-w-4xl mx-auto px-4 md:px-8">
       <div class="text-center mb-12">
         <span class="text-sm font-semibold text-primary uppercase tracking-wider">Category 3</span>
-        <h2 class="text-3xl md:text-4xl font-bold mt-2 mb-4">Fit & Product Objections</h2>
+        <h2 class="text-3xl md:text-4xl font-bold mt-2 mb-4">Fit & Approach Objections</h2>
         <p class="text-lg text-muted max-w-2xl mx-auto">
-          Handle concerns about whether your solution is the right fit for their situation.
+          Handle concerns about whether your coaching style and approach are the right fit.
         </p>
       </div>
 
@@ -231,12 +297,23 @@ const competitorObjections = [
             </summary>
             <div class="px-6 pb-6 space-y-4 border-t border-slate-200 dark:border-slate-700 pt-4">
               <div>
-                <h4 class="text-sm font-semibold text-primary uppercase tracking-wider mb-2">Strategy</h4>
+                <div class="flex items-center gap-2 mb-2">
+                  <h4 class="text-sm font-semibold text-primary uppercase tracking-wider">Strategy</h4>
+                  {item.tags && (
+                    <div class="flex gap-2">
+                      {item.tags.map((tag) => (
+                        <span class="text-xs px-2 py-0.5 rounded-full bg-primary/10 text-primary font-medium">
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+                </div>
                 <p class="text-muted leading-relaxed">{item.strategy}</p>
               </div>
               <div>
                 <h4 class="text-sm font-semibold text-primary uppercase tracking-wider mb-2">Sample Script</h4>
-                <div class="bg-slate-50 dark:bg-slate-900 rounded-md p-4 border-l-4 border-primary">
+                <div class="bg-gradient-to-r from-primary/5 to-primary/10 dark:from-primary/10 dark:to-primary/20 rounded-md p-4 border-l-4 border-primary">
                   <p class="text-slate-700 dark:text-slate-300 whitespace-pre-line leading-relaxed">{item.script}</p>
                 </div>
               </div>
@@ -247,20 +324,20 @@ const competitorObjections = [
     </div>
   </section>
 
-  <!-- Authority & Decision-Making Objections -->
-  <section class="py-16 md:py-24 bg-slate-50 dark:bg-slate-900">
+  <!-- Commitment & Decision Objections -->
+  <section id="commitment" class="py-16 md:py-24 bg-slate-50 dark:bg-slate-900 scroll-mt-20">
     <div class="max-w-4xl mx-auto px-4 md:px-8">
       <div class="text-center mb-12">
         <span class="text-sm font-semibold text-primary uppercase tracking-wider">Category 4</span>
-        <h2 class="text-3xl md:text-4xl font-bold mt-2 mb-4">Authority & Decision-Making Objections</h2>
+        <h2 class="text-3xl md:text-4xl font-bold mt-2 mb-4">Commitment & Decision Objections</h2>
         <p class="text-lg text-muted max-w-2xl mx-auto">
-          Navigate situations where the prospect needs to involve others in the decision.
+          Navigate concerns about commitment, follow-through, and involving others in the decision.
         </p>
       </div>
 
       <div class="space-y-4">
         {/* @ts-ignore */}
-        {authorityObjections.map((item) => (
+        {commitmentObjections.map((item) => (
           <details class="group bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-md transition-shadow">
             <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
               <h3 class="text-lg font-semibold text-slate-900 dark:text-white pr-4">
@@ -274,12 +351,23 @@ const competitorObjections = [
             </summary>
             <div class="px-6 pb-6 space-y-4 border-t border-slate-200 dark:border-slate-700 pt-4">
               <div>
-                <h4 class="text-sm font-semibold text-primary uppercase tracking-wider mb-2">Strategy</h4>
+                <div class="flex items-center gap-2 mb-2">
+                  <h4 class="text-sm font-semibold text-primary uppercase tracking-wider">Strategy</h4>
+                  {item.tags && (
+                    <div class="flex gap-2">
+                      {item.tags.map((tag) => (
+                        <span class="text-xs px-2 py-0.5 rounded-full bg-primary/10 text-primary font-medium">
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+                </div>
                 <p class="text-muted leading-relaxed">{item.strategy}</p>
               </div>
               <div>
                 <h4 class="text-sm font-semibold text-primary uppercase tracking-wider mb-2">Sample Script</h4>
-                <div class="bg-slate-50 dark:bg-slate-900 rounded-md p-4 border-l-4 border-primary">
+                <div class="bg-gradient-to-r from-primary/5 to-primary/10 dark:from-primary/10 dark:to-primary/20 rounded-md p-4 border-l-4 border-primary">
                   <p class="text-slate-700 dark:text-slate-300 whitespace-pre-line leading-relaxed">{item.script}</p>
                 </div>
               </div>
@@ -290,20 +378,20 @@ const competitorObjections = [
     </div>
   </section>
 
-  <!-- Competitor Objections -->
-  <section class="py-16 md:py-24">
+  <!-- Comparison & Alternatives Objections -->
+  <section id="comparison" class="py-16 md:py-24 scroll-mt-20">
     <div class="max-w-4xl mx-auto px-4 md:px-8">
       <div class="text-center mb-12">
         <span class="text-sm font-semibold text-primary uppercase tracking-wider">Category 5</span>
-        <h2 class="text-3xl md:text-4xl font-bold mt-2 mb-4">Competitor Objections</h2>
+        <h2 class="text-3xl md:text-4xl font-bold mt-2 mb-4">Comparison & Alternatives Objections</h2>
         <p class="text-lg text-muted max-w-2xl mx-auto">
-          Handle situations where prospects are considering alternatives or building in-house.
+          Handle situations where prospects are considering other coaches or DIY approaches.
         </p>
       </div>
 
       <div class="space-y-4">
         {/* @ts-ignore */}
-        {competitorObjections.map((item) => (
+        {comparisonObjections.map((item) => (
           <details class="group bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-md transition-shadow">
             <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
               <h3 class="text-lg font-semibold text-slate-900 dark:text-white pr-4">
@@ -317,12 +405,23 @@ const competitorObjections = [
             </summary>
             <div class="px-6 pb-6 space-y-4 border-t border-slate-200 dark:border-slate-700 pt-4">
               <div>
-                <h4 class="text-sm font-semibold text-primary uppercase tracking-wider mb-2">Strategy</h4>
+                <div class="flex items-center gap-2 mb-2">
+                  <h4 class="text-sm font-semibold text-primary uppercase tracking-wider">Strategy</h4>
+                  {item.tags && (
+                    <div class="flex gap-2">
+                      {item.tags.map((tag) => (
+                        <span class="text-xs px-2 py-0.5 rounded-full bg-primary/10 text-primary font-medium">
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+                </div>
                 <p class="text-muted leading-relaxed">{item.strategy}</p>
               </div>
               <div>
                 <h4 class="text-sm font-semibold text-primary uppercase tracking-wider mb-2">Sample Script</h4>
-                <div class="bg-slate-50 dark:bg-slate-900 rounded-md p-4 border-l-4 border-primary">
+                <div class="bg-gradient-to-r from-primary/5 to-primary/10 dark:from-primary/10 dark:to-primary/20 rounded-md p-4 border-l-4 border-primary">
                   <p class="text-slate-700 dark:text-slate-300 whitespace-pre-line leading-relaxed">{item.script}</p>
                 </div>
               </div>
@@ -333,4 +432,3 @@ const competitorObjections = [
     </div>
   </section>
 </Layout>
-
