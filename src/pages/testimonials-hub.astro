@@ -1080,9 +1080,14 @@ const longTestimonials = [
       return name.substring(0, 2).toUpperCase();
     }
 
+    // Make getInitials available globally
+    window.getInitials = getInitials;
+
     function updateAvatarDisplay(sectionId, mode) {
+      console.log('updateAvatarDisplay called:', sectionId, mode);
+      
       // Handle both testimonial-section wrapper and direct section queries
-      let section = document.querySelector(`[data-section="${sectionId}"]`);
+      let section = document.querySelector(`.testimonial-section[data-section="${sectionId}"]`);
       if (!section) {
         // Try finding by section ID
         const sectionElement = document.getElementById(sectionId);
@@ -1090,15 +1095,58 @@ const longTestimonials = [
           section = sectionElement;
         }
       }
-      if (!section) return;
+      if (!section) {
+        console.log('Section not found:', sectionId);
+        return;
+      }
 
-      // Find all avatars in this section
-      const avatars = section.querySelectorAll('.testimonial-avatar');
+      console.log('Section found:', section);
+
+      // Find all avatars in this section - try multiple selectors
+      let avatars = section.querySelectorAll('.testimonial-avatar');
+      if (avatars.length === 0) {
+        // Fallback: look for any rounded-full divs that might be avatars
+        avatars = section.querySelectorAll('div[class*="rounded-full"]');
+        // Add the class to them so they're recognized
+        avatars.forEach(avatar => {
+          if (!avatar.classList.contains('testimonial-avatar')) {
+            avatar.classList.add('testimonial-avatar');
+          }
+        });
+      }
+      
+      console.log('Found avatars:', avatars.length);
       avatars.forEach(avatar => {
+        // Skip if it's not actually an avatar (e.g., a button or other element)
+        if (!avatar.classList.contains('rounded-full') && !avatar.querySelector('img') && !avatar.querySelector('div[class*="rounded-full"]')) {
+          return;
+        }
         const card = avatar.closest('.testimonial-card') || avatar.closest('[class*="flex"]') || avatar.parentElement;
-        const name = card?.getAttribute('data-name') || card?.querySelector('p[class*="font-semibold"]')?.textContent?.trim() || '';
-        const imageSrc = card?.getAttribute('data-image-src') || avatar.querySelector('img')?.getAttribute('src') || '';
-        const imageAlt = card?.getAttribute('data-image-alt') || avatar.querySelector('img')?.getAttribute('alt') || '';
+        
+        // Get name - try multiple sources
+        let name = card?.getAttribute('data-name') || '';
+        if (!name) {
+          const nameEl = card?.querySelector('p[class*="font-semibold"]');
+          name = nameEl?.textContent?.trim() || '';
+        }
+        
+        // Get image source - try multiple sources and store original
+        let imageSrc = card?.getAttribute('data-image-src') || '';
+        let imageAlt = card?.getAttribute('data-image-alt') || '';
+        
+        // If not in data attributes, get from current img
+        if (!imageSrc) {
+          const currentImg = avatar.querySelector('img');
+          if (currentImg) {
+            imageSrc = currentImg.getAttribute('src') || '';
+            imageAlt = currentImg.getAttribute('alt') || imageAlt;
+            // Store in data attributes for future use
+            if (card && imageSrc) {
+              card.setAttribute('data-image-src', imageSrc);
+              if (imageAlt) card.setAttribute('data-image-alt', imageAlt);
+            }
+          }
+        }
         
         // Get size classes from current avatar
         const sizeClasses = [];
@@ -1117,6 +1165,11 @@ const longTestimonials = [
         const hasBorder4 = avatar.classList.contains('border-4');
         const borderClass = hasBorder4 ? 'border-4' : 'border-2';
         const borderColor = 'border-slate-200 dark:border-slate-600';
+        
+        // Store original values in data attributes if not already there
+        if (card && name && !card.getAttribute('data-name')) {
+          card.setAttribute('data-name', name);
+        }
         
         // Clear and reset
         avatar.innerHTML = '';
@@ -1160,8 +1213,11 @@ const longTestimonials = [
       });
       
       // Also handle Style 1 which uses the Testimonials component
-      if (sectionId === 'style-1') {
+      if (sectionId === 'style-1' && avatars.length === 0) {
+        console.log('Handling Style 1 with Testimonials component');
         const testimonialCards = section.querySelectorAll('[class*="flex"][class*="h-auto"]');
+        console.log('Found testimonial cards:', testimonialCards.length);
+        
         testimonialCards.forEach(card => {
           const imgContainer = card.querySelector('div[class*="rounded-full"]');
           if (!imgContainer) return;
@@ -1172,13 +1228,20 @@ const longTestimonials = [
           const imageSrc = img?.getAttribute('src') || '';
           const imageAlt = img?.getAttribute('alt') || '';
           
+          // Add testimonial-avatar class if not present
+          if (!imgContainer.classList.contains('testimonial-avatar')) {
+            imgContainer.classList.add('testimonial-avatar');
+          }
+          
           imgContainer.className = 'testimonial-avatar h-10 w-10 rounded-full border border-slate-200 dark:border-slate-600 flex-shrink-0 flex items-center justify-center overflow-hidden';
           imgContainer.setAttribute('data-mode', mode);
           
           switch(mode) {
             case 'image':
-              if (imageSrc && img) {
+              if (imageSrc) {
                 imgContainer.innerHTML = `<img src="${imageSrc}" alt="${imageAlt || name}" class="h-10 w-10 object-cover" />`;
+              } else {
+                imgContainer.innerHTML = `<div class="h-10 w-10 bg-slate-200 dark:bg-slate-700 rounded-full"></div>`;
               }
               imgContainer.style.display = 'flex';
               break;
@@ -1209,18 +1272,26 @@ const longTestimonials = [
       }
     }
 
+    // Make updateAvatarDisplay available globally
+    window.updateAvatarDisplay = updateAvatarDisplay;
+
     // Initialize avatar toggle buttons
     document.addEventListener('DOMContentLoaded', function() {
       const toggleButtons = document.querySelectorAll('.avatar-toggle-btn');
       
+      console.log('Found toggle buttons:', toggleButtons.length);
+      
       toggleButtons.forEach(btn => {
-        btn.addEventListener('click', function() {
+        btn.addEventListener('click', function(e) {
+          e.preventDefault();
           const section = this.getAttribute('data-section');
           const mode = this.getAttribute('data-mode');
           
-          // Update button states
-          const sectionButtons = document.querySelectorAll(`[data-section="${section}"]`);
-          sectionButtons.forEach(b => {
+          console.log('Toggle clicked:', section, mode);
+          
+          // Update button states for this section
+          const allSectionButtons = document.querySelectorAll(`.avatar-toggle-btn[data-section="${section}"]`);
+          allSectionButtons.forEach(b => {
             b.classList.remove('active', 'bg-primary', 'text-white');
             b.classList.add('bg-slate-200', 'dark:bg-slate-700', 'text-slate-700', 'dark:text-slate-300');
           });
