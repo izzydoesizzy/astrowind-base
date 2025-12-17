@@ -112,6 +112,10 @@ export const headerData = {
           text: 'Testimonials Hub',
           href: getPermalink('/testimonials-hub'),
         },
+        {
+          text: 'Testimonials Instructions',
+          href: getPermalink('/testimonials-instructions'),
+        },
       ],
     },
     {

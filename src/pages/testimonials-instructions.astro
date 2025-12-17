@@ -1,0 +1,696 @@
+---
+/**
+ * ============================================================================
+ * TESTIMONIALS INSTRUCTIONS PAGE
+ * ============================================================================
+ * 
+ * A comprehensive, beginner-friendly guide for using testimonials in your Astro pages.
+ * This page explains everything step-by-step with clear examples.
+ * ============================================================================
+ */
+
+// @ts-ignore - Astro components are resolved by the Astro compiler
+import Layout from '~/layouts/PageLayout.astro';
+
+// @ts-ignore - Astro components are resolved by the Astro compiler
+import HeroText from '~/components/widgets/HeroText.astro';
+
+import '~/styles/testimonials.css';
+// @ts-ignore - data path resolved by Astro alias
+import {
+  testimonials,
+  getFeaturedTestimonials,
+  getVideoTestimonials,
+  getLongTestimonials,
+  getTestimonialsByCategory,
+  getRatedTestimonials,
+  getTextTestimonials,
+} from '~/data/testimonials';
+
+const metadata = {
+  title: 'Testimonials Instructions - Complete Guide',
+};
+
+// Example data selections for demonstration
+const exampleFeatured = getFeaturedTestimonials().slice(0, 1);
+const exampleCoaching = getTestimonialsByCategory('coaching').slice(0, 1);
+const exampleWithRating = getRatedTestimonials().slice(0, 1);
+---
+
+<Layout metadata={metadata}>
+  <HeroText
+    tagline="Complete Guide"
+    title="How to Use Testimonials in Your Pages"
+    subtitle="Step-by-step instructions for adding testimonials to any page. Perfect for beginners!"
+  />
+
+  <div class="container mx-auto max-w-4xl px-6 py-16">
+    
+    <!-- TABLE OF CONTENTS -->
+    <section class="mb-16 rounded-2xl border border-slate-200 bg-slate-50 p-8 dark:border-slate-800 dark:bg-slate-900/50">
+      <h2 class="mb-6 text-2xl font-bold text-slate-900 dark:text-white">Table of Contents</h2>
+      <nav class="space-y-2">
+        <a href="#step-1" class="block text-primary hover:underline">Step 1: Import the Files You Need</a>
+        <a href="#step-2" class="block text-primary hover:underline">Step 2: Select Which Testimonials to Use</a>
+        <a href="#step-3" class="block text-primary hover:underline">Step 3: Choose Your Layout Style</a>
+        <a href="#step-4" class="block text-primary hover:underline">Step 4: Add Testimonials to Your Page</a>
+        <a href="#examples" class="block text-primary hover:underline">Complete Examples</a>
+        <a href="#customization" class="block text-primary hover:underline">Customization Options</a>
+      </nav>
+    </section>
+
+    <!-- STEP 1: IMPORT FILES -->
+    <section id="step-1" class="mb-16 scroll-mt-20">
+      <div class="mb-6">
+        <span class="inline-block rounded-full bg-primary px-4 py-1 text-sm font-semibold text-white">Step 1</span>
+        <h2 class="mt-4 text-3xl font-bold text-slate-900 dark:text-white">Import the Files You Need</h2>
+        <p class="mt-2 text-slate-600 dark:text-slate-300">
+          Every page that uses testimonials needs to import two things: the data and the styles.
+        </p>
+      </div>
+
+      <div class="rounded-lg border border-slate-200 bg-white p-6 dark:border-slate-800 dark:bg-slate-900">
+        <h3 class="mb-3 font-semibold text-slate-900 dark:text-white">Copy this code at the top of your file:</h3>
+        <pre class="overflow-x-auto rounded bg-slate-900 p-4 text-sm text-slate-100"><code>---
+// Import the CSS styles (makes testimonials look good)
+import '~/styles/testimonials.css';
+
+// Import the testimonials data
+import { testimonials } from '~/data/testimonials';
+---</code></pre>
+        <p class="mt-4 text-sm text-slate-600 dark:text-slate-400">
+          <strong>What this does:</strong> The first line loads the styling, and the second line gives you access to all testimonials.
+        </p>
+      </div>
+    </section>
+
+    <!-- STEP 2: SELECT TESTIMONIALS -->
+    <section id="step-2" class="mb-16 scroll-mt-20">
+      <div class="mb-6">
+        <span class="inline-block rounded-full bg-primary px-4 py-1 text-sm font-semibold text-white">Step 2</span>
+        <h2 class="mt-4 text-3xl font-bold text-slate-900 dark:text-white">Select Which Testimonials to Use</h2>
+        <p class="mt-2 text-slate-600 dark:text-slate-300">
+          You don't have to use all testimonials. Here are 8 easy ways to pick specific ones.
+        </p>
+      </div>
+
+      <!-- Method 1: All Testimonials -->
+      <div class="mb-8 rounded-lg border border-slate-200 bg-white p-6 dark:border-slate-800 dark:bg-slate-900">
+        <h3 class="mb-3 text-xl font-semibold text-slate-900 dark:text-white">Method 1: Use All Testimonials</h3>
+        <p class="mb-4 text-slate-600 dark:text-slate-300">Use every testimonial in the list.</p>
+        <pre class="mb-4 overflow-x-auto rounded bg-slate-900 p-4 text-sm text-slate-100"><code>---
+import { testimonials } from '~/data/testimonials';
+
+// Use all testimonials
+const myTestimonials = testimonials;
+---</code></pre>
+        <p class="text-sm text-slate-600 dark:text-slate-400">
+          <strong>When to use:</strong> When you want to show everything you have.
+        </p>
+      </div>
+
+      <!-- Method 2: First N Testimonials -->
+      <div class="mb-8 rounded-lg border border-slate-200 bg-white p-6 dark:border-slate-800 dark:bg-slate-900">
+        <h3 class="mb-3 text-xl font-semibold text-slate-900 dark:text-white">Method 2: Use First 3, 5, or 10 Testimonials</h3>
+        <p class="mb-4 text-slate-600 dark:text-slate-300">Show only the first few testimonials.</p>
+        <pre class="mb-4 overflow-x-auto rounded bg-slate-900 p-4 text-sm text-slate-100"><code>---
+import { testimonials } from '~/data/testimonials';
+
+// First 3 testimonials
+const myTestimonials = testimonials.slice(0, 3);
+
+// First 5 testimonials
+// const myTestimonials = testimonials.slice(0, 5);
+
+// First 10 testimonials
+// const myTestimonials = testimonials.slice(0, 10);
+---</code></pre>
+        <p class="text-sm text-slate-600 dark:text-slate-400">
+          <strong>When to use:</strong> When you want a small selection, like for a homepage.
+        </p>
+      </div>
+
+      <!-- Method 3: By Category -->
+      <div class="mb-8 rounded-lg border border-slate-200 bg-white p-6 dark:border-slate-800 dark:bg-slate-900">
+        <h3 class="mb-3 text-xl font-semibold text-slate-900 dark:text-white">Method 3: Use Testimonials by Category</h3>
+        <p class="mb-4 text-slate-600 dark:text-slate-300">Show only testimonials from a specific category (like "coaching" or "product").</p>
+        <pre class="mb-4 overflow-x-auto rounded bg-slate-900 p-4 text-sm text-slate-100"><code>---
+import { getTestimonialsByCategory } from '~/data/testimonials';
+
+// Get only coaching testimonials
+const myTestimonials = getTestimonialsByCategory('coaching');
+
+// Other categories you can use:
+// - 'product'
+// - 'growth'
+// - 'sales'
+// - 'agency'
+// - 'leadership'
+// - 'business'
+// - 'design'
+// - 'general'
+---</code></pre>
+        <p class="text-sm text-slate-600 dark:text-slate-400">
+          <strong>When to use:</strong> When you want testimonials related to a specific topic or service.
+        </p>
+      </div>
+
+      <!-- Method 4: Featured Only -->
+      <div class="mb-8 rounded-lg border border-slate-200 bg-white p-6 dark:border-slate-800 dark:bg-slate-900">
+        <h3 class="mb-3 text-xl font-semibold text-slate-900 dark:text-white">Method 4: Use Featured Testimonials Only</h3>
+        <p class="mb-4 text-slate-600 dark:text-slate-300">Show only the testimonials marked as "featured" (your best ones).</p>
+        <pre class="mb-4 overflow-x-auto rounded bg-slate-900 p-4 text-sm text-slate-100"><code>---
+import { getFeaturedTestimonials } from '~/data/testimonials';
+
+// Get only featured testimonials
+const myTestimonials = getFeaturedTestimonials();
+---</code></pre>
+        <p class="text-sm text-slate-600 dark:text-slate-400">
+          <strong>When to use:</strong> When you want to highlight your best testimonials.
+        </p>
+      </div>
+
+      <!-- Method 5: With Star Ratings -->
+      <div class="mb-8 rounded-lg border border-slate-200 bg-white p-6 dark:border-slate-800 dark:bg-slate-900">
+        <h3 class="mb-3 text-xl font-semibold text-slate-900 dark:text-white">Method 5: Use Only Testimonials with Star Ratings</h3>
+        <p class="mb-4 text-slate-600 dark:text-slate-300">Show only testimonials that have star ratings (1-5 stars).</p>
+        <pre class="mb-4 overflow-x-auto rounded bg-slate-900 p-4 text-sm text-slate-100"><code>---
+import { getRatedTestimonials } from '~/data/testimonials';
+
+// Get only testimonials with ratings
+const myTestimonials = getRatedTestimonials();
+
+// Or get only 5-star testimonials
+// const myTestimonials = testimonials.filter(t => t.rating === 5);
+---</code></pre>
+        <p class="text-sm text-slate-600 dark:text-slate-400">
+          <strong>When to use:</strong> When you want to show social proof with star ratings.
+        </p>
+      </div>
+
+      <!-- Method 6: Video Testimonials -->
+      <div class="mb-8 rounded-lg border border-slate-200 bg-white p-6 dark:border-slate-800 dark:bg-slate-900">
+        <h3 class="mb-3 text-xl font-semibold text-slate-900 dark:text-white">Method 6: Use Only Video Testimonials</h3>
+        <p class="mb-4 text-slate-600 dark:text-slate-300">Show only testimonials that have videos.</p>
+        <pre class="mb-4 overflow-x-auto rounded bg-slate-900 p-4 text-sm text-slate-100"><code>---
+import { getVideoTestimonials } from '~/data/testimonials';
+
+// Get only video testimonials
+const myTestimonials = getVideoTestimonials();
+---</code></pre>
+        <p class="text-sm text-slate-600 dark:text-slate-400">
+          <strong>When to use:</strong> When you want to showcase video testimonials.
+        </p>
+      </div>
+
+      <!-- Method 7: Text Only -->
+      <div class="mb-8 rounded-lg border border-slate-200 bg-white p-6 dark:border-slate-800 dark:bg-slate-900">
+        <h3 class="mb-3 text-xl font-semibold text-slate-900 dark:text-white">Method 7: Use Only Text Testimonials (No Videos)</h3>
+        <p class="mb-4 text-slate-600 dark:text-slate-300">Show only testimonials without videos (text-only).</p>
+        <pre class="mb-4 overflow-x-auto rounded bg-slate-900 p-4 text-sm text-slate-100"><code>---
+import { getTextTestimonials } from '~/data/testimonials';
+
+// Get only text testimonials (no videos)
+const myTestimonials = getTextTestimonials();
+---</code></pre>
+        <p class="text-sm text-slate-600 dark:text-slate-400">
+          <strong>When to use:</strong> When you want simple text testimonials without videos.
+        </p>
+      </div>
+
+      <!-- Method 8: Specific IDs -->
+      <div class="mb-8 rounded-lg border border-slate-200 bg-white p-6 dark:border-slate-800 dark:bg-slate-900">
+        <h3 class="mb-3 text-xl font-semibold text-slate-900 dark:text-white">Method 8: Pick Specific Testimonials by ID</h3>
+        <p class="mb-4 text-slate-600 dark:text-slate-300">Choose exactly which testimonials you want by their ID numbers.</p>
+        <pre class="mb-4 overflow-x-auto rounded bg-slate-900 p-4 text-sm text-slate-100"><code>---
+import { testimonials } from '~/data/testimonials';
+
+// Pick specific testimonials by their ID
+const myTestimonials = testimonials.filter(t => 
+  ['testimonial-1', 'testimonial-3', 'testimonial-5'].includes(t.id)
+);
+---</code></pre>
+        <p class="text-sm text-slate-600 dark:text-slate-400">
+          <strong>When to use:</strong> When you want complete control over exactly which testimonials appear.
+        </p>
+        <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">
+          <strong>Tip:</strong> To find testimonial IDs, check the file <code class="rounded bg-slate-200 px-1 dark:bg-slate-700">src/data/testimonials.ts</code>
+        </p>
+      </div>
+
+      <!-- Combining Methods -->
+      <div class="mb-8 rounded-lg border-2 border-primary bg-primary/5 p-6 dark:bg-primary/10">
+        <h3 class="mb-3 text-xl font-semibold text-slate-900 dark:text-white">💡 Pro Tip: Combine Methods</h3>
+        <p class="mb-4 text-slate-600 dark:text-slate-300">You can combine methods to get exactly what you want!</p>
+        <pre class="mb-4 overflow-x-auto rounded bg-slate-900 p-4 text-sm text-slate-100"><code>---
+import { testimonials } from '~/data/testimonials';
+
+// Example: Get coaching testimonials with 5-star ratings, first 3
+const myTestimonials = testimonials
+  .filter(t => t.category === 'coaching' && t.rating === 5)
+  .slice(0, 3);
+---</code></pre>
+      </div>
+    </section>
+
+    <!-- STEP 3: CHOOSE LAYOUT -->
+    <section id="step-3" class="mb-16 scroll-mt-20">
+      <div class="mb-6">
+        <span class="inline-block rounded-full bg-primary px-4 py-1 text-sm font-semibold text-white">Step 3</span>
+        <h2 class="mt-4 text-3xl font-bold text-slate-900 dark:text-white">Choose Your Layout Style</h2>
+        <p class="mt-2 text-slate-600 dark:text-slate-300">
+          Pick how you want your testimonials to look. Each style uses different CSS classes.
+        </p>
+      </div>
+
+      <!-- Style 1: Standard Grid -->
+      <div class="mb-8 rounded-lg border border-slate-200 bg-white p-6 dark:border-slate-800 dark:bg-slate-900">
+        <h3 class="mb-3 text-xl font-semibold text-slate-900 dark:text-white">Style 1: Standard Grid (3 Columns)</h3>
+        <p class="mb-4 text-slate-600 dark:text-slate-300">Cards arranged in a grid. Shows 1 column on mobile, 2 on tablet, 3 on desktop.</p>
+        <p class="mb-2 text-sm font-semibold text-slate-700 dark:text-slate-300">Use this class: <code class="rounded bg-slate-200 px-2 py-1 dark:bg-slate-700">testimonial-grid</code></p>
+        <p class="text-sm text-slate-600 dark:text-slate-400">
+          <strong>Best for:</strong> General testimonial sections, product pages, service pages.
+        </p>
+      </div>
+
+      <!-- Style 2: Two Column -->
+      <div class="mb-8 rounded-lg border border-slate-200 bg-white p-6 dark:border-slate-800 dark:bg-slate-900">
+        <h3 class="mb-3 text-xl font-semibold text-slate-900 dark:text-white">Style 2: Two Column Grid</h3>
+        <p class="mb-4 text-slate-600 dark:text-slate-300">Cards in 2 columns. Shows 1 column on mobile, 2 on larger screens.</p>
+        <p class="mb-2 text-sm font-semibold text-slate-700 dark:text-slate-300">Use this class: <code class="rounded bg-slate-200 px-2 py-1 dark:bg-slate-700">testimonial-grid-2</code></p>
+        <p class="text-sm text-slate-600 dark:text-slate-400">
+          <strong>Best for:</strong> When you want larger cards with more space.
+        </p>
+      </div>
+
+      <!-- Style 3: Masonry -->
+      <div class="mb-8 rounded-lg border border-slate-200 bg-white p-6 dark:border-slate-800 dark:bg-slate-900">
+        <h3 class="mb-3 text-xl font-semibold text-slate-900 dark:text-white">Style 3: Masonry (Staggered Columns)</h3>
+        <p class="mb-4 text-slate-600 dark:text-slate-300">Cards of different heights arranged in columns, like Pinterest.</p>
+        <p class="mb-2 text-sm font-semibold text-slate-700 dark:text-slate-300">Use these classes: <code class="rounded bg-slate-200 px-2 py-1 dark:bg-slate-700">testimonial-masonry</code> and <code class="rounded bg-slate-200 px-2 py-1 dark:bg-slate-700">testimonial-masonry-item</code></p>
+        <p class="text-sm text-slate-600 dark:text-slate-400">
+          <strong>Best for:</strong> When testimonials have very different lengths.
+        </p>
+      </div>
+
+      <!-- Style 4: Featured Card -->
+      <div class="mb-8 rounded-lg border border-slate-200 bg-white p-6 dark:border-slate-800 dark:bg-slate-900">
+        <h3 class="mb-3 text-xl font-semibold text-slate-900 dark:text-white">Style 4: Featured Card</h3>
+        <p class="mb-4 text-slate-600 dark:text-slate-300">A highlighted card with gradient background to make one testimonial stand out.</p>
+        <p class="mb-2 text-sm font-semibold text-slate-700 dark:text-slate-300">Use this class: <code class="rounded bg-slate-200 px-2 py-1 dark:bg-slate-700">testimonial-card-featured</code></p>
+        <p class="text-sm text-slate-600 dark:text-slate-400">
+          <strong>Best for:</strong> Highlighting your best testimonial at the top of a section.
+        </p>
+      </div>
+
+      <!-- Style 5: Minimal Card -->
+      <div class="mb-8 rounded-lg border border-slate-200 bg-white p-6 dark:border-slate-800 dark:bg-slate-900">
+        <h3 class="mb-3 text-xl font-semibold text-slate-900 dark:text-white">Style 5: Minimal Card</h3>
+        <p class="mb-4 text-slate-600 dark:text-slate-300">Simple card with just a border, no shadow. Clean and minimal look.</p>
+        <p class="mb-2 text-sm font-semibold text-slate-700 dark:text-slate-300">Use this class: <code class="rounded bg-slate-200 px-2 py-1 dark:bg-slate-700">testimonial-card-minimal</code></p>
+        <p class="text-sm text-slate-600 dark:text-slate-400">
+          <strong>Best for:</strong> Clean, modern designs without heavy shadows.
+        </p>
+      </div>
+
+      <!-- Style 6: Standard Card -->
+      <div class="mb-8 rounded-lg border border-slate-200 bg-white p-6 dark:border-slate-800 dark:bg-slate-900">
+        <h3 class="mb-3 text-xl font-semibold text-slate-900 dark:text-white">Style 6: Standard Card</h3>
+        <p class="mb-4 text-slate-600 dark:text-slate-300">Classic card with shadow. This is the default style.</p>
+        <p class="mb-2 text-sm font-semibold text-slate-700 dark:text-slate-300">Use this class: <code class="rounded bg-slate-200 px-2 py-1 dark:bg-slate-700">testimonial-card</code></p>
+        <p class="text-sm text-slate-600 dark:text-slate-400">
+          <strong>Best for:</strong> Most general use cases. Works well everywhere.
+        </p>
+      </div>
+    </section>
+
+    <!-- STEP 4: ADD TO PAGE -->
+    <section id="step-4" class="mb-16 scroll-mt-20">
+      <div class="mb-6">
+        <span class="inline-block rounded-full bg-primary px-4 py-1 text-sm font-semibold text-white">Step 4</span>
+        <h2 class="mt-4 text-3xl font-bold text-slate-900 dark:text-white">Add Testimonials to Your Page</h2>
+        <p class="mt-2 text-slate-600 dark:text-slate-300">
+          Now put it all together! Copy one of these examples and modify it for your needs.
+        </p>
+      </div>
+
+      <!-- Example 1: Simple Grid -->
+      <div class="mb-8 rounded-lg border border-slate-200 bg-white p-6 dark:border-slate-800 dark:bg-slate-900">
+        <h3 class="mb-4 text-xl font-semibold text-slate-900 dark:text-white">Example 1: Simple Grid with All Testimonials</h3>
+        <pre class="mb-4 overflow-x-auto rounded bg-slate-900 p-4 text-sm text-slate-100"><code>---
+import '~/styles/testimonials.css';
+import { testimonials } from '~/data/testimonials';
+
+const myTestimonials = testimonials.slice(0, 6);
+---
+
+&lt;div class="testimonial-grid"&gt;
+  {myTestimonials.map((item) => (
+    &lt;article class="testimonial-card"&gt;
+      &lt;p class="testimonial-content text-slate-800 dark:text-slate-200"&gt;
+        {item.testimonial}
+      &lt;/p&gt;
+      &lt;div class="mt-4 flex items-center gap-3"&gt;
+        &lt;div class="testimonial-avatar testimonial-avatar-show testimonial-avatar-md rounded-full overflow-hidden"&gt;
+          &lt;img src={item.image.src} alt={item.image.alt} class="h-full w-full object-cover" /&gt;
+        &lt;/div&gt;
+        &lt;div class="testimonial-author"&gt;
+          &lt;p class="font-semibold text-slate-900 dark:text-white"&gt;{item.name}&lt;/p&gt;
+          &lt;p class="text-sm text-slate-500 dark:text-slate-400"&gt;{item.job}&lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/article&gt;
+  ))}
+&lt;/div&gt;</code></pre>
+        <p class="text-sm text-slate-600 dark:text-slate-400">
+          <strong>What this does:</strong> Shows first 6 testimonials in a 3-column grid with profile pictures.
+        </p>
+      </div>
+
+      <!-- Example 2: With Star Ratings -->
+      <div class="mb-8 rounded-lg border border-slate-200 bg-white p-6 dark:border-slate-800 dark:bg-slate-900">
+        <h3 class="mb-4 text-xl font-semibold text-slate-900 dark:text-white">Example 2: Grid with Star Ratings</h3>
+        <pre class="mb-4 overflow-x-auto rounded bg-slate-900 p-4 text-sm text-slate-100"><code>---
+import '~/styles/testimonials.css';
+import { getRatedTestimonials } from '~/data/testimonials';
+
+const myTestimonials = getRatedTestimonials().slice(0, 6);
+---
+
+&lt;div class="testimonial-grid"&gt;
+  {myTestimonials.map((item) => (
+    &lt;article class="testimonial-card"&gt;
+      {item.rating && (
+        &lt;div class="testimonial-rating testimonial-rating-show mb-3 flex items-center gap-1" data-rating={item.rating}&gt;
+          {[0, 1, 2, 3, 4].map((i) => (
+            &lt;svg
+              class={`testimonial-star ${i < item.rating ? 'text-yellow-400 fill-current' : 'testimonial-star-empty'}`}
+              viewBox="0 0 24 24"
+            &gt;
+              &lt;path d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" /&gt;
+            &lt;/svg&gt;
+          ))}
+        &lt;/div&gt;
+      )}
+      &lt;p class="testimonial-content text-slate-800 dark:text-slate-200"&gt;
+        {item.testimonial}
+      &lt;/p&gt;
+      &lt;div class="mt-4 flex items-center gap-3"&gt;
+        &lt;div class="testimonial-avatar testimonial-avatar-show testimonial-avatar-md rounded-full overflow-hidden"&gt;
+          &lt;img src={item.image.src} alt={item.image.alt} class="h-full w-full object-cover" /&gt;
+        &lt;/div&gt;
+        &lt;div class="testimonial-author"&gt;
+          &lt;p class="font-semibold text-slate-900 dark:text-white"&gt;{item.name}&lt;/p&gt;
+          &lt;p class="text-sm text-slate-500 dark:text-slate-400"&gt;{item.job}&lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/article&gt;
+  ))}
+&lt;/div&gt;</code></pre>
+        <p class="text-sm text-slate-600 dark:text-slate-400">
+          <strong>What this does:</strong> Shows only testimonials with star ratings, displaying the stars above each quote.
+        </p>
+      </div>
+
+      <!-- Example 3: Featured First -->
+      <div class="mb-8 rounded-lg border border-slate-200 bg-white p-6 dark:border-slate-800 dark:bg-slate-900">
+        <h3 class="mb-4 text-xl font-semibold text-slate-900 dark:text-white">Example 3: Featured Testimonial First, Then Grid</h3>
+        <pre class="mb-4 overflow-x-auto rounded bg-slate-900 p-4 text-sm text-slate-100"><code>---
+import '~/styles/testimonials.css';
+import { getFeaturedTestimonials, testimonials } from '~/data/testimonials';
+
+const featured = getFeaturedTestimonials().slice(0, 1);
+const others = testimonials.slice(0, 6);
+---
+
+{featured.length > 0 && (
+  &lt;div class="mb-8 rounded-2xl border border-primary/20 bg-gradient-to-br from-primary/10 to-primary/5 p-8"&gt;
+    {featured.map((item) => (
+      &lt;div class="grid gap-6 md:grid-cols-[auto,1fr] md:items-center"&gt;
+        &lt;div class="testimonial-avatar testimonial-avatar-show testimonial-avatar-lg rounded-full overflow-hidden"&gt;
+          &lt;img src={item.image.src} alt={item.image.alt} /&gt;
+        &lt;/div&gt;
+        &lt;div&gt;
+          &lt;p class="testimonial-content text-lg"&gt;{item.testimonial}&lt;/p&gt;
+          &lt;div class="mt-4 testimonial-author"&gt;
+            &lt;p class="font-semibold"&gt;{item.name}&lt;/p&gt;
+            &lt;p class="text-sm text-slate-500"&gt;{item.job}&lt;/p&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    ))}
+  &lt;/div&gt;
+)}
+
+&lt;div class="testimonial-grid"&gt;
+  {others.map((item) => (
+    &lt;article class="testimonial-card"&gt;
+      &lt;p class="testimonial-content"&gt;{item.testimonial}&lt;/p&gt;
+      &lt;div class="mt-4 flex items-center gap-3"&gt;
+        &lt;div class="testimonial-avatar testimonial-avatar-show testimonial-avatar-md rounded-full overflow-hidden"&gt;
+          &lt;img src={item.image.src} alt={item.image.alt} /&gt;
+        &lt;/div&gt;
+        &lt;div class="testimonial-author"&gt;
+          &lt;p class="font-semibold"&gt;{item.name}&lt;/p&gt;
+          &lt;p class="text-sm text-slate-500"&gt;{item.job}&lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/article&gt;
+  ))}
+&lt;/div&gt;</code></pre>
+        <p class="text-sm text-slate-600 dark:text-slate-400">
+          <strong>What this does:</strong> Shows one featured testimonial in a highlighted box, then a grid of other testimonials below.
+        </p>
+      </div>
+
+      <!-- Example 4: By Category -->
+      <div class="mb-8 rounded-lg border border-slate-200 bg-white p-6 dark:border-slate-800 dark:bg-slate-900">
+        <h3 class="mb-4 text-xl font-semibold text-slate-900 dark:text-white">Example 4: Show Only Coaching Testimonials</h3>
+        <pre class="mb-4 overflow-x-auto rounded bg-slate-900 p-4 text-sm text-slate-100"><code>---
+import '~/styles/testimonials.css';
+import { getTestimonialsByCategory } from '~/data/testimonials';
+
+const myTestimonials = getTestimonialsByCategory('coaching');
+---
+
+&lt;div class="testimonial-grid"&gt;
+  {myTestimonials.map((item) => (
+    &lt;article class="testimonial-card testimonial-card-minimal"&gt;
+      &lt;p class="testimonial-content"&gt;{item.testimonial}&lt;/p&gt;
+      &lt;div class="mt-4 flex items-center gap-3"&gt;
+        &lt;div class="testimonial-avatar testimonial-avatar-show testimonial-avatar-md rounded-full overflow-hidden"&gt;
+          &lt;img src={item.image.src} alt={item.image.alt} /&gt;
+        &lt;/div&gt;
+        &lt;div class="testimonial-author"&gt;
+          &lt;p class="font-semibold"&gt;{item.name}&lt;/p&gt;
+          &lt;p class="text-sm text-slate-500"&gt;{item.job}&lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/article&gt;
+  ))}
+&lt;/div&gt;</code></pre>
+        <p class="text-sm text-slate-600 dark:text-slate-400">
+          <strong>What this does:</strong> Shows only testimonials from the "coaching" category using minimal card style.
+        </p>
+      </div>
+
+      <!-- Example 5: Masonry -->
+      <div class="mb-8 rounded-lg border border-slate-200 bg-white p-6 dark:border-slate-800 dark:bg-slate-900">
+        <h3 class="mb-4 text-xl font-semibold text-slate-900 dark:text-white">Example 5: Masonry Layout (No Avatars)</h3>
+        <pre class="mb-4 overflow-x-auto rounded bg-slate-900 p-4 text-sm text-slate-100"><code>---
+import '~/styles/testimonials.css';
+import { testimonials } from '~/data/testimonials';
+
+const myTestimonials = testimonials.slice(0, 9);
+---
+
+&lt;div class="testimonial-masonry"&gt;
+  {myTestimonials.map((item) => (
+    &lt;article class="testimonial-masonry-item testimonial-card"&gt;
+      &lt;p class="testimonial-content"&gt;{item.testimonial}&lt;/p&gt;
+      &lt;div class="mt-4 testimonial-author"&gt;
+        &lt;div class="testimonial-avatar testimonial-avatar-hide"&gt;&lt;/div&gt;
+        &lt;p class="font-semibold"&gt;{item.name}&lt;/p&gt;
+        &lt;p class="text-sm text-slate-500"&gt;{item.job}&lt;/p&gt;
+      &lt;/div&gt;
+    &lt;/article&gt;
+  ))}
+&lt;/div&gt;</code></pre>
+        <p class="text-sm text-slate-600 dark:text-slate-400">
+          <strong>What this does:</strong> Shows testimonials in a staggered masonry layout without profile pictures.
+        </p>
+      </div>
+    </section>
+
+    <!-- COMPLETE EXAMPLES -->
+    <section id="examples" class="mb-16 scroll-mt-20">
+      <div class="mb-6">
+        <h2 class="text-3xl font-bold text-slate-900 dark:text-white">Complete Working Examples</h2>
+        <p class="mt-2 text-slate-600 dark:text-slate-300">
+          Copy and paste these complete examples into your own pages.
+        </p>
+      </div>
+
+      <!-- Complete Example 1 -->
+      <div class="mb-8 rounded-lg border-2 border-primary bg-primary/5 p-6 dark:bg-primary/10">
+        <h3 class="mb-4 text-xl font-semibold text-slate-900 dark:text-white">Complete Example: Homepage Testimonials Section</h3>
+        <p class="mb-4 text-slate-600 dark:text-slate-300">Perfect for a homepage. Shows 3 testimonials with ratings.</p>
+        <pre class="mb-4 overflow-x-auto rounded bg-slate-900 p-4 text-sm text-slate-100"><code>---
+// File: src/pages/index.astro (or any page)
+
+import '~/styles/testimonials.css';
+import { getRatedTestimonials } from '~/data/testimonials';
+
+const myTestimonials = getRatedTestimonials().slice(0, 3);
+---
+
+&lt;section class="py-16"&gt;
+  &lt;div class="container mx-auto max-w-6xl px-6"&gt;
+    &lt;h2 class="mb-8 text-center text-3xl font-bold"&gt;What Our Clients Say&lt;/h2&gt;
+    
+    &lt;div class="testimonial-grid"&gt;
+      {myTestimonials.map((item) => (
+        &lt;article class="testimonial-card"&gt;
+          {item.rating && (
+            &lt;div class="testimonial-rating testimonial-rating-show mb-3 flex items-center gap-1"&gt;
+              {[0, 1, 2, 3, 4].map((i) => (
+                &lt;svg
+                  class={`w-4 h-4 ${i < item.rating ? 'text-yellow-400 fill-current' : 'text-slate-300'}`}
+                  viewBox="0 0 24 24"
+                &gt;
+                  &lt;path d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" /&gt;
+                &lt;/svg&gt;
+              ))}
+            &lt;/div&gt;
+          )}
+          &lt;p class="testimonial-content text-slate-800 dark:text-slate-200"&gt;
+            {item.testimonial}
+          &lt;/p&gt;
+          &lt;div class="mt-4 flex items-center gap-3"&gt;
+            &lt;div class="testimonial-avatar testimonial-avatar-show testimonial-avatar-md rounded-full overflow-hidden"&gt;
+              &lt;img src={item.image.src} alt={item.image.alt} class="h-full w-full object-cover" /&gt;
+            &lt;/div&gt;
+            &lt;div class="testimonial-author"&gt;
+              &lt;p class="font-semibold text-slate-900 dark:text-white"&gt;{item.name}&lt;/p&gt;
+              &lt;p class="text-sm text-slate-500 dark:text-slate-400"&gt;{item.job}&lt;/p&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/article&gt;
+      ))}
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/section&gt;</code></pre>
+      </div>
+    </section>
+
+    <!-- CUSTOMIZATION -->
+    <section id="customization" class="mb-16 scroll-mt-20">
+      <div class="mb-6">
+        <h2 class="text-3xl font-bold text-slate-900 dark:text-white">Customization Options</h2>
+        <p class="mt-2 text-slate-600 dark:text-slate-300">
+          Easy ways to customize how your testimonials look.
+        </p>
+      </div>
+
+      <!-- Avatar Options -->
+      <div class="mb-8 rounded-lg border border-slate-200 bg-white p-6 dark:border-slate-800 dark:bg-slate-900">
+        <h3 class="mb-4 text-xl font-semibold text-slate-900 dark:text-white">Avatar Display Options</h3>
+        <div class="space-y-3">
+          <div>
+            <p class="mb-2 font-semibold text-slate-700 dark:text-slate-300">Show Profile Picture (Default)</p>
+            <code class="block rounded bg-slate-100 p-2 text-sm dark:bg-slate-800">testimonial-avatar testimonial-avatar-show testimonial-avatar-md</code>
+          </div>
+          <div>
+            <p class="mb-2 font-semibold text-slate-700 dark:text-slate-300">Hide Avatar</p>
+            <code class="block rounded bg-slate-100 p-2 text-sm dark:bg-slate-800">testimonial-avatar testimonial-avatar-hide</code>
+          </div>
+          <div>
+            <p class="mb-2 font-semibold text-slate-700 dark:text-slate-300">Show Placeholder (Gradient Box)</p>
+            <code class="block rounded bg-slate-100 p-2 text-sm dark:bg-slate-800">testimonial-avatar testimonial-avatar-placeholder testimonial-avatar-md</code>
+          </div>
+        </div>
+        <p class="mt-4 text-sm text-slate-600 dark:text-slate-400">
+          <strong>Avatar Sizes:</strong> sm, md, lg, xl, 2xl (replace "md" with your preferred size)
+        </p>
+      </div>
+
+      <!-- Card Styles -->
+      <div class="mb-8 rounded-lg border border-slate-200 bg-white p-6 dark:border-slate-800 dark:bg-slate-900">
+        <h3 class="mb-4 text-xl font-semibold text-slate-900 dark:text-white">Card Style Options</h3>
+        <div class="space-y-3">
+          <div>
+            <p class="mb-2 font-semibold text-slate-700 dark:text-slate-300">Standard Card (with shadow)</p>
+            <code class="block rounded bg-slate-100 p-2 text-sm dark:bg-slate-800">testimonial-card</code>
+          </div>
+          <div>
+            <p class="mb-2 font-semibold text-slate-700 dark:text-slate-300">Minimal Card (border only)</p>
+            <code class="block rounded bg-slate-100 p-2 text-sm dark:bg-slate-800">testimonial-card testimonial-card-minimal</code>
+          </div>
+          <div>
+            <p class="mb-2 font-semibold text-slate-700 dark:text-slate-300">Featured Card (gradient background)</p>
+            <code class="block rounded bg-slate-100 p-2 text-sm dark:bg-slate-800">testimonial-card testimonial-card-featured</code>
+          </div>
+        </div>
+      </div>
+
+      <!-- Layout Options -->
+      <div class="mb-8 rounded-lg border border-slate-200 bg-white p-6 dark:border-slate-800 dark:bg-slate-900">
+        <h3 class="mb-4 text-xl font-semibold text-slate-900 dark:text-white">Layout Options</h3>
+        <div class="space-y-3">
+          <div>
+            <p class="mb-2 font-semibold text-slate-700 dark:text-slate-300">3-Column Grid (1/2/3 columns responsive)</p>
+            <code class="block rounded bg-slate-100 p-2 text-sm dark:bg-slate-800">testimonial-grid</code>
+          </div>
+          <div>
+            <p class="mb-2 font-semibold text-slate-700 dark:text-slate-300">2-Column Grid (1/2 columns responsive)</p>
+            <code class="block rounded bg-slate-100 p-2 text-sm dark:bg-slate-800">testimonial-grid-2</code>
+          </div>
+          <div>
+            <p class="mb-2 font-semibold text-slate-700 dark:text-slate-300">Masonry (staggered columns)</p>
+            <code class="block rounded bg-slate-100 p-2 text-sm dark:bg-slate-800">testimonial-masonry</code>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- QUICK REFERENCE -->
+    <section class="mb-16 rounded-2xl border-2 border-primary bg-primary/5 p-8 dark:bg-primary/10">
+      <h2 class="mb-6 text-3xl font-bold text-slate-900 dark:text-white">Quick Reference</h2>
+      <div class="grid gap-6 md:grid-cols-2">
+        <div>
+          <h3 class="mb-3 font-semibold text-slate-900 dark:text-white">Selecting Testimonials</h3>
+          <ul class="space-y-2 text-sm text-slate-600 dark:text-slate-300">
+            <li>• <code class="rounded bg-slate-200 px-1 dark:bg-slate-700">testimonials.slice(0, 3)</code> - First 3</li>
+            <li>• <code class="rounded bg-slate-200 px-1 dark:bg-slate-700">getFeaturedTestimonials()</code> - Featured only</li>
+            <li>• <code class="rounded bg-slate-200 px-1 dark:bg-slate-700">getTestimonialsByCategory('coaching')</code> - By category</li>
+            <li>• <code class="rounded bg-slate-200 px-1 dark:bg-slate-700">getRatedTestimonials()</code> - With ratings</li>
+            <li>• <code class="rounded bg-slate-200 px-1 dark:bg-slate-700">getVideoTestimonials()</code> - Video only</li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="mb-3 font-semibold text-slate-900 dark:text-white">Layout Classes</h3>
+          <ul class="space-y-2 text-sm text-slate-600 dark:text-slate-300">
+            <li>• <code class="rounded bg-slate-200 px-1 dark:bg-slate-700">testimonial-grid</code> - 3 columns</li>
+            <li>• <code class="rounded bg-slate-200 px-1 dark:bg-slate-700">testimonial-grid-2</code> - 2 columns</li>
+            <li>• <code class="rounded bg-slate-200 px-1 dark:bg-slate-700">testimonial-masonry</code> - Staggered</li>
+            <li>• <code class="rounded bg-slate-200 px-1 dark:bg-slate-700">testimonial-card</code> - Standard</li>
+            <li>• <code class="rounded bg-slate-200 px-1 dark:bg-slate-700">testimonial-card-minimal</code> - Minimal</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- NEED HELP -->
+    <section class="rounded-2xl border border-slate-200 bg-slate-50 p-8 dark:border-slate-800 dark:bg-slate-900/50">
+      <h2 class="mb-4 text-2xl font-bold text-slate-900 dark:text-white">Need More Help?</h2>
+      <p class="mb-4 text-slate-600 dark:text-slate-300">
+        Check out the <a href="/testimonials-hub" class="text-primary hover:underline">Testimonials Hub</a> page to see all styles in action with live examples.
+      </p>
+      <p class="text-slate-600 dark:text-slate-300">
+        All testimonial data is stored in <code class="rounded bg-slate-200 px-1 dark:bg-slate-700">src/data/testimonials.ts</code> and all styles are in <code class="rounded bg-slate-200 px-1 dark:bg-slate-700">src/styles/testimonials.css</code>
+      </p>
+    </section>
+
+  </div>
+</Layout>
+
