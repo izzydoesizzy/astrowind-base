@@ -1,0 +1,427 @@
+/**
+ * ============================================================================
+ * TESTIMONIAL UTILITY CLASSES
+ * ============================================================================
+ * 
+ * Modular, composable CSS classes for testimonial components.
+ * Import this file in any page or component where you need testimonial styles.
+ * 
+ * USAGE:
+ *   import '~/styles/testimonials.css';
+ * 
+ * Then apply classes directly to your HTML elements.
+ * 
+ * ============================================================================
+ * CLASS NAMING CONVENTION
+ * ============================================================================
+ * 
+ * All classes are prefixed with "testimonial-" for easy identification.
+ * Classes are designed to be:
+ * - Descriptive: Clear what they do (e.g., "testimonial-avatar-hide")
+ * - Composable: Can be combined (e.g., "testimonial-card testimonial-card-minimal")
+ * - Independent: Work without JavaScript (for static display)
+ * 
+ * ============================================================================
+ */
+
+/* ============================================================================
+   AVATAR DISPLAY CONTROL
+   ============================================================================
+   
+   Control how avatars are displayed in testimonials.
+   Apply these classes to elements with class "testimonial-avatar".
+   
+   USAGE:
+     <div class="testimonial-avatar testimonial-avatar-show">
+       <img src="..." alt="..." />
+     </div>
+   
+   OR:
+     <div class="testimonial-avatar testimonial-avatar-hide">
+       <!-- Avatar will be hidden -->
+     </div>
+*/
+
+/* Show profile picture (default state) */
+.testimonial-avatar-show {
+  display: flex !important;
+}
+
+/* Hide avatar completely (removes from layout) */
+.testimonial-avatar-hide {
+  display: none !important;
+  width: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Show gradient placeholder instead of image */
+.testimonial-avatar-placeholder {
+  display: flex !important;
+  background: linear-gradient(to bottom right, rgb(203 213 225), rgb(148 163 184)) !important;
+}
+
+.dark .testimonial-avatar-placeholder {
+  background: linear-gradient(to bottom right, rgb(71 85 105), rgb(51 65 85)) !important;
+}
+
+/* Show user icon SVG */
+.testimonial-avatar-icon {
+  display: flex !important;
+}
+
+/* Show initials (requires JavaScript to populate initials) */
+.testimonial-avatar-initials {
+  display: flex !important;
+  background-color: rgb(226 232 240) !important;
+  color: rgb(51 65 85) !important;
+}
+
+.dark .testimonial-avatar-initials {
+  background-color: rgb(51 65 85) !important;
+  color: rgb(226 232 240) !important;
+}
+
+/* ============================================================================
+   STAR RATING CONTROL
+   ============================================================================
+   
+   Control star rating visibility.
+   Apply these classes to rating container elements.
+   
+   USAGE:
+     <div class="testimonial-rating testimonial-rating-show">
+       <!-- Stars visible -->
+     </div>
+   
+   OR:
+     <div class="testimonial-rating testimonial-rating-hide">
+       <!-- Stars hidden -->
+     </div>
+*/
+
+/* Show star ratings */
+.testimonial-rating-show {
+  display: block !important;
+}
+
+/* Hide star ratings */
+.testimonial-rating-hide {
+  display: none !important;
+}
+
+/* ============================================================================
+   TESTIMONIAL LAYOUT STYLES
+   ============================================================================
+   
+   Grid and layout classes for arranging multiple testimonials.
+   Apply to container elements.
+*/
+
+/* Standard 3-column grid (responsive: 1 col mobile, 2 col tablet, 3 col desktop) */
+.testimonial-grid {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: 1.5rem;
+}
+
+@media (min-width: 640px) {
+  .testimonial-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .testimonial-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* Two-column grid (responsive: 1 col mobile, 2 col tablet+) */
+.testimonial-grid-2 {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: 1.5rem;
+}
+
+@media (min-width: 640px) {
+  .testimonial-grid-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Four-column grid (responsive: 1 col mobile, 2 col tablet, 4 col desktop) */
+.testimonial-grid-4 {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+@media (min-width: 640px) {
+  .testimonial-grid-4 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .testimonial-grid-4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+/* Masonry layout (staggered columns, like Pinterest) */
+.testimonial-masonry {
+  column-count: 1;
+  column-gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .testimonial-masonry {
+    column-count: 2;
+  }
+}
+
+@media (min-width: 1024px) {
+  .testimonial-masonry {
+    column-count: 3;
+  }
+}
+
+/* Prevent items from breaking across columns in masonry */
+.testimonial-masonry-item {
+  break-inside: avoid;
+  margin-bottom: 1.5rem;
+}
+
+/* ============================================================================
+   TESTIMONIAL CARD VARIANTS
+   ============================================================================
+   
+   Different card styles for testimonials.
+   Apply to the main testimonial container.
+*/
+
+/* Standard Card (default) */
+.testimonial-card {
+  position: relative;
+  background: white;
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+}
+
+.dark .testimonial-card {
+  background: rgb(30 41 59);
+  box-shadow: none;
+  border: 1px solid rgb(51 65 85);
+}
+
+/* Minimal Card (subtle border, no shadow) */
+.testimonial-card-minimal {
+  position: relative;
+  background: white;
+  border-radius: 0.5rem;
+  padding: 2rem;
+  border: 2px solid rgb(226 232 240);
+  box-shadow: none;
+}
+
+.dark .testimonial-card-minimal {
+  background: rgb(30 41 59);
+  border-color: rgb(51 65 85);
+}
+
+.testimonial-card-minimal:hover {
+  border-color: rgb(1 97 239 / 0.5);
+  transition: border-color 0.2s;
+}
+
+.dark .testimonial-card-minimal:hover {
+  border-color: rgb(1 97 239 / 0.5);
+}
+
+/* Featured Card (highlighted with gradient background) */
+.testimonial-card-featured {
+  position: relative;
+  background: linear-gradient(to bottom right, rgb(1 97 239 / 0.1), rgb(1 97 239 / 0.05));
+  border-radius: 0.75rem;
+  padding: 3rem;
+  border: 1px solid rgb(1 97 239 / 0.2);
+}
+
+.dark .testimonial-card-featured {
+  background: linear-gradient(to bottom right, rgb(1 97 239 / 0.2), rgb(1 97 239 / 0.1));
+  border-color: rgb(1 97 239 / 0.3);
+}
+
+/* ============================================================================
+   AVATAR SIZES
+   ============================================================================
+   
+   Control avatar size independently of display mode.
+   Combine with avatar display classes.
+   
+   USAGE:
+     <div class="testimonial-avatar testimonial-avatar-show testimonial-avatar-md">
+       <img src="..." />
+     </div>
+*/
+
+.testimonial-avatar-sm {
+  width: 2.5rem;  /* 40px */
+  height: 2.5rem;
+  min-width: 2.5rem;
+  min-height: 2.5rem;
+}
+
+.testimonial-avatar-md {
+  width: 3rem;  /* 48px */
+  height: 3rem;
+  min-width: 3rem;
+  min-height: 3rem;
+}
+
+.testimonial-avatar-lg {
+  width: 4rem;  /* 64px */
+  height: 4rem;
+  min-width: 4rem;
+  min-height: 4rem;
+}
+
+.testimonial-avatar-xl {
+  width: 5rem;  /* 80px */
+  height: 5rem;
+  min-width: 5rem;
+  min-height: 5rem;
+}
+
+.testimonial-avatar-2xl {
+  width: 8rem;  /* 128px */
+  height: 8rem;
+  min-width: 8rem;
+  min-height: 8rem;
+}
+
+/* ============================================================================
+   SPACING UTILITIES
+   ============================================================================
+   
+   Helper classes for spacing adjustments.
+*/
+
+/* Remove left margin when avatar is hidden */
+.testimonial-avatar-hide + .testimonial-author,
+.testimonial-avatar-hide ~ .testimonial-author {
+  margin-left: 0 !important;
+}
+
+/* ============================================================================
+   TEXT STYLES
+   ============================================================================
+   
+   Text size utilities for testimonial content.
+*/
+
+.testimonial-text-sm {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.testimonial-text-base {
+  font-size: 1rem;
+  line-height: 1.5rem;
+}
+
+.testimonial-text-lg {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}
+
+.testimonial-text-xl {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+}
+
+.testimonial-text-2xl {
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
+
+/* ============================================================================
+   STAR RATING STYLES
+   ============================================================================
+   
+   Styles for star rating displays.
+*/
+
+.testimonial-stars {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.testimonial-star {
+  width: 1rem;
+  height: 1rem;
+  color: rgb(250 204 21);  /* Yellow */
+  flex-shrink: 0;
+}
+
+.testimonial-star-empty {
+  color: rgb(203 213 225);  /* Light gray */
+}
+
+.dark .testimonial-star-empty {
+  color: rgb(51 65 85);  /* Dark gray */
+}
+
+/* Larger star sizes */
+.testimonial-stars-lg .testimonial-star {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.testimonial-stars-xl .testimonial-star {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+/* ============================================================================
+   STRUCTURE CLASSES
+   ============================================================================
+   
+   Semantic classes for testimonial structure.
+   Use these to mark up your HTML for better organization.
+*/
+
+.testimonial-content {
+  /* Testimonial text content area */
+}
+
+.testimonial-author {
+  /* Author name and job container */
+}
+
+.testimonial-section {
+  /* Section wrapper for grouping testimonials */
+  position: relative;
+}
+
+/* ============================================================================
+   RESPONSIVE UTILITIES
+   ============================================================================
+   
+   Additional responsive adjustments if needed.
+*/
+
+@media (max-width: 640px) {
+  .testimonial-card-featured {
+    padding: 2rem;
+  }
+  
+  .testimonial-card-minimal {
+    padding: 1.5rem;
+  }
+}
+
