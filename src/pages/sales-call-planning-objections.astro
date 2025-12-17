@@ -1,0 +1,336 @@
+---
+// @ts-ignore - Astro components are resolved by the Astro compiler
+import Layout from '~/layouts/PageLayout.astro';
+// @ts-ignore - Astro components are resolved by the Astro compiler
+import HeroText from '~/components/widgets/HeroText.astro';
+
+const metadata = {
+  title: 'Sales Call Planning - Objection Handling',
+};
+
+// Price & Budget Objections
+// @ts-ignore - TypeScript inference works correctly at runtime
+const priceObjections = [
+  {
+    objection: '"This is more expensive than we expected."',
+    strategy: 'Acknowledge the concern, then reframe the conversation around value and ROI. Connect the price to specific outcomes they want to achieve. Avoid getting defensive—this is often a buying signal.',
+    script: '"I totally understand that concern—most of our best customers said the same thing initially. When you say \'expensive,\' are you comparing us to another solution, or to the cost of keeping things as they are?\n\nLet me share something: [Customer Name] had the same reaction, but after seeing [specific outcome—e.g., 40% reduction in onboarding time], they realized the ROI was actually 3x their investment in the first year.\n\nWhat would need to be true for this investment to feel like a no-brainer for you?"'
+  },
+  {
+    objection: '"We don\'t have budget for this right now."',
+    strategy: 'Explore timing, priorities, and potential budget sources. Understand what "right now" means and what would need to change. Sometimes budget can be found or reallocated if the priority is high enough.',
+    script: '"That makes complete sense. Before we move on, can I ask—when you say \'right now,\' are we talking about this quarter, this year, or something else?\n\nAnd just to understand your priorities: if you could solve [the problem] without budget constraints, where would it rank on your list of priorities?\n\nSometimes we can structure things in phases or find budget from other areas. What would need to happen for this to become a priority?"'
+  },
+  {
+    objection: '"Can you just send me a discount?"',
+    strategy: 'Protect your positioning while staying helpful. Focus on value rather than price. Explore what they really need—sometimes it\'s not about the price but about structure, terms, or proving ROI.',
+    script: '"I appreciate you asking. We can sometimes adjust structure or terms, but the investment is tied to the outcomes we commit to delivering.\n\nCan we walk through what success would look like for you so we can see together what makes sense? Sometimes there are ways to structure this that work better for your situation.\n\nWhat specific outcome would make this investment feel worth it to you?"'
+  },
+  {
+    objection: '"We need to think about it."',
+    strategy: 'Understand what they need to think about. This is often a stall tactic. Get specific about concerns, decision-makers, or information gaps. Create urgency around the cost of inaction.',
+    script: '"Absolutely—I want to make sure you have everything you need. What specifically would you like to think about? Is it the fit, the investment, the timing, or something else?\n\nI ask because sometimes when people say \'think about it,\' there\'s a specific concern we haven\'t addressed yet. If we can solve that concern now, would that help you move forward?\n\nAlso, what happens if you wait? What\'s the cost of not solving [the problem] in the next [timeframe]?"'
+  }
+];
+
+// Timing & Urgency Objections
+// @ts-ignore - TypeScript inference works correctly at runtime
+const timingObjections = [
+  {
+    objection: '"Let\'s talk again in six months."',
+    strategy: 'Explore the cost of waiting. Help them visualize what changes—good or bad—if they delay. Sometimes urgency can be created by showing the opportunity cost or competitive disadvantage.',
+    script: '"We can absolutely do that. Before we park it, can we quickly look at what changes—good or bad—if we revisit this in six months instead of now?\n\nFor example, [Customer Name] was in a similar situation. They waited six months, and by then [specific negative consequence—e.g., they\'d lost 3 key team members to competitors, or the problem had cost them $X].\n\nWhat would need to be different in six months for this to make sense then? And what\'s the cost if nothing changes?"'
+  },
+  {
+    objection: '"We\'re in the middle of another project."',
+    strategy: 'Acknowledge their capacity constraints. Explore whether this could be complementary or if there\'s a way to make it feel supportive rather than overwhelming. Sometimes projects can run in parallel.',
+    script: '"That makes sense—nobody wants to overload the team. Can I ask what project you\'re working on?\n\nSometimes what we do actually supports other initiatives. For example, [Customer Name] was in the middle of [similar project] and found that our solution actually accelerated their timeline.\n\nIf this did move forward, what would we need to do to make sure it feels supportive, not overwhelming? Could we phase it in a way that works with your current project?"'
+  },
+  {
+    objection: '"We\'re not ready to make a decision yet."',
+    strategy: 'Understand what "ready" means. Identify what information, approvals, or conditions they need. Help them see that they might be more ready than they think, or create a path to readiness.',
+    script: '"I appreciate you being honest about that. What would need to be true for you to feel ready to make a decision?\n\nIs it about having more information? Getting buy-in from other stakeholders? Understanding the ROI better? Or something else?\n\nSometimes people feel more ready than they think once we address a specific concern. What\'s the one thing that, if we solved it today, would make you feel ready?"'
+  }
+];
+
+// Fit & Product Objections
+// @ts-ignore - TypeScript inference works correctly at runtime
+const fitObjections = [
+  {
+    objection: '"I\'m not sure this will work in our situation."',
+    strategy: 'Get specific about their concerns. Ask for concrete examples of what might not work. Often this is a vague concern that can be addressed once you understand the real issue.',
+    script: '"I appreciate you sharing that—that\'s really helpful feedback. Can you help me understand which part feels like the biggest mismatch with your situation?\n\nIs it about [specific aspect—e.g., team size, industry, current tools, processes]?\n\nI ask because we\'ve worked with companies in similar situations. For example, [Customer Name] had [similar concern] and here\'s how we addressed it: [specific solution]. Does that sound like it could work for you?"'
+  },
+  {
+    objection: '"We tried something similar and it didn\'t work."',
+    strategy: 'Differentiate without attacking their previous solution. Understand what specifically didn\'t work and highlight how your approach is different. Focus on implementation, support, or methodology differences.',
+    script: '"Thank you for sharing that—that context really helps. Can you tell me a bit about what you tried before and what specifically didn\'t work?\n\nWas it the product itself, the implementation, the support, or something else?\n\nI ask because while we might seem similar on the surface, we actually approach [key differentiator] very differently. For example, [Customer Name] had the same experience with [competitor/similar solution], but here\'s what made the difference with us: [specific differentiator].\n\nDoes that address the concern you had before?"'
+  },
+  {
+    objection: '"This seems too complex for our team."',
+    strategy: 'Address complexity concerns by showing simplicity, training, and support. Emphasize ease of use and the support they\'ll receive. Sometimes complexity is a feature, not a bug—if positioned correctly.',
+    script: '"I hear that. Can you help me understand what feels complex? Is it the setup, the day-to-day use, or something else?\n\nThe good news is that while we\'re powerful, we\'re actually designed to be simple. Most of our customers say it\'s easier than what they were using before.\n\nFor example, [Customer Name] had the same concern, but after [specific training/support], their team was up and running in [timeframe]. We also provide [specific support—e.g., dedicated onboarding, training, ongoing support].\n\nWhat would make you feel confident that your team could use this successfully?"'
+  },
+  {
+    objection: '"We need something more customizable."',
+    strategy: 'Understand what customization they need. Show flexibility where possible. Sometimes "customization" is code for "we don\'t think this will work"—address the underlying concern.',
+    script: '"That\'s a great point. Can you help me understand what specific customizations you\'re thinking about?\n\nI ask because we actually have [specific customization options]. For example, [Customer Name] needed [similar customization] and here\'s how we handled it: [solution].\n\nSometimes when people say \'customizable,\' they\'re really concerned about [underlying need]. Is that what you\'re thinking about, or something else?\n\nWhat would need to be customizable for this to work perfectly for you?"'
+  }
+];
+
+// Authority & Decision-Making Objections
+// @ts-ignore - TypeScript inference works correctly at runtime
+const authorityObjections = [
+  {
+    objection: '"I need to check with my boss/team/stakeholders."',
+    strategy: 'This is often legitimate, but get specific. Understand who needs to be involved, what they need to know, and how you can help prepare them. Offer to join the conversation or provide materials.',
+    script: '"Absolutely—I want to make sure everyone who needs to be involved is on board. Can you help me understand who else needs to be part of this decision?\n\nAnd what do you think their main concerns or questions will be? I ask because I can help you prepare for that conversation, or I\'m happy to join a call with them if that would be helpful.\n\nWhat information would be most helpful for them to see? I can put together a brief summary or proposal that addresses their likely concerns."'
+  },
+  {
+    objection: '"I\'m not the decision maker."',
+    strategy: 'Understand their role in the process. Even if they\'re not the final decision maker, they\'re often an influencer. Help them become a champion. Get introduced to the decision maker.',
+    script: '"I appreciate you being upfront about that. Can you help me understand your role in this process? Even if you\'re not the final decision maker, your input is really valuable.\n\nWhat would need to be true for you to feel confident recommending this to [decision maker]? I\'d love to help you become a champion for this.\n\nAlso, would it be helpful if I had a conversation with [decision maker] directly? Sometimes it helps to have everyone in the same room so we can address any concerns in real-time."'
+  }
+];
+
+// Competitor Objections
+// @ts-ignore - TypeScript inference works correctly at runtime
+const competitorObjections = [
+  {
+    objection: '"We\'re already talking to [Competitor Name]."',
+    strategy: 'Don\'t badmouth the competitor. Focus on differentiation and what makes you unique. Understand what they like about the competitor and address gaps. Position yourself as complementary or better.',
+    script: '"That makes sense—[Competitor Name] is a solid option. Can I ask what you like about what you\'ve seen from them so far?\n\nI ask because while we might seem similar, we actually approach [key differentiator] very differently. For example, [specific differentiator that matters to them].\n\n[Competitor Name] is great at [their strength], but where we really shine is [your unique strength that addresses their specific need].\n\nWhat\'s most important to you in making this decision? Is it [factor 1], [factor 2], or something else?"'
+  },
+  {
+    objection: '"We\'re going to build this in-house."',
+    strategy: 'Understand the real cost of building in-house—time, resources, opportunity cost. Show examples of companies who tried and why they eventually bought. Position as faster time to value.',
+    script: '"I totally respect that—building in-house gives you full control. Can I ask what\'s driving that decision? Is it about customization, cost, or something else?\n\nI ask because we\'ve worked with several companies who started down that path. For example, [Customer Name] was building something similar, but after [timeframe], they realized it was taking [X times longer] and costing [Y times more] than expected.\n\nBy the time they came to us, they\'d spent [resources] and still weren\'t where they wanted to be. They ended up using our solution and were live in [timeframe] instead of [their timeline].\n\nWhat would need to be true for buying to make more sense than building?"'
+  }
+];
+---
+
+<Layout metadata={metadata}>
+  <!-- HeroText Widget ******************* -->
+
+  <HeroText
+    tagline="Sales enablement"
+    title="Sales Call Planning - Objection Handling"
+    subtitle="Expand each objection to see the strategy and sample scripts your team can use on calls. Each accordion includes the objection, handling strategy, and word-for-word scripts you can adapt."
+  />
+
+  <!-- Price & Budget Objections -->
+  <section class="py-16 md:py-24">
+    <div class="max-w-4xl mx-auto px-4 md:px-8">
+      <div class="text-center mb-12">
+        <span class="text-sm font-semibold text-primary uppercase tracking-wider">Category 1</span>
+        <h2 class="text-3xl md:text-4xl font-bold mt-2 mb-4">Price & Budget Objections</h2>
+        <p class="text-lg text-muted max-w-2xl mx-auto">
+          Handle concerns about cost, budget, and pricing with confidence.
+        </p>
+      </div>
+
+      <div class="space-y-4">
+        {/* @ts-ignore */}
+        {priceObjections.map((item) => (
+          <details class="group bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-md transition-shadow">
+            <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
+              <h3 class="text-lg font-semibold text-slate-900 dark:text-white pr-4">
+                {item.objection}
+              </h3>
+              <span class="flex-shrink-0 text-primary group-open:rotate-180 transition-transform">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                </svg>
+              </span>
+            </summary>
+            <div class="px-6 pb-6 space-y-4 border-t border-slate-200 dark:border-slate-700 pt-4">
+              <div>
+                <h4 class="text-sm font-semibold text-primary uppercase tracking-wider mb-2">Strategy</h4>
+                <p class="text-muted leading-relaxed">{item.strategy}</p>
+              </div>
+              <div>
+                <h4 class="text-sm font-semibold text-primary uppercase tracking-wider mb-2">Sample Script</h4>
+                <div class="bg-slate-50 dark:bg-slate-900 rounded-md p-4 border-l-4 border-primary">
+                  <p class="text-slate-700 dark:text-slate-300 whitespace-pre-line leading-relaxed">{item.script}</p>
+                </div>
+              </div>
+            </div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Timing & Urgency Objections -->
+  <section class="py-16 md:py-24 bg-slate-50 dark:bg-slate-900">
+    <div class="max-w-4xl mx-auto px-4 md:px-8">
+      <div class="text-center mb-12">
+        <span class="text-sm font-semibold text-primary uppercase tracking-wider">Category 2</span>
+        <h2 class="text-3xl md:text-4xl font-bold mt-2 mb-4">Timing & Urgency Objections</h2>
+        <p class="text-lg text-muted max-w-2xl mx-auto">
+          Address concerns about timing, readiness, and when to move forward.
+        </p>
+      </div>
+
+      <div class="space-y-4">
+        {/* @ts-ignore */}
+        {timingObjections.map((item) => (
+          <details class="group bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-md transition-shadow">
+            <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
+              <h3 class="text-lg font-semibold text-slate-900 dark:text-white pr-4">
+                {item.objection}
+              </h3>
+              <span class="flex-shrink-0 text-primary group-open:rotate-180 transition-transform">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                </svg>
+              </span>
+            </summary>
+            <div class="px-6 pb-6 space-y-4 border-t border-slate-200 dark:border-slate-700 pt-4">
+              <div>
+                <h4 class="text-sm font-semibold text-primary uppercase tracking-wider mb-2">Strategy</h4>
+                <p class="text-muted leading-relaxed">{item.strategy}</p>
+              </div>
+              <div>
+                <h4 class="text-sm font-semibold text-primary uppercase tracking-wider mb-2">Sample Script</h4>
+                <div class="bg-slate-50 dark:bg-slate-900 rounded-md p-4 border-l-4 border-primary">
+                  <p class="text-slate-700 dark:text-slate-300 whitespace-pre-line leading-relaxed">{item.script}</p>
+                </div>
+              </div>
+            </div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Fit & Product Objections -->
+  <section class="py-16 md:py-24">
+    <div class="max-w-4xl mx-auto px-4 md:px-8">
+      <div class="text-center mb-12">
+        <span class="text-sm font-semibold text-primary uppercase tracking-wider">Category 3</span>
+        <h2 class="text-3xl md:text-4xl font-bold mt-2 mb-4">Fit & Product Objections</h2>
+        <p class="text-lg text-muted max-w-2xl mx-auto">
+          Handle concerns about whether your solution is the right fit for their situation.
+        </p>
+      </div>
+
+      <div class="space-y-4">
+        {/* @ts-ignore */}
+        {fitObjections.map((item) => (
+          <details class="group bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-md transition-shadow">
+            <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
+              <h3 class="text-lg font-semibold text-slate-900 dark:text-white pr-4">
+                {item.objection}
+              </h3>
+              <span class="flex-shrink-0 text-primary group-open:rotate-180 transition-transform">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                </svg>
+              </span>
+            </summary>
+            <div class="px-6 pb-6 space-y-4 border-t border-slate-200 dark:border-slate-700 pt-4">
+              <div>
+                <h4 class="text-sm font-semibold text-primary uppercase tracking-wider mb-2">Strategy</h4>
+                <p class="text-muted leading-relaxed">{item.strategy}</p>
+              </div>
+              <div>
+                <h4 class="text-sm font-semibold text-primary uppercase tracking-wider mb-2">Sample Script</h4>
+                <div class="bg-slate-50 dark:bg-slate-900 rounded-md p-4 border-l-4 border-primary">
+                  <p class="text-slate-700 dark:text-slate-300 whitespace-pre-line leading-relaxed">{item.script}</p>
+                </div>
+              </div>
+            </div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Authority & Decision-Making Objections -->
+  <section class="py-16 md:py-24 bg-slate-50 dark:bg-slate-900">
+    <div class="max-w-4xl mx-auto px-4 md:px-8">
+      <div class="text-center mb-12">
+        <span class="text-sm font-semibold text-primary uppercase tracking-wider">Category 4</span>
+        <h2 class="text-3xl md:text-4xl font-bold mt-2 mb-4">Authority & Decision-Making Objections</h2>
+        <p class="text-lg text-muted max-w-2xl mx-auto">
+          Navigate situations where the prospect needs to involve others in the decision.
+        </p>
+      </div>
+
+      <div class="space-y-4">
+        {/* @ts-ignore */}
+        {authorityObjections.map((item) => (
+          <details class="group bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-md transition-shadow">
+            <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
+              <h3 class="text-lg font-semibold text-slate-900 dark:text-white pr-4">
+                {item.objection}
+              </h3>
+              <span class="flex-shrink-0 text-primary group-open:rotate-180 transition-transform">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                </svg>
+              </span>
+            </summary>
+            <div class="px-6 pb-6 space-y-4 border-t border-slate-200 dark:border-slate-700 pt-4">
+              <div>
+                <h4 class="text-sm font-semibold text-primary uppercase tracking-wider mb-2">Strategy</h4>
+                <p class="text-muted leading-relaxed">{item.strategy}</p>
+              </div>
+              <div>
+                <h4 class="text-sm font-semibold text-primary uppercase tracking-wider mb-2">Sample Script</h4>
+                <div class="bg-slate-50 dark:bg-slate-900 rounded-md p-4 border-l-4 border-primary">
+                  <p class="text-slate-700 dark:text-slate-300 whitespace-pre-line leading-relaxed">{item.script}</p>
+                </div>
+              </div>
+            </div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Competitor Objections -->
+  <section class="py-16 md:py-24">
+    <div class="max-w-4xl mx-auto px-4 md:px-8">
+      <div class="text-center mb-12">
+        <span class="text-sm font-semibold text-primary uppercase tracking-wider">Category 5</span>
+        <h2 class="text-3xl md:text-4xl font-bold mt-2 mb-4">Competitor Objections</h2>
+        <p class="text-lg text-muted max-w-2xl mx-auto">
+          Handle situations where prospects are considering alternatives or building in-house.
+        </p>
+      </div>
+
+      <div class="space-y-4">
+        {/* @ts-ignore */}
+        {competitorObjections.map((item) => (
+          <details class="group bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-md transition-shadow">
+            <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
+              <h3 class="text-lg font-semibold text-slate-900 dark:text-white pr-4">
+                {item.objection}
+              </h3>
+              <span class="flex-shrink-0 text-primary group-open:rotate-180 transition-transform">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                </svg>
+              </span>
+            </summary>
+            <div class="px-6 pb-6 space-y-4 border-t border-slate-200 dark:border-slate-700 pt-4">
+              <div>
+                <h4 class="text-sm font-semibold text-primary uppercase tracking-wider mb-2">Strategy</h4>
+                <p class="text-muted leading-relaxed">{item.strategy}</p>
+              </div>
+              <div>
+                <h4 class="text-sm font-semibold text-primary uppercase tracking-wider mb-2">Sample Script</h4>
+                <div class="bg-slate-50 dark:bg-slate-900 rounded-md p-4 border-l-4 border-primary">
+                  <p class="text-slate-700 dark:text-slate-300 whitespace-pre-line leading-relaxed">{item.script}</p>
+                </div>
+              </div>
+            </div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+</Layout>
+
