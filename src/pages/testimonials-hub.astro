@@ -1,4 +1,69 @@
 ---
+/**
+ * TESTIMONIALS HUB PAGE - USAGE & CUSTOMIZATION GUIDE
+ * 
+ * This page showcases 9 different testimonial layout styles, each with interactive
+ * avatar display toggles. Use this page as a reference to choose your preferred style.
+ * 
+ * HOW TO USE THIS PAGE:
+ * 1. Browse through the 9 different testimonial styles below
+ * 2. Use the toggle buttons above each section to see how avatars look with:
+ *    - Photo: Actual profile pictures
+ *    - None: No avatars (text-only)
+ *    - Placeholder: Gradient placeholder boxes
+ *    - Icon: User icon SVG
+ *    - Initials: First and last name initials (e.g., "RP" for "Riya Patel")
+ * 3. Choose your favorite style and copy the HTML structure to your own page
+ * 
+ * HOW TO CUSTOMIZE:
+ * 
+ * 1. ADDING YOUR OWN TESTIMONIALS:
+ *    - Edit the `allTestimonials` array below
+ *    - Each testimonial needs: testimonial (text), name, job, and image (with src and alt)
+ *    - Example structure:
+ *      {
+ *        testimonial: 'Your testimonial text here...',
+ *        name: 'John Doe',
+ *        job: 'CEO, Company Name',
+ *        image: {
+ *          src: 'path/to/image.jpg',
+ *          alt: 'Portrait of John Doe.',
+ *        },
+ *      }
+ * 
+ * 2. CUSTOMIZING TESTIMONIAL DATA:
+ *    - `allTestimonials`: Used for most styles (standard length testimonials)
+ *    - `masonryTestimonials`: Used for Style 4 (masonry layout) - includes varied lengths
+ *    - `longTestimonials`: Used for Style 9 (long form) - detailed, story-driven testimonials
+ * 
+ * 3. MODIFYING STYLES:
+ *    - Each section (style-1 through style-9) is independent
+ *    - You can copy any section's HTML structure to your own page
+ *    - Adjust Tailwind CSS classes to match your brand colors
+ *    - The toggle functionality will work automatically if you include the JavaScript
+ * 
+ * 4. AVATAR TOGGLE FUNCTIONALITY:
+ *    - The toggle buttons work by finding elements with class `.testimonial-avatar`
+ *    - Make sure your avatar containers have: `class="testimonial-avatar"`
+ *    - Add data attributes to testimonial cards: `data-name`, `data-image-src`, `data-image-alt`
+ *    - The JavaScript will automatically handle switching between the 5 display modes
+ * 
+ * 5. REMOVING STYLES YOU DON'T NEED:
+ *    - Simply delete the entire `<section id="style-X">` block for styles you don't want
+ *    - Update the navigation index at the top to remove links to deleted styles
+ * 
+ * 6. CUSTOMIZING COLORS:
+ *    - Replace `primary` with your brand color class
+ *    - Update `slate-` colors to match your design system
+ *    - Avatar placeholder colors are in the `updateAvatarDisplay` function
+ * 
+ * 7. LONG TESTIMONIALS WITH EXPAND/COLLAPSE:
+ *    - Style 9 includes expand/collapse functionality
+ *    - Testimonials over 300 characters are automatically truncated
+ *    - Users can click "Read More" to expand
+ *    - To adjust the truncation length, change `300` in the testimonial text rendering
+ */
+
 // @ts-ignore - Astro components are resolved by the Astro compiler
 import Layout from '~/layouts/PageLayout.astro';
 
@@ -11,7 +76,18 @@ const metadata = {
   title: 'Testimonials Wall - Style Showcase',
 };
 
-// Shared testimonial data with varied lengths for masonry
+/**
+ * STANDARD TESTIMONIALS DATA
+ * 
+ * This array contains testimonials used in most styles (1, 2, 3, 5, 6, 7, 8).
+ * Each testimonial should have:
+ * - testimonial: The quote text
+ * - name: Person's full name
+ * - job: Their title/company
+ * - image: Object with src (image URL) and alt (accessibility text)
+ * 
+ * To add your own testimonials, simply add new objects to this array.
+ */
 // @ts-ignore - TypeScript inference works correctly at runtime
 const allTestimonials = [
   {
@@ -106,7 +182,16 @@ const allTestimonials = [
   },
 ];
 
-// Varied length testimonials for masonry (some very short, some very long)
+/**
+ * MASONRY TESTIMONIALS DATA
+ * 
+ * Used specifically for Style 4 (Masonry Layout).
+ * This array should contain testimonials with VARYING LENGTHS to create
+ * the staggered masonry effect. Include some very short (1-2 sentences)
+ * and some very long (3+ paragraphs) testimonials.
+ * 
+ * The expand/collapse functionality automatically handles testimonials over 200 characters.
+ */
 // @ts-ignore
 const masonryTestimonials = [
   {
@@ -196,7 +281,15 @@ const masonryTestimonials = [
   },
 ];
 
-// Longer testimonials for the expandable section
+/**
+ * LONG FORM TESTIMONIALS DATA
+ * 
+ * Used specifically for Style 9 (Long Form Testimonials).
+ * These should be detailed, story-driven testimonials (3+ paragraphs).
+ * 
+ * Testimonials over 300 characters are automatically truncated with a "Read More" button.
+ * To change the truncation length, search for `300` in the Style 9 section below.
+ */
 // @ts-ignore
 const longTestimonials = [
   {
@@ -251,7 +344,58 @@ const longTestimonials = [
     subtitle="Browse different testimonial wall styles below. Each showcases the same testimonials in a unique layout so you can pick the one that best fits your brand."
   />
 
-  <!-- Navigation Index -->
+  <!-- Usage Instructions Section -->
+  <section class="py-12 bg-blue-50 dark:bg-blue-900/20 border-b border-blue-200 dark:border-blue-800">
+    <div class="max-w-4xl mx-auto px-4 md:px-8">
+      <div class="bg-white dark:bg-slate-800 rounded-lg border border-blue-200 dark:border-blue-700 p-6 md:p-8 shadow-sm">
+        <h2 class="text-2xl font-bold mb-4 flex items-center gap-2">
+          <svg class="w-6 h-6 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          How to Use This Page
+        </h2>
+        <div class="space-y-4 text-slate-700 dark:text-slate-300">
+          <div>
+            <h3 class="font-semibold mb-2 text-slate-900 dark:text-white">1. Browse Styles</h3>
+            <p>Scroll through the 9 different testimonial layout styles below. Each style has a unique design and use case.</p>
+          </div>
+          <div>
+            <h3 class="font-semibold mb-2 text-slate-900 dark:text-white">2. Test Avatar Options</h3>
+            <p>Use the toggle buttons above each section to preview how avatars look with different display modes:</p>
+            <ul class="list-disc list-inside ml-4 mt-2 space-y-1">
+              <li><strong>Photo:</strong> Shows actual profile pictures</li>
+              <li><strong>None:</strong> Hides avatars completely (text-only)</li>
+              <li><strong>Placeholder:</strong> Shows gradient placeholder boxes</li>
+              <li><strong>Icon:</strong> Shows a user icon SVG</li>
+              <li><strong>Initials:</strong> Shows first and last name initials (e.g., "JD" for "John Doe")</li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="font-semibold mb-2 text-slate-900 dark:text-white">3. Customize for Your Site</h3>
+            <p>Once you've chosen a style, you can customize it by:</p>
+            <ul class="list-disc list-inside ml-4 mt-2 space-y-1">
+              <li>Editing the testimonial data arrays at the top of this file</li>
+              <li>Copying the HTML structure to your own page</li>
+              <li>Adjusting Tailwind CSS classes to match your brand colors</li>
+              <li>Including the JavaScript code to enable avatar toggles</li>
+            </ul>
+          </div>
+          <div class="bg-blue-50 dark:bg-blue-900/30 rounded-md p-4 border-l-4 border-blue-500">
+            <p class="text-sm">
+              <strong>💡 Tip:</strong> Check the code comments in this file for detailed customization instructions. 
+              Each section includes comments explaining how to modify it for your needs.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 
+    NAVIGATION INDEX
+    Quick links to jump to each testimonial style.
+    To remove a style, delete its link here and the corresponding section below.
+  -->
   <section class="py-8 bg-slate-50 dark:bg-slate-900 border-b border-slate-200 dark:border-slate-700 sticky top-0 z-10">
     <div class="max-w-6xl mx-auto px-4 md:px-8">
       <nav class="flex flex-wrap justify-center gap-4 md:gap-6">
@@ -286,7 +430,16 @@ const longTestimonials = [
     </div>
   </section>
 
-  <!-- Style 1: Standard Grid (3 columns) -->
+  <!-- 
+    STYLE 1: STANDARD GRID LAYOUT
+    Uses the Testimonials component from AstroWind.
+    This is a 3-column grid with equal-height cards.
+    
+    TO CUSTOMIZE:
+    - Replace <Testimonials> component with custom HTML if needed
+    - Modify grid columns: change `lg:grid-cols-3` to `lg:grid-cols-2` or `lg:grid-cols-4`
+    - Adjust card styling in the Testimonials component file
+  -->
   <section id="style-1" class="py-16 md:py-24 scroll-mt-20">
     <div class="max-w-6xl mx-auto px-4 md:px-8">
       <div class="text-center mb-12">
@@ -297,7 +450,15 @@ const longTestimonials = [
         </p>
       </div>
       
-      <!-- Avatar Display Toggle -->
+      <!-- 
+        AVATAR DISPLAY TOGGLE BUTTONS
+        These buttons allow users to preview different avatar display modes.
+        Each button has:
+        - data-mode: The display mode (image, none, placeholder, icon, initials)
+        - data-section: The section ID this toggle controls (style-1, style-2, etc.)
+        
+        To add toggles to your own page, copy this button group and update data-section.
+      -->
       <div class="mb-8 flex flex-wrap justify-center gap-2">
         <button type="button" class="avatar-toggle-btn active px-4 py-2 rounded-full text-sm font-medium bg-primary text-white" data-mode="image" data-section="style-1">
           Photo
@@ -316,12 +477,26 @@ const longTestimonials = [
         </button>
       </div>
       
+      <!-- 
+        TESTIMONIAL SECTION WRAPPER
+        The data-section attribute is required for the toggle functionality to work.
+        Make sure to include this wrapper with data-section matching the section ID.
+      -->
       <div class="testimonial-section" data-section="style-1">
         <Testimonials testimonials={allTestimonials} />
       </div>
     </div>
   </section>
 
+  <!-- 
+    STYLE 2: TWO-COLUMN GRID
+    Spacious 2-column layout ideal for longer testimonials.
+    
+    TO CUSTOMIZE:
+    - Change grid columns: `sm:grid-cols-2` to `sm:grid-cols-1` or `lg:grid-cols-3`
+    - Adjust card padding: change `p-6` to `p-4` or `p-8`
+    - Modify avatar size: change `h-12 w-12` to your preferred size
+  -->
   <!-- Style 2: 2-Column Grid -->
   <section id="style-2" class="py-16 md:py-24 bg-slate-50 dark:bg-slate-900 scroll-mt-20">
     <div class="max-w-6xl mx-auto px-4 md:px-8">
@@ -1018,6 +1193,26 @@ const longTestimonials = [
   </section>
 
   <script is:inline>
+    /**
+     * AVATAR TOGGLE FUNCTIONALITY
+     * 
+     * This script handles the interactive avatar display toggles.
+     * It works by:
+     * 1. Finding all avatars in a section (elements with class .testimonial-avatar)
+     * 2. Reading data attributes from testimonial cards (data-name, data-image-src, etc.)
+     * 3. Switching the avatar display based on the selected mode
+     * 
+     * TO USE THIS ON YOUR OWN PAGE:
+     * 1. Copy the entire <script> block below
+     * 2. Make sure your testimonial cards have:
+     *    - class="testimonial-card" on the card container
+     *    - data-name="Person Name" attribute
+     *    - data-image-src="image-url.jpg" attribute
+     *    - data-image-alt="Alt text" attribute
+     * 3. Make sure avatar containers have class="testimonial-avatar"
+     * 4. The toggle buttons will automatically work
+     */
+
     // Expand/Collapse functionality for long form testimonials
     function toggleTestimonial(index) {
       const card = document.querySelector(`[data-index="${index}"]`);
@@ -1070,7 +1265,14 @@ const longTestimonials = [
     window.toggleTestimonial = toggleTestimonial;
     window.toggleMasonryTestimonial = toggleMasonryTestimonial;
 
-    // Avatar Display Toggle Functionality
+    /**
+     * AVATAR DISPLAY TOGGLE FUNCTIONS
+     * 
+     * getInitials(): Extracts initials from a full name
+     * - Takes first letter of first name and first letter of last name
+     * - Example: "John Doe" -> "JD"
+     * - Falls back to first 2 characters if only one name provided
+     */
     function getInitials(name) {
       if (!name) return '??';
       const parts = name.trim().split(/\s+/);
@@ -1083,13 +1285,36 @@ const longTestimonials = [
     // Make getInitials available globally
     window.getInitials = getInitials;
 
+    /**
+     * updateAvatarDisplay(sectionId, mode)
+     * 
+     * Main function that updates all avatars in a section to the specified display mode.
+     * 
+     * @param {string} sectionId - The ID of the section (e.g., "style-1", "style-2")
+     * @param {string} mode - The display mode: "image", "none", "placeholder", "icon", or "initials"
+     * 
+     * HOW IT WORKS:
+     * 1. Finds the section by ID or data-section attribute
+     * 2. Locates all avatar elements (class .testimonial-avatar or div[class*="rounded-full"])
+     * 3. For each avatar:
+     *    - Extracts name and image data from data attributes or DOM
+     *    - Determines avatar size from existing classes
+     *    - Replaces avatar content based on selected mode
+     * 
+     * DISPLAY MODES:
+     * - "image": Shows the actual profile picture
+     * - "none": Hides the avatar completely
+     * - "placeholder": Shows a gradient placeholder box
+     * - "icon": Shows a user icon SVG
+     * - "initials": Shows first and last name initials
+     */
     function updateAvatarDisplay(sectionId, mode) {
       console.log('updateAvatarDisplay called:', sectionId, mode);
       
-      // Handle both testimonial-section wrapper and direct section queries
+      // Find the section - try testimonial-section wrapper first, then section ID
       let section = document.querySelector(`.testimonial-section[data-section="${sectionId}"]`);
       if (!section) {
-        // Try finding by section ID
+        // Fallback: try finding by section ID
         const sectionElement = document.getElementById(sectionId);
         if (sectionElement) {
           section = sectionElement;
@@ -1184,13 +1409,59 @@ const longTestimonials = [
               avatar.innerHTML = `<div class="${size} bg-slate-200 dark:bg-slate-700"></div>`;
             }
             avatar.style.display = 'flex';
+            avatar.style.width = '';
+            avatar.style.margin = '';
+            // Remove any classes that might affect layout
+            avatar.classList.remove('hidden');
+            // Restore margin on name container if it was removed
+            const flexParentRestore = avatar.parentElement;
+            if (flexParentRestore && flexParentRestore.classList.contains('flex')) {
+              const nameContainerRestore = flexParentRestore.querySelector('.grow, [class*="ml-"]');
+              if (nameContainerRestore) {
+                // Restore appropriate margin based on avatar size
+                const marginClass = size.includes('12') ? 'ml-4' : size.includes('16') || size.includes('20') || size.includes('32') ? 'ml-6' : 'ml-3';
+                if (!nameContainerRestore.classList.contains(marginClass)) {
+                  nameContainerRestore.classList.add(marginClass);
+                }
+                nameContainerRestore.style.marginLeft = '';
+              }
+            }
             break;
           case 'none':
+            // Hide avatar and remove it from layout flow completely
             avatar.style.display = 'none';
+            avatar.style.width = '0';
+            avatar.style.margin = '0';
+            avatar.style.padding = '0';
+            // Also hide the parent flex container's gap if it exists
+            const flexParent = avatar.parentElement;
+            if (flexParent && flexParent.classList.contains('flex')) {
+              // Remove margin-left from the name/details container
+              const nameContainer = flexParent.querySelector('.grow, [class*="ml-"]');
+              if (nameContainer) {
+                // Remove left margin classes
+                nameContainer.classList.remove('ml-3', 'ml-4', 'ml-6');
+                nameContainer.style.marginLeft = '0';
+              }
+            }
             break;
           case 'placeholder':
             avatar.innerHTML = `<div class="${size} bg-gradient-to-br from-slate-300 to-slate-400 dark:from-slate-600 dark:to-slate-700 rounded-full"></div>`;
             avatar.style.display = 'flex';
+            avatar.style.width = '';
+            avatar.style.margin = '';
+            // Restore margin on name container
+            const flexParentPlaceholder = avatar.parentElement;
+            if (flexParentPlaceholder && flexParentPlaceholder.classList.contains('flex')) {
+              const nameContainerPlaceholder = flexParentPlaceholder.querySelector('.grow, [class*="ml-"]');
+              if (nameContainerPlaceholder) {
+                const marginClass = size.includes('12') ? 'ml-4' : size.includes('16') || size.includes('20') || size.includes('32') ? 'ml-6' : 'ml-3';
+                if (!nameContainerPlaceholder.classList.contains(marginClass)) {
+                  nameContainerPlaceholder.classList.add(marginClass);
+                }
+                nameContainerPlaceholder.style.marginLeft = '';
+              }
+            }
             break;
           case 'icon':
             const iconSize = size.includes('32') ? 'w-8 h-8' : size.includes('20') ? 'w-6 h-6' : size.includes('16') ? 'w-5 h-5' : 'w-4 h-4';
@@ -1198,21 +1469,55 @@ const longTestimonials = [
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
             </svg>`;
             avatar.style.display = 'flex';
+            avatar.style.width = '';
+            avatar.style.margin = '';
+            // Restore margin on name container
+            const flexParentIcon = avatar.parentElement;
+            if (flexParentIcon && flexParentIcon.classList.contains('flex')) {
+              const nameContainerIcon = flexParentIcon.querySelector('.grow, [class*="ml-"]');
+              if (nameContainerIcon) {
+                const marginClass = size.includes('12') ? 'ml-4' : size.includes('16') || size.includes('20') || size.includes('32') ? 'ml-6' : 'ml-3';
+                if (!nameContainerIcon.classList.contains(marginClass)) {
+                  nameContainerIcon.classList.add(marginClass);
+                }
+                nameContainerIcon.style.marginLeft = '';
+              }
+            }
             break;
           case 'initials':
             const initials = getInitials(name);
             const textSize = size.includes('32') ? 'text-lg' : size.includes('20') ? 'text-base' : size.includes('16') ? 'text-sm' : 'text-xs';
             avatar.innerHTML = `<span class="${textSize} font-semibold text-slate-700 dark:text-slate-300">${initials}</span>`;
             avatar.style.display = 'flex';
+            avatar.style.width = '';
+            avatar.style.margin = '';
             avatar.style.backgroundColor = 'rgb(226 232 240)';
             if (document.documentElement.classList.contains('dark')) {
               avatar.style.backgroundColor = 'rgb(51 65 85)';
+            }
+            // Restore margin on name container
+            const flexParentInitials = avatar.parentElement;
+            if (flexParentInitials && flexParentInitials.classList.contains('flex')) {
+              const nameContainerInitials = flexParentInitials.querySelector('.grow, [class*="ml-"]');
+              if (nameContainerInitials) {
+                const marginClass = size.includes('12') ? 'ml-4' : size.includes('16') || size.includes('20') || size.includes('32') ? 'ml-6' : 'ml-3';
+                if (!nameContainerInitials.classList.contains(marginClass)) {
+                  nameContainerInitials.classList.add(marginClass);
+                }
+                nameContainerInitials.style.marginLeft = '';
+              }
             }
             break;
         }
       });
       
-      // Also handle Style 1 which uses the Testimonials component
+      /**
+       * SPECIAL HANDLING FOR STYLE 1
+       * 
+       * Style 1 uses the Testimonials component which has a different HTML structure.
+       * This code handles finding and updating avatars in that component's output.
+       * If you're using the Testimonials component elsewhere, this code will handle it.
+       */
       if (sectionId === 'style-1' && avatars.length === 0) {
         console.log('Handling Style 1 with Testimonials component');
         const testimonialCards = section.querySelectorAll('[class*="flex"][class*="h-auto"]');
@@ -1244,27 +1549,78 @@ const longTestimonials = [
                 imgContainer.innerHTML = `<div class="h-10 w-10 bg-slate-200 dark:bg-slate-700 rounded-full"></div>`;
               }
               imgContainer.style.display = 'flex';
+              imgContainer.style.width = '';
+              imgContainer.style.margin = '';
+              imgContainer.style.padding = '';
+              // Restore margin on name container
+              const nameContainerStyle1 = card.querySelector('.grow, [class*="ml-"]');
+              if (nameContainerStyle1) {
+                nameContainerStyle1.style.marginLeft = '';
+                if (!nameContainerStyle1.classList.contains('ml-3') && !nameContainerStyle1.classList.contains('ml-4')) {
+                  nameContainerStyle1.classList.add('ml-3');
+                }
+              }
               break;
             case 'none':
+              // Hide avatar and remove it from layout flow completely
               imgContainer.style.display = 'none';
+              imgContainer.style.width = '0';
+              imgContainer.style.margin = '0';
+              imgContainer.style.padding = '0';
+              // Remove left margin from name/details container to align with testimonial text
+              const nameContainerNoneStyle1 = card.querySelector('.grow, [class*="ml-"]');
+              if (nameContainerNoneStyle1) {
+                nameContainerNoneStyle1.classList.remove('ml-3', 'ml-4', 'ml-6');
+                nameContainerNoneStyle1.style.marginLeft = '0';
+              }
               break;
             case 'placeholder':
               imgContainer.innerHTML = `<div class="h-10 w-10 bg-gradient-to-br from-slate-300 to-slate-400 dark:from-slate-600 dark:to-slate-700 rounded-full"></div>`;
               imgContainer.style.display = 'flex';
+              imgContainer.style.width = '';
+              imgContainer.style.margin = '';
+              // Restore margin on name container
+              const nameContainerPlaceholderStyle1 = card.querySelector('.grow, [class*="ml-"]');
+              if (nameContainerPlaceholderStyle1) {
+                nameContainerPlaceholderStyle1.style.marginLeft = '';
+                if (!nameContainerPlaceholderStyle1.classList.contains('ml-3') && !nameContainerPlaceholderStyle1.classList.contains('ml-4')) {
+                  nameContainerPlaceholderStyle1.classList.add('ml-3');
+                }
+              }
               break;
             case 'icon':
               imgContainer.innerHTML = `<svg class="w-4 h-4 text-slate-500 dark:text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
               </svg>`;
               imgContainer.style.display = 'flex';
+              imgContainer.style.width = '';
+              imgContainer.style.margin = '';
+              // Restore margin on name container
+              const nameContainerIconStyle1 = card.querySelector('.grow, [class*="ml-"]');
+              if (nameContainerIconStyle1) {
+                nameContainerIconStyle1.style.marginLeft = '';
+                if (!nameContainerIconStyle1.classList.contains('ml-3') && !nameContainerIconStyle1.classList.contains('ml-4')) {
+                  nameContainerIconStyle1.classList.add('ml-3');
+                }
+              }
               break;
             case 'initials':
               const initials = getInitials(name);
               imgContainer.innerHTML = `<span class="text-xs font-semibold text-slate-700 dark:text-slate-300">${initials}</span>`;
               imgContainer.style.display = 'flex';
+              imgContainer.style.width = '';
+              imgContainer.style.margin = '';
               imgContainer.style.backgroundColor = 'rgb(226 232 240)';
               if (document.documentElement.classList.contains('dark')) {
                 imgContainer.style.backgroundColor = 'rgb(51 65 85)';
+              }
+              // Restore margin on name container
+              const nameContainerInitialsStyle1 = card.querySelector('.grow, [class*="ml-"]');
+              if (nameContainerInitialsStyle1) {
+                nameContainerInitialsStyle1.style.marginLeft = '';
+                if (!nameContainerInitialsStyle1.classList.contains('ml-3') && !nameContainerInitialsStyle1.classList.contains('ml-4')) {
+                  nameContainerInitialsStyle1.classList.add('ml-3');
+                }
               }
               break;
           }
@@ -1275,7 +1631,19 @@ const longTestimonials = [
     // Make updateAvatarDisplay available globally
     window.updateAvatarDisplay = updateAvatarDisplay;
 
-    // Initialize avatar toggle buttons
+    /**
+     * INITIALIZE AVATAR TOGGLE BUTTONS
+     * 
+     * Sets up event listeners for all toggle buttons on page load.
+     * Each button click:
+     * 1. Updates the visual state of all buttons in that section (highlights active button)
+     * 2. Calls updateAvatarDisplay() to change all avatars in that section
+     * 
+     * TO ADD TO YOUR OWN PAGE:
+     * - Copy this entire DOMContentLoaded block
+     * - Make sure your toggle buttons have class="avatar-toggle-btn"
+     * - Ensure buttons have data-section and data-mode attributes
+     */
     document.addEventListener('DOMContentLoaded', function() {
       const toggleButtons = document.querySelectorAll('.avatar-toggle-btn');
       
@@ -1289,16 +1657,17 @@ const longTestimonials = [
           
           console.log('Toggle clicked:', section, mode);
           
-          // Update button states for this section
+          // Update button visual states - highlight active, dim others
           const allSectionButtons = document.querySelectorAll(`.avatar-toggle-btn[data-section="${section}"]`);
           allSectionButtons.forEach(b => {
             b.classList.remove('active', 'bg-primary', 'text-white');
             b.classList.add('bg-slate-200', 'dark:bg-slate-700', 'text-slate-700', 'dark:text-slate-300');
           });
+          // Highlight the clicked button
           this.classList.add('active', 'bg-primary', 'text-white');
           this.classList.remove('bg-slate-200', 'dark:bg-slate-700', 'text-slate-700', 'dark:text-slate-300');
           
-          // Update avatars
+          // Update all avatars in this section to the selected mode
           updateAvatarDisplay(section, mode);
         });
       });
