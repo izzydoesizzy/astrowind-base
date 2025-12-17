@@ -174,7 +174,7 @@ const myTestimonials = getFeaturedTestimonials();
       <div class="mb-8 rounded-lg border border-slate-200 bg-white p-6 dark:border-slate-800 dark:bg-slate-900">
         <h3 class="mb-3 text-xl font-semibold text-slate-900 dark:text-white">Method 5: Use Only Testimonials with Star Ratings</h3>
         <p class="mb-4 text-slate-600 dark:text-slate-300">Show only testimonials that have star ratings (1-5 stars).</p>
-        <pre class="mb-4 overflow-x-auto rounded bg-slate-900 p-4 text-sm text-slate-100"><code>---
+        <pre class="mb-4 overflow-x-auto rounded bg-slate-900 p-4 text-sm text-slate-100"><code>{`---
 import { getRatedTestimonials } from '~/data/testimonials';
 
 // Get only testimonials with ratings
@@ -182,7 +182,7 @@ const myTestimonials = getRatedTestimonials();
 
 // Or get only 5-star testimonials
 // const myTestimonials = testimonials.filter(t => t.rating === 5);
----</code></pre>
+---`}</code></pre>
         <p class="text-sm text-slate-600 dark:text-slate-400">
           <strong>When to use:</strong> When you want to show social proof with star ratings.
         </p>
@@ -337,31 +337,31 @@ const myTestimonials = testimonials
       <!-- Example 1: Simple Grid -->
       <div class="mb-8 rounded-lg border border-slate-200 bg-white p-6 dark:border-slate-800 dark:bg-slate-900">
         <h3 class="mb-4 text-xl font-semibold text-slate-900 dark:text-white">Example 1: Simple Grid with All Testimonials</h3>
-        <pre class="mb-4 overflow-x-auto rounded bg-slate-900 p-4 text-sm text-slate-100"><code>---
+        <pre class="mb-4 overflow-x-auto rounded bg-slate-900 p-4 text-sm text-slate-100"><code>{`---
 import '~/styles/testimonials.css';
 import { testimonials } from '~/data/testimonials';
 
 const myTestimonials = testimonials.slice(0, 6);
 ---
 
-&lt;div class="testimonial-grid"&gt;
+<div class="testimonial-grid">
   {myTestimonials.map((item) => (
-    &lt;article class="testimonial-card"&gt;
-      &lt;p class="testimonial-content text-slate-800 dark:text-slate-200"&gt;
+    <article class="testimonial-card">
+      <p class="testimonial-content text-slate-800 dark:text-slate-200">
         {item.testimonial}
-      &lt;/p&gt;
-      &lt;div class="mt-4 flex items-center gap-3"&gt;
-        &lt;div class="testimonial-avatar testimonial-avatar-show testimonial-avatar-md rounded-full overflow-hidden"&gt;
-          &lt;img src={item.image.src} alt={item.image.alt} class="h-full w-full object-cover" /&gt;
-        &lt;/div&gt;
-        &lt;div class="testimonial-author"&gt;
-          &lt;p class="font-semibold text-slate-900 dark:text-white"&gt;{item.name}&lt;/p&gt;
-          &lt;p class="text-sm text-slate-500 dark:text-slate-400"&gt;{item.job}&lt;/p&gt;
-        &lt;/div&gt;
-      &lt;/div&gt;
-    &lt;/article&gt;
+      </p>
+      <div class="mt-4 flex items-center gap-3">
+        <div class="testimonial-avatar testimonial-avatar-show testimonial-avatar-md rounded-full overflow-hidden">
+          <img src={item.image.src} alt={item.image.alt} class="h-full w-full object-cover" />
+        </div>
+        <div class="testimonial-author">
+          <p class="font-semibold text-slate-900 dark:text-white">{item.name}</p>
+          <p class="text-sm text-slate-500 dark:text-slate-400">{item.job}</p>
+        </div>
+      </div>
+    </article>
   ))}
-&lt;/div&gt;</code></pre>
+</div>`}</code></pre>
         <p class="text-sm text-slate-600 dark:text-slate-400">
           <strong>What this does:</strong> Shows first 6 testimonials in a 3-column grid with profile pictures.
         </p>
@@ -370,43 +370,43 @@ const myTestimonials = testimonials.slice(0, 6);
       <!-- Example 2: With Star Ratings -->
       <div class="mb-8 rounded-lg border border-slate-200 bg-white p-6 dark:border-slate-800 dark:bg-slate-900">
         <h3 class="mb-4 text-xl font-semibold text-slate-900 dark:text-white">Example 2: Grid with Star Ratings</h3>
-        <pre class="mb-4 overflow-x-auto rounded bg-slate-900 p-4 text-sm text-slate-100"><code>---
+        <pre class="mb-4 overflow-x-auto rounded bg-slate-900 p-4 text-sm text-slate-100"><code>{`---
 import '~/styles/testimonials.css';
 import { getRatedTestimonials } from '~/data/testimonials';
 
 const myTestimonials = getRatedTestimonials().slice(0, 6);
 ---
 
-&lt;div class="testimonial-grid"&gt;
+<div class="testimonial-grid">
   {myTestimonials.map((item) => (
-    &lt;article class="testimonial-card"&gt;
+    <article class="testimonial-card">
       {item.rating && (
-        &lt;div class="testimonial-rating testimonial-rating-show mb-3 flex items-center gap-1" data-rating={item.rating}&gt;
+        <div class="testimonial-rating testimonial-rating-show mb-3 flex items-center gap-1" data-rating={item.rating}>
           {[0, 1, 2, 3, 4].map((i) => (
-            &lt;svg
-              class={`testimonial-star ${i < item.rating ? 'text-yellow-400 fill-current' : 'testimonial-star-empty'}`}
+            <svg
+              class={\`testimonial-star \${i < item.rating ? 'text-yellow-400 fill-current' : 'testimonial-star-empty'}\`}
               viewBox="0 0 24 24"
-            &gt;
-              &lt;path d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" /&gt;
-            &lt;/svg&gt;
+            >
+              <path d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
+            </svg>
           ))}
-        &lt;/div&gt;
+        </div>
       )}
-      &lt;p class="testimonial-content text-slate-800 dark:text-slate-200"&gt;
+      <p class="testimonial-content text-slate-800 dark:text-slate-200">
         {item.testimonial}
-      &lt;/p&gt;
-      &lt;div class="mt-4 flex items-center gap-3"&gt;
-        &lt;div class="testimonial-avatar testimonial-avatar-show testimonial-avatar-md rounded-full overflow-hidden"&gt;
-          &lt;img src={item.image.src} alt={item.image.alt} class="h-full w-full object-cover" /&gt;
-        &lt;/div&gt;
-        &lt;div class="testimonial-author"&gt;
-          &lt;p class="font-semibold text-slate-900 dark:text-white"&gt;{item.name}&lt;/p&gt;
-          &lt;p class="text-sm text-slate-500 dark:text-slate-400"&gt;{item.job}&lt;/p&gt;
-        &lt;/div&gt;
-      &lt;/div&gt;
-    &lt;/article&gt;
+      </p>
+      <div class="mt-4 flex items-center gap-3">
+        <div class="testimonial-avatar testimonial-avatar-show testimonial-avatar-md rounded-full overflow-hidden">
+          <img src={item.image.src} alt={item.image.alt} class="h-full w-full object-cover" />
+        </div>
+        <div class="testimonial-author">
+          <p class="font-semibold text-slate-900 dark:text-white">{item.name}</p>
+          <p class="text-sm text-slate-500 dark:text-slate-400">{item.job}</p>
+        </div>
+      </div>
+    </article>
   ))}
-&lt;/div&gt;</code></pre>
+</div>`}</code></pre>
         <p class="text-sm text-slate-600 dark:text-slate-400">
           <strong>What this does:</strong> Shows only testimonials with star ratings, displaying the stars above each quote.
         </p>
@@ -415,7 +415,7 @@ const myTestimonials = getRatedTestimonials().slice(0, 6);
       <!-- Example 3: Featured First -->
       <div class="mb-8 rounded-lg border border-slate-200 bg-white p-6 dark:border-slate-800 dark:bg-slate-900">
         <h3 class="mb-4 text-xl font-semibold text-slate-900 dark:text-white">Example 3: Featured Testimonial First, Then Grid</h3>
-        <pre class="mb-4 overflow-x-auto rounded bg-slate-900 p-4 text-sm text-slate-100"><code>---
+        <pre class="mb-4 overflow-x-auto rounded bg-slate-900 p-4 text-sm text-slate-100"><code>{`---
 import '~/styles/testimonials.css';
 import { getFeaturedTestimonials, testimonials } from '~/data/testimonials';
 
@@ -424,40 +424,40 @@ const others = testimonials.slice(0, 6);
 ---
 
 {featured.length > 0 && (
-  &lt;div class="mb-8 rounded-2xl border border-primary/20 bg-gradient-to-br from-primary/10 to-primary/5 p-8"&gt;
+  <div class="mb-8 rounded-2xl border border-primary/20 bg-gradient-to-br from-primary/10 to-primary/5 p-8">
     {featured.map((item) => (
-      &lt;div class="grid gap-6 md:grid-cols-[auto,1fr] md:items-center"&gt;
-        &lt;div class="testimonial-avatar testimonial-avatar-show testimonial-avatar-lg rounded-full overflow-hidden"&gt;
-          &lt;img src={item.image.src} alt={item.image.alt} /&gt;
-        &lt;/div&gt;
-        &lt;div&gt;
-          &lt;p class="testimonial-content text-lg"&gt;{item.testimonial}&lt;/p&gt;
-          &lt;div class="mt-4 testimonial-author"&gt;
-            &lt;p class="font-semibold"&gt;{item.name}&lt;/p&gt;
-            &lt;p class="text-sm text-slate-500"&gt;{item.job}&lt;/p&gt;
-          &lt;/div&gt;
-        &lt;/div&gt;
-      &lt;/div&gt;
+      <div class="grid gap-6 md:grid-cols-[auto,1fr] md:items-center">
+        <div class="testimonial-avatar testimonial-avatar-show testimonial-avatar-lg rounded-full overflow-hidden">
+          <img src={item.image.src} alt={item.image.alt} />
+        </div>
+        <div>
+          <p class="testimonial-content text-lg">{item.testimonial}</p>
+          <div class="mt-4 testimonial-author">
+            <p class="font-semibold">{item.name}</p>
+            <p class="text-sm text-slate-500">{item.job}</p>
+          </div>
+        </div>
+      </div>
     ))}
-  &lt;/div&gt;
+  </div>
 )}
 
-&lt;div class="testimonial-grid"&gt;
+<div class="testimonial-grid">
   {others.map((item) => (
-    &lt;article class="testimonial-card"&gt;
-      &lt;p class="testimonial-content"&gt;{item.testimonial}&lt;/p&gt;
-      &lt;div class="mt-4 flex items-center gap-3"&gt;
-        &lt;div class="testimonial-avatar testimonial-avatar-show testimonial-avatar-md rounded-full overflow-hidden"&gt;
-          &lt;img src={item.image.src} alt={item.image.alt} /&gt;
-        &lt;/div&gt;
-        &lt;div class="testimonial-author"&gt;
-          &lt;p class="font-semibold"&gt;{item.name}&lt;/p&gt;
-          &lt;p class="text-sm text-slate-500"&gt;{item.job}&lt;/p&gt;
-        &lt;/div&gt;
-      &lt;/div&gt;
-    &lt;/article&gt;
+    <article class="testimonial-card">
+      <p class="testimonial-content">{item.testimonial}</p>
+      <div class="mt-4 flex items-center gap-3">
+        <div class="testimonial-avatar testimonial-avatar-show testimonial-avatar-md rounded-full overflow-hidden">
+          <img src={item.image.src} alt={item.image.alt} />
+        </div>
+        <div class="testimonial-author">
+          <p class="font-semibold">{item.name}</p>
+          <p class="text-sm text-slate-500">{item.job}</p>
+        </div>
+      </div>
+    </article>
   ))}
-&lt;/div&gt;</code></pre>
+</div>`}</code></pre>
         <p class="text-sm text-slate-600 dark:text-slate-400">
           <strong>What this does:</strong> Shows one featured testimonial in a highlighted box, then a grid of other testimonials below.
         </p>
@@ -466,29 +466,29 @@ const others = testimonials.slice(0, 6);
       <!-- Example 4: By Category -->
       <div class="mb-8 rounded-lg border border-slate-200 bg-white p-6 dark:border-slate-800 dark:bg-slate-900">
         <h3 class="mb-4 text-xl font-semibold text-slate-900 dark:text-white">Example 4: Show Only Coaching Testimonials</h3>
-        <pre class="mb-4 overflow-x-auto rounded bg-slate-900 p-4 text-sm text-slate-100"><code>---
+        <pre class="mb-4 overflow-x-auto rounded bg-slate-900 p-4 text-sm text-slate-100"><code>{`---
 import '~/styles/testimonials.css';
 import { getTestimonialsByCategory } from '~/data/testimonials';
 
 const myTestimonials = getTestimonialsByCategory('coaching');
 ---
 
-&lt;div class="testimonial-grid"&gt;
+<div class="testimonial-grid">
   {myTestimonials.map((item) => (
-    &lt;article class="testimonial-card testimonial-card-minimal"&gt;
-      &lt;p class="testimonial-content"&gt;{item.testimonial}&lt;/p&gt;
-      &lt;div class="mt-4 flex items-center gap-3"&gt;
-        &lt;div class="testimonial-avatar testimonial-avatar-show testimonial-avatar-md rounded-full overflow-hidden"&gt;
-          &lt;img src={item.image.src} alt={item.image.alt} /&gt;
-        &lt;/div&gt;
-        &lt;div class="testimonial-author"&gt;
-          &lt;p class="font-semibold"&gt;{item.name}&lt;/p&gt;
-          &lt;p class="text-sm text-slate-500"&gt;{item.job}&lt;/p&gt;
-        &lt;/div&gt;
-      &lt;/div&gt;
-    &lt;/article&gt;
+    <article class="testimonial-card testimonial-card-minimal">
+      <p class="testimonial-content">{item.testimonial}</p>
+      <div class="mt-4 flex items-center gap-3">
+        <div class="testimonial-avatar testimonial-avatar-show testimonial-avatar-md rounded-full overflow-hidden">
+          <img src={item.image.src} alt={item.image.alt} />
+        </div>
+        <div class="testimonial-author">
+          <p class="font-semibold">{item.name}</p>
+          <p class="text-sm text-slate-500">{item.job}</p>
+        </div>
+      </div>
+    </article>
   ))}
-&lt;/div&gt;</code></pre>
+</div>`}</code></pre>
         <p class="text-sm text-slate-600 dark:text-slate-400">
           <strong>What this does:</strong> Shows only testimonials from the "coaching" category using minimal card style.
         </p>
@@ -497,25 +497,25 @@ const myTestimonials = getTestimonialsByCategory('coaching');
       <!-- Example 5: Masonry -->
       <div class="mb-8 rounded-lg border border-slate-200 bg-white p-6 dark:border-slate-800 dark:bg-slate-900">
         <h3 class="mb-4 text-xl font-semibold text-slate-900 dark:text-white">Example 5: Masonry Layout (No Avatars)</h3>
-        <pre class="mb-4 overflow-x-auto rounded bg-slate-900 p-4 text-sm text-slate-100"><code>---
+        <pre class="mb-4 overflow-x-auto rounded bg-slate-900 p-4 text-sm text-slate-100"><code>{`---
 import '~/styles/testimonials.css';
 import { testimonials } from '~/data/testimonials';
 
 const myTestimonials = testimonials.slice(0, 9);
 ---
 
-&lt;div class="testimonial-masonry"&gt;
+<div class="testimonial-masonry">
   {myTestimonials.map((item) => (
-    &lt;article class="testimonial-masonry-item testimonial-card"&gt;
-      &lt;p class="testimonial-content"&gt;{item.testimonial}&lt;/p&gt;
-      &lt;div class="mt-4 testimonial-author"&gt;
-        &lt;div class="testimonial-avatar testimonial-avatar-hide"&gt;&lt;/div&gt;
-        &lt;p class="font-semibold"&gt;{item.name}&lt;/p&gt;
-        &lt;p class="text-sm text-slate-500"&gt;{item.job}&lt;/p&gt;
-      &lt;/div&gt;
-    &lt;/article&gt;
+    <article class="testimonial-masonry-item testimonial-card">
+      <p class="testimonial-content">{item.testimonial}</p>
+      <div class="mt-4 testimonial-author">
+        <div class="testimonial-avatar testimonial-avatar-hide"></div>
+        <p class="font-semibold">{item.name}</p>
+        <p class="text-sm text-slate-500">{item.job}</p>
+      </div>
+    </article>
   ))}
-&lt;/div&gt;</code></pre>
+</div>`}</code></pre>
         <p class="text-sm text-slate-600 dark:text-slate-400">
           <strong>What this does:</strong> Shows testimonials in a staggered masonry layout without profile pictures.
         </p>
@@ -535,7 +535,7 @@ const myTestimonials = testimonials.slice(0, 9);
       <div class="mb-8 rounded-lg border-2 border-primary bg-primary/5 p-6 dark:bg-primary/10">
         <h3 class="mb-4 text-xl font-semibold text-slate-900 dark:text-white">Complete Example: Homepage Testimonials Section</h3>
         <p class="mb-4 text-slate-600 dark:text-slate-300">Perfect for a homepage. Shows 3 testimonials with ratings.</p>
-        <pre class="mb-4 overflow-x-auto rounded bg-slate-900 p-4 text-sm text-slate-100"><code>---
+        <pre class="mb-4 overflow-x-auto rounded bg-slate-900 p-4 text-sm text-slate-100"><code>{`---
 // File: src/pages/index.astro (or any page)
 
 import '~/styles/testimonials.css';
@@ -544,42 +544,42 @@ import { getRatedTestimonials } from '~/data/testimonials';
 const myTestimonials = getRatedTestimonials().slice(0, 3);
 ---
 
-&lt;section class="py-16"&gt;
-  &lt;div class="container mx-auto max-w-6xl px-6"&gt;
-    &lt;h2 class="mb-8 text-center text-3xl font-bold"&gt;What Our Clients Say&lt;/h2&gt;
+<section class="py-16">
+  <div class="container mx-auto max-w-6xl px-6">
+    <h2 class="mb-8 text-center text-3xl font-bold">What Our Clients Say</h2>
     
-    &lt;div class="testimonial-grid"&gt;
+    <div class="testimonial-grid">
       {myTestimonials.map((item) => (
-        &lt;article class="testimonial-card"&gt;
+        <article class="testimonial-card">
           {item.rating && (
-            &lt;div class="testimonial-rating testimonial-rating-show mb-3 flex items-center gap-1"&gt;
+            <div class="testimonial-rating testimonial-rating-show mb-3 flex items-center gap-1">
               {[0, 1, 2, 3, 4].map((i) => (
-                &lt;svg
-                  class={`w-4 h-4 ${i < item.rating ? 'text-yellow-400 fill-current' : 'text-slate-300'}`}
+                <svg
+                  class={\`w-4 h-4 \${i < item.rating ? 'text-yellow-400 fill-current' : 'text-slate-300'}\`}
                   viewBox="0 0 24 24"
-                &gt;
-                  &lt;path d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" /&gt;
-                &lt;/svg&gt;
+                >
+                  <path d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
+                </svg>
               ))}
-            &lt;/div&gt;
+            </div>
           )}
-          &lt;p class="testimonial-content text-slate-800 dark:text-slate-200"&gt;
+          <p class="testimonial-content text-slate-800 dark:text-slate-200">
             {item.testimonial}
-          &lt;/p&gt;
-          &lt;div class="mt-4 flex items-center gap-3"&gt;
-            &lt;div class="testimonial-avatar testimonial-avatar-show testimonial-avatar-md rounded-full overflow-hidden"&gt;
-              &lt;img src={item.image.src} alt={item.image.alt} class="h-full w-full object-cover" /&gt;
-            &lt;/div&gt;
-            &lt;div class="testimonial-author"&gt;
-              &lt;p class="font-semibold text-slate-900 dark:text-white"&gt;{item.name}&lt;/p&gt;
-              &lt;p class="text-sm text-slate-500 dark:text-slate-400"&gt;{item.job}&lt;/p&gt;
-            &lt;/div&gt;
-          &lt;/div&gt;
-        &lt;/article&gt;
+          </p>
+          <div class="mt-4 flex items-center gap-3">
+            <div class="testimonial-avatar testimonial-avatar-show testimonial-avatar-md rounded-full overflow-hidden">
+              <img src={item.image.src} alt={item.image.alt} class="h-full w-full object-cover" />
+            </div>
+            <div class="testimonial-author">
+              <p class="font-semibold text-slate-900 dark:text-white">{item.name}</p>
+              <p class="text-sm text-slate-500 dark:text-slate-400">{item.job}</p>
+            </div>
+          </div>
+        </article>
       ))}
-    &lt;/div&gt;
-  &lt;/div&gt;
-&lt;/section&gt;</code></pre>
+    </div>
+  </div>
+</section>`}</code></pre>
       </div>
     </section>
 
