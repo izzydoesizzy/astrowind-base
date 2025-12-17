@@ -1,6 +1,8 @@
 ---
 // @ts-ignore - Astro components are resolved by the Astro compiler
 import Layout from '~/layouts/PageLayout.astro';
+// @ts-ignore - Fragment is provided globally by Astro
+import { Fragment } from 'react';
 
 // @ts-ignore - Astro components are resolved by the Astro compiler
 import Header from '~/components/widgets/Header.astro';
@@ -28,24 +30,25 @@ const metadata = {
 ---
 
 <Layout metadata={metadata}>
-  <Header
-    slot="header"
-    {...headerData}
-    actions={[
-      {
-        variant: 'secondary',
-        text: 'Schedule a tour',
-        href: '#contact',
-      },
-      {
-        variant: 'primary',
-        text: 'List your property',
-        href: '#list',
-      },
-    ]}
-    isSticky
-    showToggleTheme
-  />
+  <Fragment slot="header">
+    <Header
+      {...headerData}
+      actions={[
+        {
+          variant: 'secondary',
+          text: 'Schedule a tour',
+          href: '#contact',
+        },
+        {
+          variant: 'primary',
+          text: 'List your property',
+          href: '#list',
+        },
+      ]}
+      isSticky
+      showToggleTheme
+    />
+  </Fragment>
 
   <!-- Hero2 Widget ******************* -->
 
@@ -64,14 +67,14 @@ const metadata = {
       alt: 'Modern home exterior at sunset.',
     }}
   >
-    <div slot="title">
+    <Fragment slot="title">
       Showcase listings & build trust with a <span class="text-accent dark:text-white">Real Estate</span> homepage
-    </div>
+    </Fragment>
 
-    <div slot="subtitle">
+    <Fragment slot="subtitle">
       Use this layout to highlight your marquee properties, prove your track record, and make it easy for buyers and
       sellers to take the next step.
-    </div>
+    </Fragment>
   </Hero2>
 
   <!-- Stats Widget ****************** -->
@@ -145,7 +148,9 @@ const metadata = {
       alt: 'Real estate agent meeting with a couple at a property.',
     }}
   >
-    <div slot="bg" class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+    </Fragment>
   </Content>
 
   <!-- Content Widget **************** -->

@@ -1,6 +1,8 @@
 ---
 // @ts-ignore - Astro components are resolved by the Astro compiler
 import Layout from '~/layouts/PageLayout.astro';
+// @ts-ignore - Fragment is provided globally by Astro
+import { Fragment } from 'react';
 
 // @ts-ignore - Astro components are resolved by the Astro compiler
 import Header from '~/components/widgets/Header.astro';
@@ -30,24 +32,25 @@ const metadata = {
 ---
 
 <Layout metadata={metadata}>
-  <Header
-    slot="header"
-    {...headerData}
-    actions={[
-      {
-        variant: 'secondary',
-        text: 'Free session',
-        href: '#free-session',
-      },
-      {
-        variant: 'primary',
-        text: 'Book a call',
-        href: '#contact',
-      },
-    ]}
-    isSticky
-    showToggleTheme
-  />
+  <Fragment slot="header">
+    <Header
+      {...headerData}
+      actions={[
+        {
+          variant: 'secondary',
+          text: 'Free session',
+          href: '#free-session',
+        },
+        {
+          variant: 'primary',
+          text: 'Book a call',
+          href: '#contact',
+        },
+      ]}
+      isSticky
+      showToggleTheme
+    />
+  </Fragment>
 
   <!-- Hero Widget ******************* -->
 
@@ -66,14 +69,14 @@ const metadata = {
       alt: 'Coach talking with client in a session.',
     }}
   >
-    <div slot="title">
+    <Fragment slot="title">
       A modern website starter for <span class="text-accent dark:text-white">Coaches & Consultants</span>
-    </div>
+    </Fragment>
 
-    <div slot="subtitle">
+    <Fragment slot="subtitle">
       Turn your expertise into a predictable pipeline of dream clients with a story-driven homepage designed for coaches,
       strategists, and service providers.
-    </div>
+    </Fragment>
   </Hero>
 
   <!-- Stats Widget ****************** -->
@@ -147,7 +150,9 @@ const metadata = {
       alt: 'Video call coaching session.',
     }}
   >
-    <div slot="bg" class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+    </Fragment>
   </Content>
 
   <!-- Steps Widget ****************** -->
