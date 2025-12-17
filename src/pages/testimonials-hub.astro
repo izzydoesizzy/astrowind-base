@@ -11,7 +11,7 @@ const metadata = {
   title: 'Testimonials Wall - Style Showcase',
 };
 
-// Shared testimonial data
+// Shared testimonial data with varied lengths for masonry
 // @ts-ignore - TypeScript inference works correctly at runtime
 const allTestimonials = [
   {
@@ -105,6 +105,96 @@ const allTestimonials = [
     },
   },
 ];
+
+// Varied length testimonials for masonry (some very short, some very long)
+// @ts-ignore
+const masonryTestimonials = [
+  {
+    testimonial: 'Amazing!',
+    name: 'Sarah Kim',
+    job: 'CEO',
+    image: {
+      src: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=987&q=80',
+      alt: 'Portrait of Sarah Kim.',
+    },
+  },
+  {
+    testimonial:
+      'This completely transformed how we approach customer onboarding. The templates are not just beautiful—they\'re strategically designed to guide visitors through a clear journey. Our conversion rates improved by 45% in the first quarter, and we\'ve received countless compliments on the professional appearance of our new landing pages. The flexibility to customize while maintaining best practices has been invaluable.',
+    name: 'Michael Torres',
+    job: 'VP of Marketing, TechFlow',
+    image: {
+      src: 'https://images.unsplash.com/photo-1525130413817-d45c1d127c42?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=987&q=80',
+      alt: 'Portrait of Michael Torres.',
+    },
+  },
+  {
+    testimonial: 'Best decision we made this year.',
+    name: 'Emma Wilson',
+    job: 'Founder',
+    image: {
+      src: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=987&q=80',
+      alt: 'Portrait of Emma Wilson.',
+    },
+  },
+  {
+    testimonial:
+      'Onboarding dropped from 21 days to 6, and our activation rate jumped by 28%. The templates made it easy to redesign our entire product tour.',
+    name: 'Riya Patel',
+    job: 'VP Product, Flowstack',
+    image: {
+      src: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=987&q=80',
+      alt: 'Portrait of Riya Patel.',
+    },
+  },
+  {
+    testimonial: 'Highly recommend.',
+    name: 'David Park',
+    job: 'Designer',
+    image: {
+      src: 'https://images.unsplash.com/photo-1544723795-3fb6469f5b39?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=987&q=80',
+      alt: 'Portrait of David Park.',
+    },
+  },
+  {
+    testimonial:
+      'We\'ve been using this for six months now, and the impact has been remarkable. Not only did our website traffic increase by 60%, but the quality of leads improved dramatically. The long-form sales page template helped us explain our complex service offering in a way that resonated with our target audience. Our sales team reports that prospects now come to calls much better informed, which has shortened our sales cycle by an average of two weeks. The ROI has been exceptional.',
+    name: 'Jennifer Martinez',
+    job: 'Chief Revenue Officer, GrowthLabs',
+    image: {
+      src: 'https://images.unsplash.com/photo-1525130413817-d45c1d127c42?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=987&q=80',
+      alt: 'Portrait of Jennifer Martinez.',
+    },
+  },
+  {
+    testimonial: 'Game changer.',
+    name: 'Tom Anderson',
+    job: 'Entrepreneur',
+    image: {
+      src: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=987&q=80',
+      alt: 'Portrait of Tom Anderson.',
+    },
+  },
+  {
+    testimonial:
+      'The coaching homepage template transformed our business. We went from struggling to explain our value proposition to having a clear, compelling narrative that speaks directly to our ideal clients. Applications for our programs increased by 80%, and the quality of applicants improved significantly. The testimonials section has been particularly effective in building trust with potential clients.',
+    name: 'Lisa Chen',
+    job: 'Executive Coach',
+    image: {
+      src: 'https://images.unsplash.com/photo-1544723795-3fb6469f5b39?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=987&q=80',
+      alt: 'Portrait of Lisa Chen.',
+    },
+  },
+  {
+    testimonial: 'Love it!',
+    name: 'Ryan Brown',
+    job: 'Marketing Lead',
+    image: {
+      src: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=987&q=80',
+      alt: 'Portrait of Ryan Brown.',
+    },
+  },
+];
 ---
 
 <Layout metadata={metadata}>
@@ -116,8 +206,40 @@ const allTestimonials = [
     subtitle="Browse different testimonial wall styles below. Each showcases the same testimonials in a unique layout so you can pick the one that best fits your brand."
   />
 
+  <!-- Navigation Index -->
+  <section class="py-8 bg-slate-50 dark:bg-slate-900 border-b border-slate-200 dark:border-slate-700 sticky top-0 z-10">
+    <div class="max-w-6xl mx-auto px-4 md:px-8">
+      <nav class="flex flex-wrap justify-center gap-4 md:gap-6">
+        <a href="#style-1" class="text-sm font-medium text-slate-700 dark:text-slate-300 hover:text-primary transition-colors">
+          Style 1: Grid
+        </a>
+        <a href="#style-2" class="text-sm font-medium text-slate-700 dark:text-slate-300 hover:text-primary transition-colors">
+          Style 2: Two-Column
+        </a>
+        <a href="#style-3" class="text-sm font-medium text-slate-700 dark:text-slate-300 hover:text-primary transition-colors">
+          Style 3: Featured
+        </a>
+        <a href="#style-4" class="text-sm font-medium text-slate-700 dark:text-slate-300 hover:text-primary transition-colors">
+          Style 4: Masonry
+        </a>
+        <a href="#style-5" class="text-sm font-medium text-slate-700 dark:text-slate-300 hover:text-primary transition-colors">
+          Style 5: Minimal
+        </a>
+        <a href="#style-6" class="text-sm font-medium text-slate-700 dark:text-slate-300 hover:text-primary transition-colors">
+          Style 6: Alternating
+        </a>
+        <a href="#style-7" class="text-sm font-medium text-slate-700 dark:text-slate-300 hover:text-primary transition-colors">
+          Style 7: No Photos
+        </a>
+        <a href="#style-8" class="text-sm font-medium text-slate-700 dark:text-slate-300 hover:text-primary transition-colors">
+          Style 8: Slider
+        </a>
+      </nav>
+    </div>
+  </section>
+
   <!-- Style 1: Standard Grid (3 columns) -->
-  <section id="style-1" class="py-16 md:py-24">
+  <section id="style-1" class="py-16 md:py-24 scroll-mt-20">
     <div class="max-w-6xl mx-auto px-4 md:px-8">
       <div class="text-center mb-12">
         <span class="text-sm font-semibold text-primary uppercase tracking-wider">Style 1</span>
@@ -131,7 +253,7 @@ const allTestimonials = [
   </section>
 
   <!-- Style 2: 2-Column Grid -->
-  <section id="style-2" class="py-16 md:py-24 bg-slate-50 dark:bg-slate-900">
+  <section id="style-2" class="py-16 md:py-24 bg-slate-50 dark:bg-slate-900 scroll-mt-20">
     <div class="max-w-6xl mx-auto px-4 md:px-8">
       <div class="text-center mb-12">
         <span class="text-sm font-semibold text-primary uppercase tracking-wider">Style 2</span>
@@ -177,7 +299,7 @@ const allTestimonials = [
   </section>
 
   <!-- Style 3: Featured + Grid -->
-  <section id="style-3" class="py-16 md:py-24">
+  <section id="style-3" class="py-16 md:py-24 scroll-mt-20">
     <div class="max-w-6xl mx-auto px-4 md:px-8">
       <div class="text-center mb-12">
         <span class="text-sm font-semibold text-primary uppercase tracking-wider">Style 3</span>
@@ -252,8 +374,8 @@ const allTestimonials = [
     </div>
   </section>
 
-  <!-- Style 4: Masonry/Staggered Layout -->
-  <section id="style-4" class="py-16 md:py-24 bg-slate-50 dark:bg-slate-900">
+  <!-- Style 4: Masonry/Staggered Layout with varied lengths -->
+  <section id="style-4" class="py-16 md:py-24 bg-slate-50 dark:bg-slate-900 scroll-mt-20">
     <div class="max-w-6xl mx-auto px-4 md:px-8">
       <div class="text-center mb-12">
         <span class="text-sm font-semibold text-primary uppercase tracking-wider">Style 4</span>
@@ -264,7 +386,7 @@ const allTestimonials = [
       </div>
       <div class="columns-1 md:columns-2 lg:columns-3 gap-6">
         {/* @ts-ignore */}
-        {allTestimonials.map(({ testimonial, name, job, image }) => (
+        {masonryTestimonials.map(({ testimonial, name, job, image }) => (
           <div class="break-inside-avoid mb-6">
             <div class="flex flex-col p-6 rounded-lg shadow-lg dark:shadow-none dark:border dark:border-slate-600 bg-white dark:bg-slate-800">
               {testimonial && (
@@ -299,7 +421,7 @@ const allTestimonials = [
   </section>
 
   <!-- Style 5: Minimal Cards -->
-  <section id="style-5" class="py-16 md:py-24">
+  <section id="style-5" class="py-16 md:py-24 scroll-mt-20">
     <div class="max-w-6xl mx-auto px-4 md:px-8">
       <div class="text-center mb-12">
         <span class="text-sm font-semibold text-primary uppercase tracking-wider">Style 5</span>
@@ -343,7 +465,7 @@ const allTestimonials = [
   </section>
 
   <!-- Style 6: Side-by-Side Alternating -->
-  <section id="style-6" class="py-16 md:py-24 bg-slate-50 dark:bg-slate-900">
+  <section id="style-6" class="py-16 md:py-24 bg-slate-50 dark:bg-slate-900 scroll-mt-20">
     <div class="max-w-6xl mx-auto px-4 md:px-8">
       <div class="text-center mb-12">
         <span class="text-sm font-semibold text-primary uppercase tracking-wider">Style 6</span>
@@ -383,4 +505,174 @@ const allTestimonials = [
       </div>
     </div>
   </section>
+
+  <!-- Style 7: No Profile Pictures -->
+  <section id="style-7" class="py-16 md:py-24 scroll-mt-20">
+    <div class="max-w-6xl mx-auto px-4 md:px-8">
+      <div class="text-center mb-12">
+        <span class="text-sm font-semibold text-primary uppercase tracking-wider">Style 7</span>
+        <h2 class="text-3xl md:text-4xl font-bold mt-2 mb-4">Text-Only Testimonials</h2>
+        <p class="text-lg text-muted max-w-2xl mx-auto">
+          Clean, text-focused design without profile pictures. Emphasizes the words and message.
+        </p>
+      </div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {/* @ts-ignore */}
+        {allTestimonials.map(({ testimonial, name, job }) => (
+          <div class="flex h-auto">
+            <div class="flex flex-col p-6 rounded-lg shadow-lg dark:shadow-none dark:border dark:border-slate-600 bg-white dark:bg-slate-800">
+              {testimonial && (
+                <blockquote class="flex-auto mb-6">
+                  <p class="text-lg text-muted leading-relaxed">" {testimonial} "</p>
+                </blockquote>
+              )}
+
+              <hr class="border-slate-200 dark:border-slate-600 mb-4" />
+
+              <div>
+                {name && <p class="text-base font-semibold">{name}</p>}
+                {job && <p class="text-sm text-muted mt-1">{job}</p>}
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Style 8: Dynamic Slider -->
+  <section id="style-8" class="py-16 md:py-24 bg-slate-50 dark:bg-slate-900 scroll-mt-20">
+    <div class="max-w-6xl mx-auto px-4 md:px-8">
+      <div class="text-center mb-12">
+        <span class="text-sm font-semibold text-primary uppercase tracking-wider">Style 8</span>
+        <h2 class="text-3xl md:text-4xl font-bold mt-2 mb-4">Dynamic Testimonial Slider</h2>
+        <p class="text-lg text-muted max-w-2xl mx-auto">
+          Auto-rotating slider showing 3 testimonials at a time. Perfect for engaging, dynamic presentations.
+        </p>
+      </div>
+      
+      <div class="relative overflow-hidden">
+        <div id="testimonial-slider" class="flex transition-transform duration-500 ease-in-out" style="width: 100%;">
+          {/* @ts-ignore */}
+          {allTestimonials.map((testimonial, index) => (
+            <div class="w-full md:w-1/3 flex-shrink-0 px-2">
+              <div class="flex flex-col p-6 rounded-lg shadow-lg dark:shadow-none dark:border dark:border-slate-600 bg-white dark:bg-slate-800 h-full">
+                {testimonial.testimonial && (
+                  <blockquote class="flex-auto mb-6">
+                    <p class="text-lg text-muted leading-relaxed">" {testimonial.testimonial} "</p>
+                  </blockquote>
+                )}
+
+                <hr class="border-slate-200 dark:border-slate-600 mb-4" />
+
+                <div class="flex items-center">
+                  {testimonial.image && (
+                    <div class="h-12 w-12 rounded-full border-2 border-slate-200 dark:border-slate-600 overflow-hidden">
+                      <img
+                        src={testimonial.image.src}
+                        alt={testimonial.image.alt}
+                        class="h-12 w-12 object-cover"
+                      />
+                    </div>
+                  )}
+
+                  <div class="grow ml-4">
+                    {testimonial.name && <p class="text-base font-semibold">{testimonial.name}</p>}
+                    {testimonial.job && <p class="text-sm text-muted">{testimonial.job}</p>}
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Slider Controls -->
+      <div class="flex justify-center gap-2 mt-8">
+        {/* @ts-ignore */}
+        {Array.from({ length: Math.ceil(allTestimonials.length / 3) }).map((_, index) => (
+          <button
+            type="button"
+            class="slider-dot w-3 h-3 rounded-full bg-slate-300 dark:bg-slate-600 hover:bg-primary transition-colors"
+            data-slide={index}
+            aria-label={`Go to slide ${index + 1}`}
+          ></button>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <script is:inline>
+    // Testimonial Slider Functionality
+    (function() {
+      // @ts-ignore - DOM APIs are available in browser
+      const slider = document.getElementById('testimonial-slider');
+      // @ts-ignore - DOM APIs are available in browser
+      const dots = document.querySelectorAll('.slider-dot');
+      if (!slider || !dots.length) return;
+      
+      let currentSlide = 0;
+      const totalTestimonials = slider.children.length;
+      
+      function getTestimonialsPerSlide() {
+        // @ts-ignore - window is available in browser
+        return window.innerWidth >= 768 ? 3 : 1;
+      }
+      
+      function getMaxSlide() {
+        const perSlide = getTestimonialsPerSlide();
+        // @ts-ignore - Math is available in browser
+        return Math.ceil(totalTestimonials / perSlide) - 1;
+      }
+
+      function updateSlider() {
+        const perSlide = getTestimonialsPerSlide();
+        const translateX = -currentSlide * (100 / perSlide);
+        slider.style.transform = `translateX(${translateX}%)`;
+        
+        // Update active dot
+        dots.forEach((dot, index) => {
+          if (index === currentSlide) {
+            dot.classList.add('bg-primary');
+            dot.classList.remove('bg-slate-300', 'dark:bg-slate-600');
+          } else {
+            dot.classList.remove('bg-primary');
+            dot.classList.add('bg-slate-300', 'dark:bg-slate-600');
+          }
+        });
+      }
+
+      // Dot navigation
+      dots.forEach((dot, index) => {
+        dot.addEventListener('click', () => {
+          currentSlide = index;
+          updateSlider();
+        });
+      });
+
+      // Auto-advance slider
+      // @ts-ignore - setInterval is available in browser
+      setInterval(() => {
+        const maxSlide = getMaxSlide();
+        currentSlide = (currentSlide + 1) % (maxSlide + 1);
+        updateSlider();
+      }, 5000);
+
+      // Handle window resize
+      let resizeTimeout;
+      // @ts-ignore - window is available in browser
+      window.addEventListener('resize', () => {
+        // @ts-ignore - clearTimeout is available in browser
+        clearTimeout(resizeTimeout);
+        // @ts-ignore - setTimeout is available in browser
+        resizeTimeout = setTimeout(() => {
+          currentSlide = 0;
+          updateSlider();
+        }, 250);
+      });
+
+      // Initialize
+      updateSlider();
+    })();
+  </script>
 </Layout>
