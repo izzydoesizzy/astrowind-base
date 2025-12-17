@@ -86,6 +86,35 @@ export const headerData = {
       ],
     },
     {
+      text: 'Custom Pages',
+      links: [
+        {
+          text: 'Long-form Sales (Value Ladder)',
+          href: getPermalink('/landing/long-form-sales'),
+        },
+        {
+          text: 'Coach Landing Page',
+          href: getPermalink('/homes/coach'),
+        },
+        {
+          text: 'Real Estate Landing Page',
+          href: getPermalink('/homes/real-estate'),
+        },
+        {
+          text: 'Sales Call Planning',
+          href: getPermalink('/sales-call-planning'),
+        },
+        {
+          text: 'Objection Handling',
+          href: getPermalink('/objection-handling'),
+        },
+        {
+          text: 'Testimonials Hub',
+          href: getPermalink('/testimonials-hub'),
+        },
+      ],
+    },
+    {
       text: 'Blog',
       links: [
         {
