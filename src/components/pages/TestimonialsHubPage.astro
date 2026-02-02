@@ -606,7 +606,6 @@ const metadata = {
 };
 
 const featuredTestimonials = getFeaturedTestimonials() as any[];
-const primaryGrid = testimonials.slice(0, 6) as any[];
 const masonryTestimonials = testimonials.slice(0, 9) as any[];
 const longTestimonials = getLongTestimonials() as any[];
 const videoTestimonials = getVideoTestimonials() as any[];
@@ -643,48 +642,59 @@ const videoTestimonials = getVideoTestimonials() as any[];
     <div class="rounded-2xl border border-slate-200 bg-white/70 p-6 shadow-sm backdrop-blur dark:border-slate-800 dark:bg-slate-900/70">
       <p class="mb-4 text-sm font-semibold uppercase tracking-wide text-primary">Jump to a style</p>
       <div class="flex flex-wrap gap-3 text-sm font-medium">
-        <a href="#style-grid" class="rounded-full bg-primary px-4 py-2 text-white hover:bg-primary/90">Standard Grid</a>
-        <a href="#style-featured" class="rounded-full bg-slate-200 px-4 py-2 text-slate-800 hover:bg-slate-300 dark:bg-slate-800 dark:text-white dark:hover:bg-slate-700">Featured + Grid</a>
-        <a href="#style-masonry" class="rounded-full bg-slate-200 px-4 py-2 text-slate-800 hover:bg-slate-300 dark:bg-slate-800 dark:text-white dark:hover:bg-slate-700">Masonry</a>
+        <a href="#style-masonry" class="rounded-full bg-primary px-4 py-2 text-white hover:bg-primary/90">Masonry Grid</a>
+        <a href="#style-featured" class="rounded-full bg-slate-200 px-4 py-2 text-slate-800 hover:bg-slate-300 dark:bg-slate-800 dark:text-white dark:hover:bg-slate-700">Featured + Masonry</a>
         <a href="#style-video" class="rounded-full bg-slate-200 px-4 py-2 text-slate-800 hover:bg-slate-300 dark:bg-slate-800 dark:text-white dark:hover:bg-slate-700">Video</a>
         <a href="#style-long" class="rounded-full bg-slate-200 px-4 py-2 text-slate-800 hover:bg-slate-300 dark:bg-slate-800 dark:text-white dark:hover:bg-slate-700">Long Form</a>
       </div>
     </div>
+    <div class="mt-4 rounded-2xl border border-slate-200 bg-white/70 p-6 shadow-sm backdrop-blur dark:border-slate-800 dark:bg-slate-900/70">
+      <p class="mb-4 text-sm font-semibold uppercase tracking-wide text-primary">Preview toggles</p>
+      <div class="flex flex-wrap items-center gap-6 text-sm font-medium text-slate-700 dark:text-slate-200">
+        <label class="flex items-center gap-3">
+          <input id="toggle-avatars" type="checkbox" checked class="h-4 w-4 rounded border-slate-300 text-primary focus:ring-primary/40" />
+          Show profile photos
+        </label>
+        <label class="flex items-center gap-3">
+          <input id="toggle-ratings" type="checkbox" checked class="h-4 w-4 rounded border-slate-300 text-primary focus:ring-primary/40" />
+          Show star ratings
+        </label>
+      </div>
+    </div>
   </div>
 
-  <!-- STYLE 1: STANDARD GRID (uses utility classes from testimonials.css) -->
-  <section id="style-grid" class="bg-gradient-to-b from-white to-slate-50 py-16 dark:from-slate-950 dark:to-slate-900">
+  <!-- STYLE 1: MASONRY GRID (uses utility classes from testimonials.css) -->
+  <section id="style-masonry" class="bg-gradient-to-b from-white to-slate-50 py-16 dark:from-slate-950 dark:to-slate-900">
     <div class="container mx-auto max-w-6xl px-6">
       <div class="mb-8 flex items-center justify-between">
         <div>
           <p class="text-sm font-semibold uppercase tracking-wide text-primary">Style 1</p>
-          <h2 class="text-2xl font-bold text-slate-900 dark:text-white">Standard Grid</h2>
-          <p class="text-slate-600 dark:text-slate-300">Simple cards with avatars and optional star ratings.</p>
+          <h2 class="text-2xl font-bold text-slate-900 dark:text-white">Masonry Grid</h2>
+          <p class="text-slate-600 dark:text-slate-300">Staggered quotes with compact cards and optional star ratings.</p>
         </div>
       </div>
 
       <!-- 
-        SAMPLE USAGE: Standard Grid
+        SAMPLE USAGE: Masonry Grid
         ----------------------------
         This section demonstrates:
-        - Using testimonials data from ~/data/testimonials.ts
-        - Applying utility classes from ~/styles/testimonials.css
-        - Container: .testimonial-grid (3-column responsive grid)
-        - Card: .testimonial-card (standard card with shadow)
-        - Avatar: .testimonial-avatar + .testimonial-avatar-show + .testimonial-avatar-md
-        - Rating: .testimonial-rating + .testimonial-rating-show
-        - All classes are from ~/styles/testimonials.css
+        - Using .testimonial-masonry for staggered column layout
+        - Using .testimonial-masonry-item to prevent breaking across columns
+        - Using .testimonial-card-minimal for a lighter look
+        - Showing avatars and optional star ratings
       -->
 
-      <div class="testimonial-grid">
+      <div class="testimonial-masonry">
         {/* @ts-ignore - runtime array mapping */}
-        {primaryGrid.map((item) => (
-          <article class="testimonial-card">
-            {item.rating && (
-              <div class="testimonial-rating testimonial-rating-show mb-3 flex items-center gap-1" data-rating={item.rating}>
+        {masonryTestimonials.map((item) => {
+          const ratingValue = item.rating ?? 5;
+
+          return (
+            <article class="testimonial-masonry-item testimonial-card testimonial-card-minimal">
+              <div class="testimonial-rating testimonial-rating-show mb-3 flex items-center gap-1" data-rating={ratingValue}>
                 {[0, 1, 2, 3, 4].map((i) => (
                   <svg
-                    class={`testimonial-star ${i < (item.rating ?? 0) ? 'text-yellow-400 fill-current' : 'testimonial-star-empty'}`}
+                    class={`testimonial-star ${i < ratingValue ? 'text-yellow-400 fill-current' : 'testimonial-star-empty'}`}
                     viewBox="0 0 24 24"
                     aria-hidden="true"
                   >
@@ -697,33 +707,60 @@ const videoTestimonials = getVideoTestimonials() as any[];
                   </svg>
                 ))}
               </div>
-            )}
 
-            <p class="testimonial-content text-slate-800 dark:text-slate-200">{item.testimonial}</p>
+              <p class="testimonial-content text-slate-800 dark:text-slate-200">{item.testimonial}</p>
 
-            <div class="mt-4 flex items-center gap-3">
-              <div class="testimonial-avatar testimonial-avatar-show testimonial-avatar-md rounded-full overflow-hidden">
-                <img src={item.image.src} alt={item.image.alt} class="h-full w-full object-cover" />
+              <div class="mt-4 flex items-center gap-3">
+                <div class="testimonial-avatar testimonial-avatar-show testimonial-avatar-md rounded-full overflow-hidden">
+                  <img src={item.image.src} alt={item.image.alt} class="h-full w-full object-cover" />
+                </div>
+                <div class="testimonial-author">
+                  <p class="font-semibold text-slate-900 dark:text-white">{item.name}</p>
+                  <p class="text-sm text-slate-500 dark:text-slate-400">{item.job}</p>
+                </div>
               </div>
-              <div class="testimonial-author">
-                <p class="font-semibold text-slate-900 dark:text-white">{item.name}</p>
-                <p class="text-sm text-slate-500 dark:text-slate-400">{item.job}</p>
-              </div>
-            </div>
-          </article>
-        ))}
+            </article>
+          );
+        })}
       </div>
     </div>
   </section>
 
-  <!-- STYLE 2: FEATURED + GRID (highlights featured items first) -->
+<script>
+  const avatarToggle = document.getElementById('toggle-avatars') as HTMLInputElement | null;
+  const ratingToggle = document.getElementById('toggle-ratings') as HTMLInputElement | null;
+
+  const applyAvatarToggle = () => {
+    document.querySelectorAll('.testimonial-avatar').forEach((avatar) => {
+      const showAvatar = avatarToggle?.checked ?? true;
+      avatar.classList.toggle('testimonial-avatar-show', showAvatar);
+      avatar.classList.toggle('testimonial-avatar-hide', !showAvatar);
+    });
+  };
+
+  const applyRatingToggle = () => {
+    document.querySelectorAll('.testimonial-rating').forEach((rating) => {
+      const showRating = ratingToggle?.checked ?? true;
+      rating.classList.toggle('testimonial-rating-show', showRating);
+      rating.classList.toggle('testimonial-rating-hide', !showRating);
+    });
+  };
+
+  avatarToggle?.addEventListener('change', applyAvatarToggle);
+  ratingToggle?.addEventListener('change', applyRatingToggle);
+
+  applyAvatarToggle();
+  applyRatingToggle();
+</script>
+
+  <!-- STYLE 2: FEATURED + MASONRY (highlights featured items first) -->
   <section id="style-featured" class="bg-white py-16 dark:bg-slate-950">
     <div class="container mx-auto max-w-6xl px-6">
       <div class="mb-8 flex items-center justify-between">
         <div>
           <p class="text-sm font-semibold uppercase tracking-wide text-primary">Style 2</p>
-          <h2 class="text-2xl font-bold text-slate-900 dark:text-white">Featured + Grid</h2>
-          <p class="text-slate-600 dark:text-slate-300">Feature one, then show supporting quotes in a grid.</p>
+          <h2 class="text-2xl font-bold text-slate-900 dark:text-white">Featured + Masonry</h2>
+          <p class="text-slate-600 dark:text-slate-300">Feature one, then show supporting quotes in a masonry wall.</p>
         </div>
       </div>
 
@@ -731,17 +768,19 @@ const videoTestimonials = getVideoTestimonials() as any[];
       {featuredTestimonials.length > 0 && (
         <div class="mb-8 rounded-2xl border border-primary/20 bg-gradient-to-br from-primary/10 to-primary/5 p-8 shadow-lg dark:border-primary/30 dark:from-primary/20 dark:to-primary/10">
           {/* @ts-ignore - runtime array mapping */}
-          {featuredTestimonials.map((item) => (
-            <div class="grid gap-6 md:grid-cols-[auto,1fr] md:items-center">
-              <div class="testimonial-avatar testimonial-avatar-show testimonial-avatar-lg rounded-full overflow-hidden">
-                <img src={item.image.src} alt={item.image.alt} class="h-full w-full object-cover" />
-              </div>
-              <div>
-                {item.rating && (
-                  <div class="testimonial-rating testimonial-rating-show mb-3 flex items-center gap-1" data-rating={item.rating}>
+          {featuredTestimonials.map((item) => {
+            const ratingValue = item.rating ?? 5;
+
+            return (
+              <div class="grid gap-6 md:grid-cols-[auto,1fr] md:items-center">
+                <div class="testimonial-avatar testimonial-avatar-show testimonial-avatar-lg rounded-full overflow-hidden">
+                  <img src={item.image.src} alt={item.image.alt} class="h-full w-full object-cover" />
+                </div>
+                <div>
+                  <div class="testimonial-rating testimonial-rating-show mb-3 flex items-center gap-1" data-rating={ratingValue}>
                     {[0, 1, 2, 3, 4].map((i) => (
                       <svg
-                        class={`testimonial-star ${i < (item.rating ?? 0) ? 'text-yellow-400 fill-current' : 'testimonial-star-empty'}`}
+                        class={`testimonial-star ${i < ratingValue ? 'text-yellow-400 fill-current' : 'testimonial-star-empty'}`}
                         viewBox="0 0 24 24"
                         aria-hidden="true"
                       >
@@ -754,79 +793,62 @@ const videoTestimonials = getVideoTestimonials() as any[];
                       </svg>
                     ))}
                   </div>
-                )}
-                <p class="testimonial-content text-lg text-slate-900 dark:text-white">{item.testimonial}</p>
-                <div class="mt-4 testimonial-author">
+                  <p class="testimonial-content text-lg text-slate-900 dark:text-white">{item.testimonial}</p>
+                  <div class="mt-4 testimonial-author">
+                    <p class="font-semibold text-slate-900 dark:text-white">{item.name}</p>
+                    <p class="text-sm text-slate-500 dark:text-slate-400">{item.job}</p>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      )}
+
+      <!-- Supporting masonry -->
+      <div class="testimonial-masonry">
+        {/* @ts-ignore - runtime array mapping */}
+        {testimonials.slice(0, 6).map((item) => {
+          const ratingValue = item.rating ?? 5;
+
+          return (
+            <article class="testimonial-masonry-item testimonial-card testimonial-card-minimal">
+              <div class="testimonial-rating testimonial-rating-show mb-3 flex items-center gap-1" data-rating={ratingValue}>
+                {[0, 1, 2, 3, 4].map((i) => (
+                  <svg
+                    class={`testimonial-star ${i < ratingValue ? 'text-yellow-400 fill-current' : 'testimonial-star-empty'}`}
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"
+                    />
+                  </svg>
+                ))}
+              </div>
+              <p class="testimonial-content text-slate-800 dark:text-slate-200">{item.testimonial}</p>
+              <div class="mt-4 flex items-center gap-3">
+                <div class="testimonial-avatar testimonial-avatar-placeholder testimonial-avatar-md rounded-full"></div>
+                <div class="testimonial-author">
                   <p class="font-semibold text-slate-900 dark:text-white">{item.name}</p>
                   <p class="text-sm text-slate-500 dark:text-slate-400">{item.job}</p>
                 </div>
               </div>
-            </div>
-          ))}
-        </div>
-      )}
-
-      <!-- Supporting grid -->
-      <div class="testimonial-grid">
-        {/* @ts-ignore - runtime array mapping */}
-        {testimonials.slice(0, 6).map((item) => (
-          <article class="testimonial-card testimonial-card-minimal">
-            <p class="testimonial-content text-slate-800 dark:text-slate-200">{item.testimonial}</p>
-            <div class="mt-4 flex items-center gap-3">
-              <div class="testimonial-avatar testimonial-avatar-placeholder testimonial-avatar-md rounded-full"></div>
-              <div class="testimonial-author">
-                <p class="font-semibold text-slate-900 dark:text-white">{item.name}</p>
-                <p class="text-sm text-slate-500 dark:text-slate-400">{item.job}</p>
-              </div>
-            </div>
-          </article>
-        ))}
+            </article>
+          );
+        })}
       </div>
     </div>
   </section>
 
-  <!-- STYLE 3: MASONRY -->
-  <section id="style-masonry" class="bg-gradient-to-b from-white to-slate-50 py-16 dark:from-slate-950 dark:to-slate-900">
-    <div class="container mx-auto max-w-6xl px-6">
-      <div class="mb-8">
-        <p class="text-sm font-semibold uppercase tracking-wide text-primary">Style 3</p>
-        <h2 class="text-2xl font-bold text-slate-900 dark:text-white">Masonry</h2>
-        <p class="text-slate-600 dark:text-slate-300">Varied lengths to create a staggered wall. Avatars hidden via utility class.</p>
-      </div>
-
-      <!-- 
-        SAMPLE USAGE: Masonry Layout
-        -----------------------------
-        This section demonstrates:
-        - Using .testimonial-masonry for staggered column layout
-        - Using .testimonial-masonry-item to prevent breaking across columns
-        - Hiding avatars with .testimonial-avatar-hide
-        - All classes from ~/styles/testimonials.css
-      -->
-
-      <div class="testimonial-masonry">
-        {/* @ts-ignore - runtime array mapping */}
-        {masonryTestimonials.map((item) => (
-          <article class="testimonial-masonry-item testimonial-card">
-            <p class="testimonial-content text-slate-800 dark:text-slate-200">{item.testimonial}</p>
-            <div class="mt-4 flex items-center gap-3">
-              <div class="testimonial-avatar testimonial-avatar-hide testimonial-avatar-md rounded-full overflow-hidden"></div>
-              <div class="testimonial-author">
-                <p class="font-semibold text-slate-900 dark:text-white">{item.name}</p>
-                <p class="text-sm text-slate-500 dark:text-slate-400">{item.job}</p>
-              </div>
-            </div>
-          </article>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- STYLE 4: VIDEO (horizontal + vertical) -->
+  <!-- STYLE 3: VIDEO (horizontal + vertical) -->
   <section id="style-video" class="bg-white py-16 dark:bg-slate-950">
     <div class="container mx-auto max-w-6xl px-6">
       <div class="mb-8">
-        <p class="text-sm font-semibold uppercase tracking-wide text-primary">Style 4</p>
+        <p class="text-sm font-semibold uppercase tracking-wide text-primary">Style 3</p>
         <h2 class="text-2xl font-bold text-slate-900 dark:text-white">Video Testimonials</h2>
         <p class="text-slate-600 dark:text-slate-300">Horizontal (16:9) and vertical (9:16) with thumbnail, duration, and views.</p>
       </div>
@@ -844,41 +866,61 @@ const videoTestimonials = getVideoTestimonials() as any[];
 
       <div class="grid gap-6 lg:grid-cols-3">
         {/* @ts-ignore - runtime array mapping */}
-        {videoTestimonials.slice(0, 3).map((item) => (
-          <article class="testimonial-card p-0 overflow-hidden">
-            <div class={`relative ${item.video?.type === 'vertical' ? 'aspect-[9/16]' : 'aspect-video'} bg-slate-900`}>
-              <img src={item.video?.thumbnail ?? item.image.src} alt={item.image.alt} class="h-full w-full object-cover" />
-              <div class="absolute inset-0 flex items-center justify-center">
-                <div class="rounded-full bg-white/90 px-4 py-2 text-sm font-semibold text-slate-900 shadow">▶ Play</div>
-              </div>
-              <div class="absolute bottom-3 left-3 flex items-center gap-2 rounded-full bg-slate-900/80 px-3 py-1 text-xs text-white backdrop-blur">
-                {item.video?.duration && <span>{item.video.duration}</span>}
-                {item.views && <span class="opacity-80">• {item.views} views</span>}
-              </div>
-            </div>
-            <div class="p-5">
-              <p class="testimonial-content text-slate-800 dark:text-slate-200">{item.testimonial}</p>
-              <div class="mt-4 flex items-center gap-3">
-                <div class="testimonial-avatar testimonial-avatar-show testimonial-avatar-md rounded-full overflow-hidden">
-                  <img src={item.image.src} alt={item.image.alt} class="h-full w-full object-cover" />
+        {videoTestimonials.slice(0, 3).map((item) => {
+          const ratingValue = item.rating ?? 5;
+
+          return (
+            <article class="testimonial-card p-0 overflow-hidden">
+              <div class={`relative ${item.video?.type === 'vertical' ? 'aspect-[9/16]' : 'aspect-video'} bg-slate-900`}>
+                <img src={item.video?.thumbnail ?? item.image.src} alt={item.image.alt} class="h-full w-full object-cover" />
+                <div class="absolute inset-0 flex items-center justify-center">
+                  <div class="rounded-full bg-white/90 px-4 py-2 text-sm font-semibold text-slate-900 shadow">▶ Play</div>
                 </div>
-                <div class="testimonial-author">
-                  <p class="font-semibold text-slate-900 dark:text-white">{item.name}</p>
-                  <p class="text-sm text-slate-500 dark:text-slate-400">{item.job}</p>
+                <div class="absolute bottom-3 left-3 flex items-center gap-2 rounded-full bg-slate-900/80 px-3 py-1 text-xs text-white backdrop-blur">
+                  {item.video?.duration && <span>{item.video.duration}</span>}
+                  {item.views && <span class="opacity-80">• {item.views} views</span>}
                 </div>
               </div>
-            </div>
-          </article>
-        ))}
+              <div class="p-5">
+                <div class="testimonial-rating testimonial-rating-show mb-3 flex items-center gap-1" data-rating={ratingValue}>
+                  {[0, 1, 2, 3, 4].map((i) => (
+                    <svg
+                      class={`testimonial-star ${i < ratingValue ? 'text-yellow-400 fill-current' : 'testimonial-star-empty'}`}
+                      viewBox="0 0 24 24"
+                      aria-hidden="true"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"
+                      />
+                    </svg>
+                  ))}
+                </div>
+                <p class="testimonial-content text-slate-800 dark:text-slate-200">{item.testimonial}</p>
+                <div class="mt-4 flex items-center gap-3">
+                  <div class="testimonial-avatar testimonial-avatar-show testimonial-avatar-md rounded-full overflow-hidden">
+                    <img src={item.image.src} alt={item.image.alt} class="h-full w-full object-cover" />
+                  </div>
+                  <div class="testimonial-author">
+                    <p class="font-semibold text-slate-900 dark:text-white">{item.name}</p>
+                    <p class="text-sm text-slate-500 dark:text-slate-400">{item.job}</p>
+                  </div>
+                </div>
+              </div>
+            </article>
+          );
+        })}
       </div>
     </div>
   </section>
 
-  <!-- STYLE 5: LONG FORM -->
+  <!-- STYLE 4: LONG FORM -->
   <section id="style-long" class="bg-gradient-to-b from-white to-slate-50 py-16 dark:from-slate-950 dark:to-slate-900">
     <div class="container mx-auto max-w-6xl px-6">
       <div class="mb-8">
-        <p class="text-sm font-semibold uppercase tracking-wide text-primary">Style 5</p>
+        <p class="text-sm font-semibold uppercase tracking-wide text-primary">Style 4</p>
         <h2 class="text-2xl font-bold text-slate-900 dark:text-white">Long Form (Great for detailed stories)</h2>
         <p class="text-slate-600 dark:text-slate-300">Use for 300+ character testimonials. Add your own expand/collapse if desired.</p>
       </div>
@@ -896,20 +938,40 @@ const videoTestimonials = getVideoTestimonials() as any[];
 
       <div class="space-y-6">
         {/* @ts-ignore - runtime array mapping */}
-        {longTestimonials.map((item) => (
-          <article class="testimonial-card testimonial-card-minimal">
-            <p class="testimonial-content text-lg text-slate-800 dark:text-slate-100">{item.testimonial}</p>
-            <div class="mt-6 flex items-center gap-4">
-              <div class="testimonial-avatar testimonial-avatar-show testimonial-avatar-lg rounded-full overflow-hidden">
-                <img src={item.image.src} alt={item.image.alt} class="h-full w-full object-cover" />
+        {longTestimonials.map((item) => {
+          const ratingValue = item.rating ?? 5;
+
+          return (
+            <article class="testimonial-card testimonial-card-minimal">
+              <div class="testimonial-rating testimonial-rating-show mb-4 flex items-center gap-1" data-rating={ratingValue}>
+                {[0, 1, 2, 3, 4].map((i) => (
+                  <svg
+                    class={`testimonial-star ${i < ratingValue ? 'text-yellow-400 fill-current' : 'testimonial-star-empty'}`}
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"
+                    />
+                  </svg>
+                ))}
               </div>
-              <div class="testimonial-author">
-                <p class="text-lg font-semibold text-slate-900 dark:text-white">{item.name}</p>
-                <p class="text-sm text-slate-500 dark:text-slate-400">{item.job}</p>
+              <p class="testimonial-content text-lg text-slate-800 dark:text-slate-100">{item.testimonial}</p>
+              <div class="mt-6 flex items-center gap-4">
+                <div class="testimonial-avatar testimonial-avatar-show testimonial-avatar-lg rounded-full overflow-hidden">
+                  <img src={item.image.src} alt={item.image.alt} class="h-full w-full object-cover" />
+                </div>
+                <div class="testimonial-author">
+                  <p class="text-lg font-semibold text-slate-900 dark:text-white">{item.name}</p>
+                  <p class="text-sm text-slate-500 dark:text-slate-400">{item.job}</p>
+                </div>
               </div>
-            </div>
-          </article>
-        ))}
+            </article>
+          );
+        })}
       </div>
     </div>
   </section>

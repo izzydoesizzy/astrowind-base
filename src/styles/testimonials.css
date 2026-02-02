@@ -102,7 +102,9 @@
 
 /* Show star ratings */
 .testimonial-rating-show {
-  display: block !important;
+  display: flex !important;
+  align-items: center;
+  gap: 0.25rem;
 }
 
 /* Hide star ratings */
@@ -424,4 +426,3 @@
     padding: 1.5rem;
   }
 }
-
