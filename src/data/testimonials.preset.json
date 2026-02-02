@@ -1,0 +1,194 @@
+{
+  "template": "grid",
+  "testimonials": [
+    {
+      "id": "testimonial-1",
+      "testimonial": "Onboarding dropped from 21 days to 6, and our activation rate jumped by 28%. The templates made it easy to redesign our entire product tour.",
+      "name": "Riya Patel",
+      "job": "VP Product, Flowstack",
+      "image": {
+        "src": "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?ixlib=rb-4.0.3&auto=format&fit=crop&w=987&q=80",
+        "alt": "Portrait of Riya Patel."
+      },
+      "rating": 5,
+      "video": null,
+      "featured": false,
+      "category": "product"
+    },
+    {
+      "id": "testimonial-2",
+      "testimonial": "We ship new campaign pages in hours instead of weeks. That speed has been a quiet superpower for our growth team.",
+      "name": "Chris Young",
+      "job": "Head of Growth, Nimbus",
+      "image": {
+        "src": "https://images.unsplash.com/photo-1525130413817-d45c1d127c42?ixlib=rb-4.0.3&auto=format&fit=crop&w=987&q=80",
+        "alt": "Portrait of Chris Young."
+      },
+      "rating": 5,
+      "video": null,
+      "featured": false,
+      "category": "growth"
+    },
+    {
+      "id": "testimonial-3",
+      "testimonial": "The new long-form sales page became the single source of truth for our offer. Sales calls got shorter and close rates went up.",
+      "name": "Daniela Rossi",
+      "job": "Revenue Operations, Beacon",
+      "image": {
+        "src": "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&auto=format&fit=crop&w=987&q=80",
+        "alt": "Portrait of Daniela Rossi."
+      },
+      "rating": 5,
+      "video": null,
+      "featured": true,
+      "category": "sales"
+    },
+    {
+      "id": "testimonial-4",
+      "testimonial": "This completely transformed our business. The results speak for themselves. We went from struggling to scale to having a clear, repeatable system that works.",
+      "name": "Sarah Mitchell",
+      "job": "Executive Leadership Coach",
+      "image": {
+        "src": "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?ixlib=rb-4.0.3&auto=format&fit=crop&w=987&q=80",
+        "alt": "Portrait of Sarah Mitchell."
+      },
+      "rating": 5,
+      "video": {
+        "src": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        "thumbnail": "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?ixlib=rb-4.0.3&auto=format&fit=crop&w=987&q=80",
+        "type": "horizontal",
+        "platform": "youtube",
+        "duration": "2:45",
+        "views": "1.2K"
+      },
+      "featured": false,
+      "category": "coaching"
+    },
+    {
+      "id": "testimonial-5",
+      "testimonial": "Within three months I went from feeling stuck to launching a new offer that sold out its first cohort. The support and structure made all the difference.",
+      "name": "Jordan Lee",
+      "job": "Creative Entrepreneur",
+      "image": {
+        "src": "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?ixlib=rb-4.0.3&auto=format&fit=crop&w=987&q=80",
+        "alt": "Portrait of Jordan Lee."
+      },
+      "rating": null,
+      "video": {
+        "src": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        "thumbnail": "https://images.unsplash.com/photo-1525130413817-d45c1d127c42?ixlib=rb-4.0.3&auto=format&fit=crop&w=987&q=80",
+        "type": "vertical",
+        "platform": "youtube",
+        "duration": "1:32",
+        "views": "856"
+      },
+      "featured": false,
+      "category": "entrepreneurship"
+    },
+    {
+      "id": "testimonial-6",
+      "testimonial": "When we first started working with this team, I was skeptical. We had tried other solutions before and nothing seemed to stick. But within the first month, I could see a real difference. Our sales process became more streamlined, our messaging became clearer, and most importantly, our conversion rates started to climb. By month three, we had doubled our qualified leads and our sales team was closing deals faster than ever before. The investment has paid for itself ten times over, and I can't imagine running our business without these tools and strategies. The support team is also incredible—always responsive and genuinely invested in our success.",
+      "name": "Sarah Mitchell",
+      "job": "CEO, GrowthCo",
+      "image": {
+        "src": "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?ixlib=rb-4.0.3&auto=format&fit=crop&w=987&q=80",
+        "alt": "Portrait of Sarah Mitchell."
+      },
+      "rating": null,
+      "video": null,
+      "featured": false,
+      "category": "business"
+    },
+    {
+      "id": "testimonial-7",
+      "testimonial": "Our new coaching homepage gives prospects everything they need to say yes before we ever talk. Calls feel more like enrollment than persuasion.",
+      "name": "Morgan Blake",
+      "job": "Business coach",
+      "image": {
+        "src": "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?ixlib=rb-4.0.3&auto=format&fit=crop&w=987&q=80",
+        "alt": "Portrait of Morgan Blake."
+      },
+      "rating": null,
+      "video": null,
+      "featured": false,
+      "category": "coaching"
+    },
+    {
+      "id": "testimonial-8",
+      "testimonial": "We finally have one place to send leads that shows our authority, explains our process, and surfaces the right next step.",
+      "name": "Jamie Chen",
+      "job": "Agency founder",
+      "image": {
+        "src": "https://images.unsplash.com/photo-1544723795-3fb6469f5b39?ixlib=rb-4.0.3&auto=format&fit=crop&w=987&q=80",
+        "alt": "Portrait of Jamie Chen."
+      },
+      "rating": null,
+      "video": null,
+      "featured": false,
+      "category": "agency"
+    },
+    {
+      "id": "testimonial-9",
+      "testimonial": "The long-form layout helped us tell the full story behind our flagship program. Applications now come in from people who are already bought in.",
+      "name": "Nicole Alvarez",
+      "job": "Leadership consultant",
+      "image": {
+        "src": "https://images.unsplash.com/photo-1525130413817-d45c1d127c42?ixlib=rb-4.0.3&auto=format&fit=crop&w=987&q=80",
+        "alt": "Portrait of Nicole Alvarez."
+      },
+      "rating": 4,
+      "video": null,
+      "featured": false,
+      "category": "leadership"
+    },
+    {
+      "id": "testimonial-10",
+      "testimonial": "We've been using this for six months now, and the impact has been remarkable. Not only did our website traffic increase by 60%, but the quality of leads improved dramatically.",
+      "name": "Jennifer Martinez",
+      "job": "Chief Revenue Officer, GrowthLabs",
+      "image": {
+        "src": "https://images.unsplash.com/photo-1525130413817-d45c1d127c42?ixlib=rb-4.0.3&auto=format&fit=crop&w=987&q=80",
+        "alt": "Portrait of Jennifer Martinez."
+      },
+      "rating": 5,
+      "video": {
+        "src": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        "thumbnail": "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&auto=format&fit=crop&w=987&q=80",
+        "type": "horizontal",
+        "platform": "youtube",
+        "duration": "3:12",
+        "views": "2.1K"
+      },
+      "featured": false,
+      "category": "growth"
+    },
+    {
+      "id": "testimonial-11",
+      "testimonial": "Best decision we made this year.",
+      "name": "Emma Wilson",
+      "job": "Founder",
+      "image": {
+        "src": "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&auto=format&fit=crop&w=987&q=80",
+        "alt": "Portrait of Emma Wilson."
+      },
+      "rating": null,
+      "video": null,
+      "featured": false,
+      "category": "general"
+    },
+    {
+      "id": "testimonial-12",
+      "testimonial": "Highly recommend.",
+      "name": "David Park",
+      "job": "Designer",
+      "image": {
+        "src": "https://images.unsplash.com/photo-1544723795-3fb6469f5b39?ixlib=rb-4.0.3&auto=format&fit=crop&w=987&q=80",
+        "alt": "Portrait of David Park."
+      },
+      "rating": null,
+      "video": null,
+      "featured": false,
+      "category": "design"
+    }
+  ]
+}

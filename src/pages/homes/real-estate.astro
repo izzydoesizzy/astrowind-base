@@ -18,6 +18,7 @@ import Testimonials from '~/components/widgets/Testimonials.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
 // @ts-ignore - Astro components are resolved by the Astro compiler
 import FAQs from '~/components/widgets/FAQs.astro';
+import { testimonials, testimonialsTemplate } from '~/data/testimonials';
 
 // @ts-ignore - Provided by AstroWind navigation utilities
 import { headerData } from '~/navigation';
@@ -189,38 +190,8 @@ const metadata = {
   <Testimonials
     title="Stories from buyers & sellers"
     subtitle="Let future clients hear from people who have already trusted you with their biggest transactions."
-    testimonials={[
-      {
-        testimonial:
-          'We sold above asking in eight days. The marketing, photos, and pricing strategy were dialed in from day one.',
-        name: 'Taylor & Sam',
-        job: 'Home sellers',
-        image: {
-          src: 'https://images.unsplash.com/photo-1513151233558-d860c5398176?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=987&q=80',
-          alt: 'Happy couple in new home.',
-        },
-      },
-      {
-        testimonial:
-          'As first-time buyers we had a lot of questions. Every step was explained clearly, and we never felt rushed or pressured.',
-        name: 'Jordan',
-        job: 'First-time buyer',
-        image: {
-          src: 'https://images.unsplash.com/photo-1525130413817-d45c1d127c42?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=987&q=80',
-          alt: 'New homeowner with keys.',
-        },
-      },
-      {
-        testimonial:
-          'We now send every investor we work with to this page. It showcases our current deals and track record in one place.',
-        name: 'Morgan',
-        job: 'Real estate investor',
-        image: {
-          src: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=987&q=80',
-          alt: 'Investor reviewing property portfolio.',
-        },
-      },
-    ]}
+    testimonials={testimonials.slice(0, 3)}
+    variant={testimonialsTemplate}
   />
 
   <!-- FAQs Widget (Accordion style) ******************* -->
@@ -269,5 +240,3 @@ const metadata = {
     ]}
   />
 </Layout>
-
-
