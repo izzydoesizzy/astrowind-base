@@ -20,6 +20,7 @@ import FAQs from '~/components/widgets/FAQs.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
 // @ts-ignore - Astro components are resolved by the Astro compiler
 import Stats from '~/components/widgets/Stats.astro';
+import { testimonials, testimonialsTemplate } from '~/data/testimonials';
 
 // @ts-ignore - Provided by AstroWind navigation utilities
 import { headerData } from '~/navigation';
@@ -190,38 +191,8 @@ const metadata = {
   <Testimonials
     title="What coaching clients are saying"
     subtitle="Use testimonials to help visitors see themselves in the stories of people you have already helped."
-    testimonials={[
-      {
-        testimonial:
-          'Within three months I went from feeling stuck and second-guessing every move to launching a new offer that sold out its first cohort.',
-        name: 'Jordan Lee',
-        job: 'Creative entrepreneur',
-        image: {
-          src: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=987&q=80',
-          alt: 'Portrait of Jordan Lee.',
-        },
-      },
-      {
-        testimonial:
-          'Having a space to think out loud with someone who understands both business and mindset has been game changing.',
-        name: 'Alex Rivera',
-        job: 'SaaS founder',
-        image: {
-          src: 'https://images.unsplash.com/photo-1544723795-3fb6469f5b39?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=987&q=80',
-          alt: 'Portrait of Alex Rivera.',
-        },
-      },
-      {
-        testimonial:
-          'I finally have a weekly rhythm that supports my goals instead of constantly reacting to whatever feels urgent.',
-        name: 'Monica Hughes',
-        job: 'Marketing director',
-        image: {
-          src: 'https://images.unsplash.com/photo-1525130413817-d45c1d127c42?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=987&q=80',
-          alt: 'Portrait of Monica Hughes.',
-        },
-      },
-    ]}
+    testimonials={testimonials.slice(0, 3)}
+    variant={testimonialsTemplate}
   />
 
   <!-- FAQs Widget (Accordion style) ******************* -->
@@ -269,5 +240,3 @@ const metadata = {
     ]}
   />
 </Layout>
-
-

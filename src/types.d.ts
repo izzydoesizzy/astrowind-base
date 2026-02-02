@@ -158,7 +158,18 @@ export interface Testimonial {
   testimonial?: string;
   name?: string;
   job?: string;
-  image?: string | unknown;
+  image?: Image | string | unknown;
+  rating?: number | null;
+  video?: {
+    src: string;
+    thumbnail: string;
+    type: 'horizontal' | 'vertical';
+    platform: 'youtube' | 'vimeo' | 'self-hosted';
+    duration?: string;
+    views?: string;
+  } | null;
+  featured?: boolean;
+  category?: string;
 }
 
 export interface Input {
@@ -233,6 +244,7 @@ export interface Pricing extends Omit<Headline, 'classes'>, Widget {
 
 export interface Testimonials extends Omit<Headline, 'classes'>, Widget {
   testimonials?: Array<Testimonial>;
+  variant?: 'grid' | 'grid-2' | 'masonry' | 'minimal';
   callToAction?: CallToAction;
 }
 

@@ -30,6 +30,7 @@ import Stats from '~/components/widgets/Stats.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
 // @ts-ignore - Astro components are resolved by the Astro compiler
 import Contact from '~/components/widgets/Contact.astro';
+import { testimonials, testimonialsTemplate } from '~/data/testimonials';
 
 const metadata = {
   title: "Value Ladder Long-form Sales Page",
@@ -229,38 +230,8 @@ const metadata = {
     id="proof"
     title="Stories from teams that swapped short pages for long-form"
     subtitle="Show—not just tell—what happens when prospects finally understand the full value of your offer."
-    testimonials={[
-      {
-        testimonial:
-          'We rebuilt our main funnel as a long-form page using these widgets and saw a 41% lift in paid traffic conversions within two weeks.',
-        name: 'Amelia Patel',
-        job: 'Head of Growth, Beacon CRM',
-        image: {
-          src: 'https://images.unsplash.com/photo-1525134479668-1bee5c7c6845?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=987&q=80',
-          alt: 'Portrait of Amelia Patel.',
-        },
-      },
-      {
-        testimonial:
-          'The modular components let us launch three narrative variations in a single sprint. Our sales team now points every prospect to this page.',
-        name: 'Jonas Miller',
-        job: 'VP Revenue, Northline',
-        image: {
-          src: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=987&q=80',
-          alt: 'Portrait of Jonas Miller.',
-        },
-      },
-      {
-        testimonial:
-          'We used to maintain separate pages for features, pricing, and testimonials. Consolidating them into one long-form narrative dramatically simplified our analytics and messaging.',
-        name: 'Grace Chen',
-        job: 'Founder, Launchwell',
-        image: {
-          src: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=987&q=80',
-          alt: 'Portrait of Grace Chen.',
-        },
-      },
-    ]}
+    testimonials={testimonials.slice(0, 3)}
+    variant={testimonialsTemplate}
   />
 
   <!-- Content Widget **************** -->
@@ -447,5 +418,4 @@ const metadata = {
     ]}
   />
 </Layout>
-
 
