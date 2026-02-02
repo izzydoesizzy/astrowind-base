@@ -10,7 +10,7 @@ on:
 
 jobs:
   build:
-    runs-on: [self-hosted, Iskenders-Air]
+    runs-on: ${{ fromJSON(vars.RUNNER_LABELS || '["ubuntu-latest"]') }}
     strategy:
       matrix:
         node-version:
@@ -29,7 +29,7 @@ jobs:
       # - run: npm test
 
   check:
-    runs-on: [self-hosted, Iskenders-Air]
+    runs-on: ${{ fromJSON(vars.RUNNER_LABELS || '["ubuntu-latest"]') }}
     steps:
       - uses: actions/checkout@v4
       - name: Use Node.js 22
